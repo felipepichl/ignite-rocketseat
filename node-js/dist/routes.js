@@ -9,5 +9,10 @@ function createCourse(request, response) {
         duration: 10,
         educator: 'Dani'
     });
+    services.execute({
+        name: 'React-JS',
+        // duration: 10,
+        educator: 'Diego'
+    });
 }
 exports.createCourse = createCourse;
