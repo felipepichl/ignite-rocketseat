@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from "uuid";
 
-class Category {
-  readonly id?: string;
+class Specification {
+  readonly id: string;
 
   name: string;
 
@@ -16,4 +16,4 @@ class Category {
   }
 }
 
-export { Category };
+export { Specification };
