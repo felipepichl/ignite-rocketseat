@@ -7,19 +7,19 @@ import { ICategoryRepository } from "../ICategoryRepository";
 class CategoryRepository implements ICategoryRepository {
   private repository: Repository<Category>;
 
-  private static INSTANCE: CategoryRepository;
+  // private static INSTANCE: CategoryRepository;
 
-  private constructor() {
+  constructor() {
     this.repository = getRepository(Category);
   }
 
-  public static getIntance(): CategoryRepository {
-    if (!CategoryRepository.INSTANCE) {
-      CategoryRepository.INSTANCE = new CategoryRepository();
-    }
+  // public static getIntance(): CategoryRepository {
+  //   if (!CategoryRepository.INSTANCE) {
+  //     CategoryRepository.INSTANCE = new CategoryRepository();
+  //   }
 
-    return CategoryRepository.INSTANCE;
-  }
+  //   return CategoryRepository.INSTANCE;
+  // }
 
   public async create({
     name,
