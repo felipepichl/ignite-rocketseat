@@ -2,9 +2,9 @@ import { getRepository, Repository } from "typeorm";
 
 import { ICreateCategoryDTO } from "../../dtos/CreateCategoryDTO";
 import { Category } from "../../entities/Category";
-import { ICategoryRepository } from "../ICategoryRepository";
+import { ICategoriesRepository } from "../ICategoriesRepository";
 
-class CategoryRepository implements ICategoryRepository {
+class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
   // private static INSTANCE: CategoryRepository;
@@ -43,4 +43,4 @@ class CategoryRepository implements ICategoryRepository {
   }
 }
 
-export { CategoryRepository };
+export { CategoriesRepository };
