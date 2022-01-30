@@ -3,6 +3,7 @@ import { verify } from "jsonwebtoken";
 
 import authConfig from "../config/auth";
 import { UsersRepository } from "../modules/accounts/repositories/implementations/UsersRepository";
+import { AppError } from "../shared/errors/AppError";
 
 interface ITokenPayload {
   sub: string;
@@ -16,7 +17,7 @@ export async function enshureAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new Error("Token is missing");
+    throw new AppError("Token is missing", 401);
   }
 
   const [, token] = authHeader.split(" ");
@@ -30,13 +31,13 @@ export async function enshureAuthenticated(
     const user = await usersRepository.findById(user_id);
 
     if (!user) {
-      throw new Error("User does not exists");
+      throw new AppError("User does not exists", 401);
     }
 
     console.log(user);
 
     return next();
   } catch {
-    throw new Error("Invalid JWT Token");
+    throw new AppError("Invalid JWT Token", 401);
   }
 }
