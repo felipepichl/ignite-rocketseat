@@ -5,7 +5,7 @@ import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
   user_id: string;
-  avatarFileName: string;
+  avatar_file: string;
 }
 
 @injectable()
@@ -14,14 +14,16 @@ class UpdateUserAvatarUseCase {
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
   ) {}
-  async execute({ user_id, avatarFileName }: IRequest): Promise<void> {
+  async execute({ user_id, avatar_file }: IRequest): Promise<void> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError("Only authenticated can change avatar", 401);
     }
 
-    console.log(avatarFileName);
+    user.avatar = avatar_file;
+
+    await this.usersRepository.create(user);
   }
 }
 
