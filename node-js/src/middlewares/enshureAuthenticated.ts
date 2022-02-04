@@ -34,6 +34,10 @@ export async function enshureAuthenticated(
       throw new AppError("User does not exists", 401);
     }
 
+    request.user = {
+      id: user_id,
+    };
+
     console.log(user);
 
     return next();
