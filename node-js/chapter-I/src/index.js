@@ -18,7 +18,7 @@ app.patch('/courses/:id', (request, response) => {
   return response.json(["Curso 06", "Curso 07", "Curso 03", "Curso 04"])
 })
 
-app.patch('/courses/:id', (request, response) => {
+app.delete('/courses/:id', (request, response) => {
   return response.json(["Curso 06", "Curso 07", "Curso 04"])
 })
 
