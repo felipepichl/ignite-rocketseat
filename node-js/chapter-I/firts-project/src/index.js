@@ -29,6 +29,16 @@ app.post('/account', (request, response) => {
   console.log('====================================');
 
   return response.status(201).send();
-
 });
+
+app.get('/account', (request, response) => {
+
+  const statment = customers.map(customer => customer.statment)
+
+  return response.json({
+    statment: statment
+  });
+});
+
+
 app.listen(3333);
