@@ -9,18 +9,16 @@ const customers = [];
 app.post('/account', (request, response) => {
   const { cpf, name } = request.body;
 
-  const id = uuid();
+  const customerAlreadyExists = customers.find(customer => customer.cpf === cpf);
 
-  const userAlreadyExists = customers.find(user => user.cpf === cpf);
-
-  if(userAlreadyExists) {
+  if(customerAlreadyExists) {
     return response.status(400).json({
       message: "User already exists" 
     });
   }
 
   customers.push({
-    id,
+    id: uuid(),
     name,
     cpf,
     statment: []
