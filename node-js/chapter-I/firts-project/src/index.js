@@ -31,9 +31,10 @@ app.post('/account', (request, response) => {
   return response.status(201).send();
 });
 
-app.get('/account/:id', (request, response) => {
+app.get('/statment/:cpf', (request, response) => {
+  const { cpf } = request.params;
 
-  const customer = customers.map(customer => customer.id === id);
+  const customer = customers.find(customer => customer.cpf === cpf);
 
   statment = customer.statment;
 
