@@ -59,16 +59,14 @@ app.post('/deposit', verifyIfExistsAccountCPF, (request, response) => {
   const { description, amount } = request.body;
   const customer = request.customer;
 
-  const statment = [ 
-   {
-     deposit: {
-       description,
-       amount,
-     }
-   }
-  ]
+  const statmentOperation = {
+    description,
+    amount,
+    created_at: new Date(),
+    type: 'credit'
+  }
 
-  customer.statment = [...customer.statment, statment] 
+  customer.statment = [...customer.statment, statmentOperation] 
 
   console.log('====================================');
   console.log(customers);
