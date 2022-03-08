@@ -55,5 +55,28 @@ app.get('/statment', verifyIfExistsAccountCPF, (request, response) => {
   });
 });
 
+app.post('/deposit', verifyIfExistsAccountCPF, (request, response) => {
+  const { description, amount } = request.body;
+  const customer = request.customer;
+
+  const statment = [ 
+   {
+     deposit: {
+       description,
+       amount,
+     }
+   }
+  ]
+
+  customer.statment = [...customer.statment, statment] 
+
+  console.log('====================================');
+  console.log(customers);
+  console.log('====================================');
+
+  return response.status(201).send();
+});
+
+
 
 app.listen(3333);
