@@ -40,10 +40,6 @@ app.post('/account', (request, response) => {
     statment: []
   });
 
-  console.log('====================================');
-  console.log(customers);
-  console.log('====================================');
-
   return response.status(201).send();
 });
 
@@ -68,9 +64,22 @@ app.post('/deposit', verifyIfExistsAccountCPF, (request, response) => {
 
   customer.statment = [...customer.statment, statmentOperation] 
 
-  console.log('====================================');
-  console.log(customers);
-  console.log('====================================');
+  return response.status(201).send();
+});
+
+app.post('/withdraw', verifyIfExistsAccountCPF, (request, response) => {
+  const { amount } = request.body;
+  const customer = request.customer;
+
+  // const oldAmount = customer.statment.map(statment => statment.amount)
+
+  const statmentOperation = {
+    amount,
+    created_at: new Date(),
+    type: 'debit'
+  }
+
+  customer.statment = [...customer.statment, statmentOperation] 
 
   return response.status(201).send();
 });
