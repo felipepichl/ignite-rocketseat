@@ -71,14 +71,31 @@ app.post('/withdraw', verifyIfExistsAccountCPF, (request, response) => {
   const { amount } = request.body;
   const customer = request.customer;
 
-  // const oldAmount = customer.statment.map(statment => statment.amount)
+  if (customer.statment.length === 0) {
+    return response.status(400).json({ error: 'You not have enough balance' })
+  }
+
+  const credits = customer.statment.map(statment => {
+    if (statment.type === 'credit'){
+      return statment.amount
+    }
+  })
+
+  const balance = credits.reduce((accumulator, credit) => {
+    return accumulator += credit;
+  })
+
+  if (amount > balance) {
+    return response.status(400).json({ error: 'You not have enough balance' })
+  }
 
   const statmentOperation = {
     amount,
     created_at: new Date(),
-    type: 'debit'
+    type: 'debit',
+    balance: balance - amount,
   }
-
+  
   customer.statment = [...customer.statment, statmentOperation] 
 
   return response.status(201).send();
