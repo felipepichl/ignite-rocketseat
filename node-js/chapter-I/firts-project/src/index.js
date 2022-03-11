@@ -22,6 +22,29 @@ function verifyIfExistsAccountCPF(request, response, next) {
   return next();
 }
 
+function getBalance(statment) {
+  const { credit, debit } = statment.reduce((accumulator, document) => {
+    switch (document.type) {
+      case 'credit':
+        accumulator.credit += document.amount;
+        break;
+      case 'debit':
+        accumulator.debit += document.amount;
+        break;
+      default:
+        break;
+    }
+    return accumulator;
+  }, {
+    credit: 0,
+    debit: 0,
+  });
+
+  const total = credit - debit;
+
+  return total;
+}
+
 app.post('/account', (request, response) => {
   const { cpf, name } = request.body;
 
@@ -70,20 +93,8 @@ app.post('/deposit', verifyIfExistsAccountCPF, (request, response) => {
 app.post('/withdraw', verifyIfExistsAccountCPF, (request, response) => {
   const { amount } = request.body;
   const customer = request.customer;
-
-  if (customer.statment.length === 0) {
-    return response.status(400).json({ error: 'You not have enough balance' })
-  }
-
-  const credits = customer.statment.map(statment => {
-    if (statment.type === 'credit'){
-      return statment.amount
-    }
-  })
-
-  const balance = credits.reduce((accumulator, credit) => {
-    return accumulator += credit;
-  })
+  
+  const balance = getBalance(customer.statment);
 
   if (amount > balance) {
     return response.status(400).json({ error: 'You not have enough balance' })
@@ -92,12 +103,11 @@ app.post('/withdraw', verifyIfExistsAccountCPF, (request, response) => {
   const statmentOperation = {
     amount,
     created_at: new Date(),
-    type: 'debit',
-    balance: balance - amount,
+    type: 'debit'
   }
   
   customer.statment = [...customer.statment, statmentOperation] 
-
+  
   return response.status(201).send();
 });
 
