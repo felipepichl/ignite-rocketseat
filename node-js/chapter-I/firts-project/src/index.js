@@ -45,6 +45,10 @@ function getBalance(statment) {
   return total;
 }
 
+function statmentByDate(date) {
+   
+}
+
 app.post('/account', (request, response) => {
   const { cpf, name } = request.body;
 
@@ -71,6 +75,21 @@ app.get('/statment', verifyIfExistsAccountCPF, (request, response) => {
 
   return response.json({
     statment: customer.statment,
+  });
+});
+
+app.get('/statment/date', verifyIfExistsAccountCPF, (request, response) => {
+  const { date } = request.query;
+  const customer = request.customer;
+
+  const dateFormat = new Date(date + '00:00')
+
+  const statment = customer.statment.filter(statment => 
+    statment.created_at === dateFormat
+  );
+
+  return response.json({
+    statment,
   });
 });
 
