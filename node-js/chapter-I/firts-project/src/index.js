@@ -45,8 +45,18 @@ function getBalance(statment) {
   return total;
 }
 
-function statmentByDate(date) {
-   
+function dateFormat(date) {
+  try {
+    const formatter = new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    });
+
+    return formatter.format(new Date(date));
+  } catch (error) {
+    throw error;
+  }
 }
 
 app.post('/account', (request, response) => {
@@ -82,14 +92,12 @@ app.get('/statment/date', verifyIfExistsAccountCPF, (request, response) => {
   const { date } = request.query;
   const customer = request.customer;
 
-  const dateFormat = new Date(date + '00:00')
-
-  const statment = customer.statment.filter(statment => 
-    statment.created_at === dateFormat
+  const statmentByDate = customer.statment.filter(operation => 
+    dateFormat(operation.created_at) === dateFormat(date)
   );
 
   return response.json({
-    statment,
+    statmentByDate,
   });
 });
 
