@@ -97,6 +97,18 @@ app.get('/account', verifyIfExistsAccountCPF, (request, response) => {
   });
 });
 
+app.delete('/account', verifyIfExistsAccountCPF, (request, response) => {
+  const customer = request.customer;
+
+  const index = customers.findIndex(operator => operator.cpf === customer.cpf); 
+
+  customers.splice(index, 1);
+
+  return response.status(201).json({
+    customers
+  });
+});
+
 app.get('/statment', verifyIfExistsAccountCPF, (request, response) => {
   const customer = request.customer;
 
