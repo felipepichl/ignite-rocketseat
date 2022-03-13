@@ -96,8 +96,16 @@ app.get('/statment/date', verifyIfExistsAccountCPF, (request, response) => {
     dateFormat(operation.created_at) === dateFormat(date)
   );
 
+  /**
+   * Other
+   */
+  const dateFormatted = new Date(date + " 00:00");
+  const _statmentByDate = customer.statment.filter((statment) => 
+    statment.created_at.toDateString() === new Date(dateFormatted).toDateString()
+  );
+
   return response.json({
-    statmentByDate,
+    _statmentByDate,
   });
 });
 
