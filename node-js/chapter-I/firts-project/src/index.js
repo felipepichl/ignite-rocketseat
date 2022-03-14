@@ -86,13 +86,13 @@ app.put('/account', verifyIfExistsAccountCPF, (request, response) => {
 
   customer.name = name;
 
-  return response.status(201).send();
+  return response.status(200).send();
 });
 
 app.get('/account', verifyIfExistsAccountCPF, (request, response) => {
   const customer = request.customer;
 
-  return response.status(201).json({
+  return response.status(200).json({
     customer
   });
 });
@@ -100,14 +100,26 @@ app.get('/account', verifyIfExistsAccountCPF, (request, response) => {
 app.delete('/account', verifyIfExistsAccountCPF, (request, response) => {
   const customer = request.customer;
 
-  const index = customers.findIndex(operator => operator.cpf === customer.cpf); 
+  // const index = customers.findIndex(operator => operator.cpf === customer.cpf); 
+  // customers.splice(index, 1);
 
-  customers.splice(index, 1);
+  customers.splice(customer, 1);
 
-  return response.status(201).json({
+  return response.status(200).json({
     customers
   });
 });
+
+app.get('/balance', verifyIfExistsAccountCPF, (request, response) => {
+  const customer = request.customer;
+
+  const balance = getBalance(customer.statment);
+
+  return response.status(200).json({
+    balance,
+  });
+});
+
 
 app.get('/statment', verifyIfExistsAccountCPF, (request, response) => {
   const customer = request.customer;
