@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 import { ICreateCategoryDTO } from "../../dtos/CreateCategoryDTO";
 import { Category } from "../../entities/Category";
 import { ICategoriesRepository } from "../ICategoriesRepository";
@@ -8,7 +10,7 @@ class CategoryRepositoryInMemory implements ICategoriesRepository {
   async create(data: ICreateCategoryDTO): Promise<void> {
     const category = new Category();
 
-    Object.assign(category, data);
+    Object.assign(category, { id: uuid() }, data);
 
     this.categories.push(category);
   }
