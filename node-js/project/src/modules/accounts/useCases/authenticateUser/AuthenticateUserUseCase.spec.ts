@@ -1,3 +1,4 @@
+import { AppError } from "../../../../shared/errors/AppError";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { UserRepositoryInMemory } from "../../repositories/in-memory/UserRepositoryInMemory";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
@@ -36,5 +37,30 @@ describe("Authenticate User", () => {
     expect(response).toHaveProperty("token");
   });
 
-  // it("should not be able to authenticate with non existing user", async () => {});
+  it("should not be able to authenticate with non existing user", async () => {
+    await expect(
+      authenticateUserUseCase.execute({
+        email: "non.existing@example.com",
+        password: "hash123",
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("should not be able to authenticate with wrong password", async () => {
+    const user: ICreateUserDTO = {
+      name: "John Due",
+      email: "johndue@example.com",
+      password: "hash123",
+      driver_license: "AB",
+    };
+
+    await createUserUseCase.execute(user);
+
+    await expect(
+      authenticateUserUseCase.execute({
+        email: "johndue@example.com",
+        password: "wrong-password",
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
