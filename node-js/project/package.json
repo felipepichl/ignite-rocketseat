@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": " ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/start/server.ts",
+    "dev": " ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/start/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest"
   },
@@ -20,7 +20,7 @@
     "sqlite3": "^5.0.8",
     "swagger-ui-express": "^4.4.0",
     "tsyringe": "^4.7.0",
-    "typeorm": "0.2.41",
+    "typeorm": "0.3.7",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
