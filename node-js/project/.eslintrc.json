@@ -56,10 +56,10 @@
 			    "alphabetize": { "order": "asc", "ignoreCase": true }
 			  }
 			],
-			"import/no-extraneous-dependencies": [
-			  "error",
-			  { "devDependencies": ["**/*.spec.js"] }
-			],
+      "import/no-extraneous-dependencies": [
+        "error",
+        { "devDependencies": ["**/*.spec.js"] }
+      ],
       "prettier/prettier": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
