@@ -1,15 +1,15 @@
-import { DataSource, Repository } from "typeorm";
+import { Repository } from "typeorm";
 
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { AppDataSource } from "@shared/infra/typeorm";
 
 class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;
-  private dataSource: DataSource;
 
   constructor() {
-    this.repository = this.dataSource.getRepository(User);
+    this.repository = AppDataSource.getRepository(User);
   }
 
   public async create(data: ICreateUserDTO): Promise<void> {

@@ -1,15 +1,15 @@
-import { DataSource, Repository } from "typeorm";
+import { Repository } from "typeorm";
 
 import { ICreateCategoryDTO } from "@modules/cars/dtos/CreateCategoryDTO";
 import { Category } from "@modules/cars/infra/typeorm/entities/Category";
 import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository";
+import { AppDataSource } from "@shared/infra/typeorm";
 
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
-  private dataSource: DataSource;
 
   constructor() {
-    this.repository = this.dataSource.getRepository(Category);
+    this.repository = AppDataSource.getRepository(Category);
   }
 
   public async create({
