@@ -13,6 +13,10 @@ class CarRepositoryInMemory implements ICarsRepository {
 
     this.cars.push(car);
   }
+
+  async findByLicensePlate(licnse_plate: string): Promise<Car> {
+    return this.cars.find((car) => car.license_plate === licnse_plate);
+  }
 }
 
 export { CarRepositoryInMemory };
