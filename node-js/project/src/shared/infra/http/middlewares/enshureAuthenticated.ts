@@ -23,7 +23,7 @@ export async function enshureAuthenticated(
   const [, token] = authHeader.split(" ");
 
   try {
-    const decoded = verify(token, authConfig.jwt.secret);
+    const decoded = verify(token, "authConfig.jwt.secret");
 
     const { sub: user_id } = decoded as ITokenPayload;
 
@@ -33,7 +33,6 @@ export async function enshureAuthenticated(
     if (!user) {
       throw new AppError("User does not exists", 401);
     }
-
     request.user = {
       id: user_id,
     };
