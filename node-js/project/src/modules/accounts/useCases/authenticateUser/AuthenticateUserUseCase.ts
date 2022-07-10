@@ -2,7 +2,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
-import authConfig from "@config/auth";
+import { authConfig } from "@config/auth";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
 
@@ -39,7 +39,7 @@ class AuthenticateUserUseCase {
       throw new AppError("Incorrect email/password combination");
     }
 
-    const { secret, expiresIn } = authConfig.jwt;
+    const { secret, expiresIn } = authConfig;
 
     const token = sign({}, secret, {
       subject: user.id,

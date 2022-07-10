@@ -1,6 +1,6 @@
-export default {
-  jwt: {
-    secret: "6b09e64cbe464905cd3b2b550083bcf4",
-    expiresIn: "1d",
-  },
+const authConfig = {
+  secret: "db262b92aeaae0774cf15ff17e18ee36",
+  expiresIn: "1d",
 };
+
+export { authConfig };

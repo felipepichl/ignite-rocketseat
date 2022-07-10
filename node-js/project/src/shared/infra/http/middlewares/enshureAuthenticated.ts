@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 
-import authConfig from "@config/auth";
+import { authConfig } from "@config/auth";
 import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository";
 import { AppError } from "@shared/errors/AppError";
 
@@ -23,7 +23,9 @@ export async function enshureAuthenticated(
   const [, token] = authHeader.split(" ");
 
   try {
-    const decoded = verify(token, "authConfig.jwt.secret");
+    const { secret } = authConfig;
+
+    const decoded = verify(token, secret);
 
     const { sub: user_id } = decoded as ITokenPayload;
 
@@ -36,8 +38,6 @@ export async function enshureAuthenticated(
     request.user = {
       id: user_id,
     };
-
-    console.log(user);
 
     return next();
   } catch {
