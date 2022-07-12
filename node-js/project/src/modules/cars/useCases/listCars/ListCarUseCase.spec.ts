@@ -1,3 +1,4 @@
+import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { CarRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarRepositoryInMemory";
 
 import { ListCarUseCase } from "./ListCarUseCase";
@@ -5,14 +6,14 @@ import { ListCarUseCase } from "./ListCarUseCase";
 let carRepositoryInMemory: CarRepositoryInMemory;
 let listCarUseCase: ListCarUseCase;
 
+let car: ICreateCarDTO;
+
 describe("List Cars", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     carRepositoryInMemory = new CarRepositoryInMemory();
     listCarUseCase = new ListCarUseCase(carRepositoryInMemory);
-  });
 
-  it("should be able to list all available cars", async () => {
-    const car = await carRepositoryInMemory.create({
+    car = await carRepositoryInMemory.create({
       name: "Car_01",
       description: "car_description",
       daily_rate: 100,
@@ -21,8 +22,18 @@ describe("List Cars", () => {
       brand: "car_brand",
       category_id: "category_id",
     });
+  });
 
-    const cars = await listCarUseCase.execute();
+  it("should be able to list all available cars", async () => {
+    const cars = await listCarUseCase.execute({});
+
+    expect(cars).toEqual([car]);
+  });
+
+  it("should be able to list all available cars by name", async () => {
+    const cars = await listCarUseCase.execute({
+      name: car.name,
+    });
 
     expect(cars).toEqual([car]);
   });
