@@ -21,8 +21,11 @@ let specification: ICreateSpecificationDTO;
 describe("Create Car Specification", () => {
   beforeEach(() => {
     carsRepositoryInMemory = new CarRepositoryInMemory();
+    specificationRepositoryInMemory = new SpecificationRepositoryInMemory();
+
     createCarSpeficificationUseCase = new CreateCarSpeficificationUseCase(
-      carsRepositoryInMemory
+      carsRepositoryInMemory,
+      specificationRepositoryInMemory
     );
 
     createCarUseCase = new CreateCarUseCase(carsRepositoryInMemory);
@@ -36,8 +39,6 @@ describe("Create Car Specification", () => {
       brand: "Example brand",
       category_id: "category_id",
     };
-
-    specificationRepositoryInMemory = new SpecificationRepositoryInMemory();
 
     createSpecificationUseCase = new CreateSpecificationUseCase(
       specificationRepositoryInMemory

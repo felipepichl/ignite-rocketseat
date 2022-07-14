@@ -5,6 +5,7 @@ import { ICreateSpecificationDTO } from "../dtos/CreateSpecificationDTO";
 interface ISpecificationsRepository {
   create(data: ICreateSpecificationDTO): Promise<void>;
   findByName(name: string): Promise<Specification>;
+  findByIds(ids: string[]): Promise<Specification[]>;
 }
 
 export { ISpecificationsRepository };

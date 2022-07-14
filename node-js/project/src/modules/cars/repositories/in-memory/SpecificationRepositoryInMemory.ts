@@ -18,6 +18,18 @@ class SpecificationRepositoryInMemory implements ISpecificationsRepository {
       (specification) => specification.name === name
     );
   }
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    const allSpecifications = this.specifications.filter((specification) =>
+      ids.includes(specification.id)
+    );
+    return allSpecifications;
+    // const findIds = this.specifications.filter((specification) => {
+    //   return ids.forEach((id) => {
+    //     return id === specification.id;
+    //   });
+    // });
+    // return findIds;
+  }
 }
 
 export { SpecificationRepositoryInMemory };
