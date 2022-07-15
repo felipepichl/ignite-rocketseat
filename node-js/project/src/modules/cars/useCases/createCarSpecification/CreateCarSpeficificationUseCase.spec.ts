@@ -55,17 +55,19 @@ describe("Create Car Specification", () => {
 
     const { id } = createdCar;
 
-    await createSpecificationUseCase.execute(specification);
-
-    const createdSpecification =
-      await specificationRepositoryInMemory.findByName(specification.name);
+    const createdSpecification = await createSpecificationUseCase.execute(
+      specification
+    );
 
     const specifications_ids = [createdSpecification.id];
 
-    await createCarSpeficificationUseCase.execute({
+    const specificationsCars = await createCarSpeficificationUseCase.execute({
       car_id: id,
       specifications_ids,
     });
+
+    expect(specificationsCars).toHaveProperty("specifications");
+    expect(specificationsCars.specifications.length).toBe(1);
   });
 
   it("should not be able to add a new specification with a non-existing car", async () => {

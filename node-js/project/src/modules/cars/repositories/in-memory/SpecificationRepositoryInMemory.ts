@@ -6,12 +6,14 @@ import { ISpecificationsRepository } from "../ISpecificationsRepository";
 class SpecificationRepositoryInMemory implements ISpecificationsRepository {
   private specifications: Specification[] = [];
 
-  async create(data: ICreateSpecificationDTO): Promise<void> {
+  async create(data: ICreateSpecificationDTO): Promise<Specification> {
     const specification = new Specification();
 
     Object.assign(specification, data);
 
     this.specifications.push(specification);
+
+    return specification;
   }
   async findByName(name: string): Promise<Specification> {
     return this.specifications.find(
