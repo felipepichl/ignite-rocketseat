@@ -23,12 +23,21 @@ describe("Create Car Specification", () => {
     carsRepositoryInMemory = new CarRepositoryInMemory();
     specificationRepositoryInMemory = new SpecificationRepositoryInMemory();
 
+    createCarUseCase = new CreateCarUseCase(carsRepositoryInMemory);
+
+    createSpecificationUseCase = new CreateSpecificationUseCase(
+      specificationRepositoryInMemory
+    );
+
     createCarSpeficificationUseCase = new CreateCarSpeficificationUseCase(
       carsRepositoryInMemory,
       specificationRepositoryInMemory
     );
 
-    createCarUseCase = new CreateCarUseCase(carsRepositoryInMemory);
+    specification = {
+      name: "Example Specification name",
+      description: "Example Specification description",
+    };
 
     car = {
       name: "Example name",
@@ -38,15 +47,6 @@ describe("Create Car Specification", () => {
       fine_amount: 33,
       brand: "Example brand",
       category_id: "category_id",
-    };
-
-    createSpecificationUseCase = new CreateSpecificationUseCase(
-      specificationRepositoryInMemory
-    );
-
-    specification = {
-      name: "Example Specification name",
-      description: "Example Specification description",
     };
   });
 

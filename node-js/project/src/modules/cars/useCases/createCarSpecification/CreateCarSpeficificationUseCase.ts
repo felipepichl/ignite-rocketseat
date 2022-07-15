@@ -23,6 +23,10 @@ class CreateCarSpeficificationUseCase {
     carExists.specifications = await this.specificationsRepository.findByIds(
       specifications_ids
     );
+
+    await this.carsRepository.create(carExists);
+
+    console.log(carExists);
   }
 }
 

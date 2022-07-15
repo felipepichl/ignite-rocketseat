@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { ICreateSpecificationDTO } from "@modules/cars/dtos/CreateSpecificationDTO";
 import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
@@ -25,7 +25,9 @@ class SpecificationsRepository implements ISpecificationsRepository {
   }
 
   async findByIds(ids: string[]): Promise<Specification[]> {
-    throw new Error("Method not implemented.");
+    return this.repository.findBy({
+      id: In(ids),
+    });
   }
 }
 
