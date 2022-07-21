@@ -15,11 +15,11 @@ describe("Upload Car Image", () => {
 
   it("should be able to uploads images to a car", async () => {
     const car_id = "car_id";
-    const image_name = "image_name";
+    const images_name = ["image_name"];
 
     await uploadCarImagesUseCase.execute({
       car_id,
-      image_name,
+      images_name,
     });
   });
 });
