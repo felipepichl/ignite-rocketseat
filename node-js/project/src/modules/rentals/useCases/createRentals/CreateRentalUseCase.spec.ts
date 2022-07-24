@@ -26,6 +26,7 @@ describe("Create Rentals", () => {
     const createdRental = await createRentalUseCase.execute(rental);
 
     expect(createdRental).toHaveProperty("id");
+    expect(createdRental).toHaveProperty("start_date");
   });
 
   it("should not be able to create a new rental for a not available car", async () => {
