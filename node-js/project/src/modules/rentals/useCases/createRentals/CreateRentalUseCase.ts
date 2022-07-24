@@ -24,12 +24,11 @@ class CreateRentalUseCase {
       throw new AppError("Car does not available");
     }
 
-    const openRentalToUser = await this.rentalsRepository.findOpenRentalByUser(
-      user_id
-    );
+    const rentalOpenRentalToUser =
+      await this.rentalsRepository.findOpenRentalByUser(user_id);
 
-    if (openRentalToUser) {
-      throw new AppError("User to have a open rental");
+    if (rentalOpenRentalToUser) {
+      throw new AppError("There is a rental in progress for user");
     }
 
     const rental = await this.rentalsRepository.create({

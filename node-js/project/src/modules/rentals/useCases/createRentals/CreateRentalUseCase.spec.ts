@@ -35,4 +35,12 @@ describe("Create Rentals", () => {
       AppError
     );
   });
+
+  it("should not be able to create a new rental in progress for a user", async () => {
+    await createRentalUseCase.execute(rental);
+
+    await expect(createRentalUseCase.execute(rental)).rejects.toBeInstanceOf(
+      AppError
+    );
+  });
 });
