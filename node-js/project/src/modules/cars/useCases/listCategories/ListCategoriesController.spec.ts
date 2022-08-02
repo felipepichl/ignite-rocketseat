@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 import { app } from "@shared/infra/http/start/app";
 import { AppDataSource } from "@shared/infra/typeorm/";
 
-describe("Create Category Controller", () => {
+describe("List Category Controller", () => {
   beforeAll(async () => {
     await AppDataSource.initialize();
     await AppDataSource.runMigrations();
@@ -40,7 +40,7 @@ describe("Create Category Controller", () => {
     await AppDataSource.dropDatabase();
   });
 
-  it("should be able to create a new category", async () => {
+  it("should be able to list all categories", async () => {
     const responseToken = await request(app).post("/sessions").send({
       email: "admin@rentx.com.br",
       password: "admin",
@@ -48,7 +48,7 @@ describe("Create Category Controller", () => {
 
     const { token } = responseToken.body;
 
-    const response = await request(app)
+    await request(app)
       .post("/categories")
       .send({
         name: "Category supertest",
@@ -58,27 +58,14 @@ describe("Create Category Controller", () => {
         Authorization: `Bearer ${token}`,
       });
 
-    expect(response.status).toBe(201);
-  });
-
-  it("should not be able to create a new category with same name for another", async () => {
-    const responseToken = await request(app).post("/sessions").send({
-      email: "admin@rentx.com.br",
-      password: "admin",
-    });
-
-    const { token } = responseToken.body;
-
     const response = await request(app)
-      .post("/categories")
-      .send({
-        name: "Category supertest",
-        description: "Description category supertest",
-      })
+      .get("/categories")
       .set({
         Authorization: `Bearer ${token}`,
       });
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0]).toHaveProperty("id");
   });
 });
