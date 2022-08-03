@@ -74,6 +74,9 @@ class CarsRepository implements ICarsRepository {
     const car = await this.repository.findOne({ where: { id: car_id } });
     return car;
   }
+  async updateAvailable(id: string, available: boolean): Promise<Car> {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export { CarsRepository };
