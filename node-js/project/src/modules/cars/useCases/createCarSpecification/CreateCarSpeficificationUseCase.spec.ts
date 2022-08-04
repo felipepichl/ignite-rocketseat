@@ -6,9 +6,9 @@ import { AppError } from "@shared/errors/AppError";
 
 import { CreateCarUseCase } from "../createCar/CreateCarUseCase";
 import { CreateSpecificationUseCase } from "../createSpecification/CreateSpecificationUseCase";
-import { CreateCarSpeficificationUseCase } from "./CreateCarSpeficificationUseCase";
+import { CreateCarSpecificationUseCase } from "./CreateCarSpecificationUseCase";
 
-let createCarSpeficificationUseCase: CreateCarSpeficificationUseCase;
+let createCarSpecificationUseCase: CreateCarSpecificationUseCase;
 let carsRepositoryInMemory: CarRepositoryInMemory;
 
 let createCarUseCase: CreateCarUseCase;
@@ -29,7 +29,7 @@ describe("Create Car Specification", () => {
       specificationRepositoryInMemory
     );
 
-    createCarSpeficificationUseCase = new CreateCarSpeficificationUseCase(
+    createCarSpecificationUseCase = new CreateCarSpecificationUseCase(
       carsRepositoryInMemory,
       specificationRepositoryInMemory
     );
@@ -43,6 +43,7 @@ describe("Create Car Specification", () => {
       name: "Example name",
       description: "Example description",
       daily_rate: 100,
+      available: false,
       license_plate: "Example license plate",
       fine_amount: 33,
       brand: "Example brand",
@@ -61,7 +62,7 @@ describe("Create Car Specification", () => {
 
     const specifications_ids = [createdSpecification.id];
 
-    const specificationsCars = await createCarSpeficificationUseCase.execute({
+    const specificationsCars = await createCarSpecificationUseCase.execute({
       car_id: id,
       specifications_ids,
     });
@@ -75,7 +76,7 @@ describe("Create Car Specification", () => {
     const specifications_ids = ["specifications_ids"];
 
     await expect(
-      createCarSpeficificationUseCase.execute({
+      createCarSpecificationUseCase.execute({
         car_id,
         specifications_ids,
       })

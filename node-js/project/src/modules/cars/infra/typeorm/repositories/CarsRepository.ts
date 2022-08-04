@@ -18,6 +18,7 @@ class CarsRepository implements ICarsRepository {
     name,
     description,
     daily_rate,
+    available,
     license_plate,
     fine_amount,
     brand,
@@ -29,6 +30,7 @@ class CarsRepository implements ICarsRepository {
       name,
       description,
       daily_rate,
+      available,
       license_plate,
       fine_amount,
       brand,
@@ -74,8 +76,14 @@ class CarsRepository implements ICarsRepository {
     const car = await this.repository.findOne({ where: { id: car_id } });
     return car;
   }
-  async updateAvailable(id: string, available: boolean): Promise<Car> {
-    throw new Error("Method not implemented.");
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({ available })
+      .where("id = :id")
+      .setParameters({ id })
+      .execute();
   }
 }
 
