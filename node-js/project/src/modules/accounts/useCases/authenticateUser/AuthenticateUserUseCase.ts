@@ -30,13 +30,13 @@ class AuthenticateUserUseCase {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError("Incorrect email/password combination");
+      throw new AppError("Incorrect email/password combination", 400);
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError("Incorrect email/password combination");
+      throw new AppError("Incorrect email/password combination", 400);
     }
 
     const { secret, expiresIn } = authConfig;
