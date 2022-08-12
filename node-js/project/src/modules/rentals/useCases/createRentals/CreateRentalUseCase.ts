@@ -9,7 +9,7 @@ import { AppError } from "@shared/errors/AppError";
 interface IRequest {
   car_id: string;
   user_id: string;
-  expected_return_date: Date;
+  expected_return_date?: Date;
 }
 
 @injectable()

@@ -55,16 +55,16 @@ describe("Create Rentals", () => {
   it("should not be able to create a new rental for a not available car", async () => {
     await createRentalUseCase.execute(rental);
 
-    await expect(createRentalUseCase.execute(rental)).rejects.toBeInstanceOf(
-      AppError
+    await expect(createRentalUseCase.execute(rental)).rejects.toEqual(
+      new AppError("Car does not available")
     );
   });
 
   it("should not be able to create a new rental in progress for a user", async () => {
     await createRentalUseCase.execute(rental);
 
-    await expect(createRentalUseCase.execute(rental)).rejects.toBeInstanceOf(
-      AppError
+    await expect(createRentalUseCase.execute(rental)).rejects.toEqual(
+      new AppError("Car does not available")
     );
   });
 
@@ -75,6 +75,6 @@ describe("Create Rentals", () => {
         user_id: "user_id",
         expected_return_date: dayjs().toDate(),
       })
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toEqual(new AppError("Invalid return time"));
   });
 });

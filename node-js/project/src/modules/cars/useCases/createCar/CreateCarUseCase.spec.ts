@@ -36,8 +36,8 @@ describe("Create Car", () => {
   it("should not be able to create a new car with exists license plate", async () => {
     await createCarUseCase.execute(car);
 
-    await expect(createCarUseCase.execute(car)).rejects.toBeInstanceOf(
-      AppError
+    await expect(createCarUseCase.execute(car)).rejects.toEqual(
+      new AppError("Car already exists")
     );
   });
 

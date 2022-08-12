@@ -206,13 +206,14 @@
         ],
         "parameters": [
           {
-            "name": "id",
             "in": "path",
+            "name": "car_id",
             "description": "Car Id",
-            "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
           }
         ],
         "requestBody": {
