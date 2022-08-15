@@ -16,7 +16,7 @@ export class CreateUsersToken1660526427775 implements MigrationInterface {
             type: "varchar",
           },
           {
-            name: "user_is",
+            name: "user_id",
             type: "uuid",
           },
           {
@@ -29,9 +29,21 @@ export class CreateUsersToken1660526427775 implements MigrationInterface {
             default: "now()",
           },
         ],
+        foreignKeys: [
+          {
+            name: "fk_users_token",
+            referencedTableName: "users",
+            referencedColumnNames: ["id"],
+            columnNames: ["user_id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+          },
+        ],
       })
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable("users_token");
+  }
 }
