@@ -4,6 +4,7 @@ import { inject, injectable } from "tsyringe";
 
 import { authConfig } from "@config/auth";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
@@ -23,7 +24,9 @@ interface IResponse {
 class AuthenticateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject("UsersTokenRepository")
+    private usersTokenRepository: IUsersTokensRepository
   ) {}
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
@@ -39,11 +42,27 @@ class AuthenticateUserUseCase {
       throw new AppError("Incorrect email/password combination", 400);
     }
 
-    const { secret, expiresIn } = authConfig;
+    const {
+      secret,
+      expiresIn,
+      secret_refresh_token,
+      expires_in_refresh_token,
+    } = authConfig;
 
     const token = sign({}, secret, {
       subject: user.id,
       expiresIn,
+    });
+
+    const refresh_token = sign({ email }, secret_refresh_token, {
+      subject: user.id,
+      expiresIn: expires_in_refresh_token,
+    });
+
+    await this.usersTokenRepository.create({
+      user_id: user.id,
+      expires_date,
+      refresh_token,
     });
 
     const tokenReturn: IResponse = {
