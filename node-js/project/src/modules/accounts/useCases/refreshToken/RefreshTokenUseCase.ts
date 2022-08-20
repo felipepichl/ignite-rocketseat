@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 
 import { authConfig } from "@config/auth";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
+import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
   token: string;
@@ -24,7 +25,15 @@ class RefreshTokenUseCase {
 
     const { sub: user_id } = decode;
 
-    await this.usersTokensRepository.findByUserId(user_id);
+    const userTokens =
+      await this.usersTokensRepository.findByUserIdAndRefreshToken(
+        user_id,
+        token
+      );
+
+    if (!userTokens) {
+      throw new AppError("Refresh token does not exists");
+    }
   }
 }
 
