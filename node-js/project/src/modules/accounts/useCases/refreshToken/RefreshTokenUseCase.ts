@@ -24,8 +24,14 @@ class RefreshTokenUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute({ token }: IRequest): Promise<void> {
-    const decode = verify(token, authConfig.secret_refresh_token) as IPayload;
+  async execute({ token }: IRequest): Promise<string> {
+    const {
+      secret_refresh_token,
+      expires_refresh_token_days,
+      expires_in_refresh_token,
+    } = authConfig;
+
+    const decode = verify(token, secret_refresh_token) as IPayload;
 
     const { sub: user_id, email } = decode;
 
@@ -43,14 +49,20 @@ class RefreshTokenUseCase {
 
     await this.usersTokensRepository.deleteById(id);
 
-    const refresh_token_expires_date = this.dateProvider.addDays(
-      expires_refresh_token_days
-    );
+    const expires_date = this.dateProvider.addDays(expires_refresh_token_days);
 
-    const refresh_token = sign({ email }, authConfig.secret_refresh_token, {
+    const refresh_token = sign({ email }, secret_refresh_token, {
       subject: user_id,
       expiresIn: expires_in_refresh_token,
     });
+
+    await this.usersTokensRepository.create({
+      user_id,
+      expires_date,
+      refresh_token,
+    });
+
+    return refresh_token;
   }
 }
 
