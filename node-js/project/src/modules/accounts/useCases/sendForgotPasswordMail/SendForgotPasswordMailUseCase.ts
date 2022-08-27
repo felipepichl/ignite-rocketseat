@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/model/IDateProvider";
+import { IMailProvider } from "@shared/container/providers/MailProvider/model/IMailProvider";
 import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
@@ -18,7 +19,9 @@ class SendForgotPasswordMailUseCase {
     @inject("UsersTokenRepository")
     private usersTokenRepository: IUsersTokensRepository,
     @inject("DateProvider")
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
+    @inject("MailProvider")
+    private mailProvide: IMailProvider
   ) {}
 
   async execute({ email }: IRequest): Promise<void> {
@@ -37,6 +40,12 @@ class SendForgotPasswordMailUseCase {
       refresh_token: token,
       expires_date,
     });
+
+    await this.mailProvide.sendMail(
+      email,
+      "Recuperação de Senha",
+      `O link para o reset é: ${token}`
+    );
   }
 }
 

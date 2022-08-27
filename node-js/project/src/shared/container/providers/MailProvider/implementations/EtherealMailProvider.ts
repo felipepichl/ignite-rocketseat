@@ -30,6 +30,7 @@ class EtherealMailProvider implements IMailProvider {
       to,
       subject,
       text: body,
+      html: body,
     });
 
     console.log("Message send: %s", message.messageId);
