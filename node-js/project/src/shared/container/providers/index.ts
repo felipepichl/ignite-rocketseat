@@ -7,12 +7,12 @@ import { IMailProvider } from "./MailProvider/model/IMailProvider";
 
 const providers = {
   dayjs: DayjsDateProvider,
-  etherealMail: EtherealMailProvider,
+  etherealMail: new EtherealMailProvider(),
 };
 
 container.registerSingleton<IDateProvider>("DateProvider", providers.dayjs);
 
-container.registerSingleton<IMailProvider>(
+container.registerInstance<IMailProvider>(
   "MailProvider",
   providers.etherealMail
 );

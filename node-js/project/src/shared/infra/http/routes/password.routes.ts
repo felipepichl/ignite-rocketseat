@@ -6,6 +6,6 @@ const passwordRoutes = Router();
 
 const sendForgotPasswordMailController = new SendForgotPasswordMailController();
 
-passwordRoutes.post("/", sendForgotPasswordMailController.handle);
+passwordRoutes.post("/forgot", sendForgotPasswordMailController.handle);
 
 export { passwordRoutes };
