@@ -27,7 +27,7 @@ class AuthenticateUserUseCase {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository,
-    @inject("UsersTokenRepository")
+    @inject("UsersTokensRepository")
     private usersTokenRepository: IUsersTokensRepository,
     @inject("DateProvider")
     private dateProvider: IDateProvider
