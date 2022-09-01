@@ -17,8 +17,8 @@ class SendForgotPasswordMailUseCase {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository,
-    @inject("UsersTokenRepository")
-    private usersTokenRepository: IUsersTokensRepository,
+    @inject("UsersTokensRepository")
+    private usersTokensRepository: IUsersTokensRepository,
     @inject("DateProvider")
     private dateProvider: IDateProvider,
     @inject("MailProvider")
@@ -45,7 +45,7 @@ class SendForgotPasswordMailUseCase {
 
     const expires_date = this.dateProvider.addHours(3);
 
-    await this.usersTokenRepository.create({
+    await this.usersTokensRepository.create({
       user_id: user.id,
       refresh_token: token,
       expires_date,
