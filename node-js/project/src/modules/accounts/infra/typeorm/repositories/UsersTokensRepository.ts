@@ -13,8 +13,16 @@ class UsersTokensRepository implements IUsersTokensRepository {
     this.repository = AppDataSource.getRepository(UserTokens);
   }
 
-  async create(data: ICreateUserTokensDTO): Promise<UserTokens> {
-    const userToken = this.repository.create(data);
+  async create({
+    user_id,
+    expires_date,
+    refresh_token,
+  }: ICreateUserTokensDTO): Promise<UserTokens> {
+    const userToken = this.repository.create({
+      user_id,
+      expires_date,
+      refresh_token,
+    });
 
     await this.repository.save(userToken);
 
