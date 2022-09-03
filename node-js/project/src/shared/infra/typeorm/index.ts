@@ -8,7 +8,7 @@ const database = {
 const AppDataSource = new DataSource({
   type: "sqlite",
   database: process.env.NODE_ENV === "test" ? database.test : database.dev,
-  entities: ["./src/modules/**/infra/typeorm/entities/**/*.ts"],
+  entities: ["./src/modules/**/infra/typeorm/entities/*.ts"],
   migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
 });
 
