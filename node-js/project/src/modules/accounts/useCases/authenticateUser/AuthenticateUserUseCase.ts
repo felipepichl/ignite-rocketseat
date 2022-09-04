@@ -28,7 +28,7 @@ class AuthenticateUserUseCase {
     @inject("UsersRepository")
     private usersRepository: IUsersRepository,
     @inject("UsersTokensRepository")
-    private usersTokenRepository: IUsersTokensRepository,
+    private usersTokensRepository: IUsersTokensRepository,
     @inject("DateProvider")
     private dateProvider: IDateProvider
   ) {}
@@ -47,16 +47,16 @@ class AuthenticateUserUseCase {
     }
 
     const {
-      secret,
-      expiresIn,
+      secret_token,
+      expires_in_token,
       secret_refresh_token,
       expires_in_refresh_token,
       expires_refresh_token_days,
     } = authConfig;
 
-    const token = sign({}, secret, {
+    const token = sign({}, secret_token, {
       subject: user.id,
-      expiresIn,
+      expiresIn: expires_in_token,
     });
 
     const refresh_token = sign({ email }, secret_refresh_token, {
@@ -68,7 +68,7 @@ class AuthenticateUserUseCase {
       expires_refresh_token_days
     );
 
-    await this.usersTokenRepository.create({
+    await this.usersTokensRepository.create({
       user_id: user.id,
       expires_date: refresh_token_expires_date,
       refresh_token,
