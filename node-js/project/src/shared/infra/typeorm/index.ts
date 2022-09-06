@@ -53,16 +53,14 @@ const AppDataSource = new DataSource({
   subscribers: [],
 });
 
-// AppDataSource.initialize();
-
 function createConnection(host = "database"): Promise<DataSource> {
   return AppDataSource.setOptions({ host }).initialize();
 }
 
 export { createConnection, AppDataSource };
 
+// AppDataSource.initialize();
 // export { AppDataSource };
 // entities: ["./src/modules/**/infra/typeorm/entities/*.ts"],
 // migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
-
 // -d src/shared/infra/typeorm/index.ts

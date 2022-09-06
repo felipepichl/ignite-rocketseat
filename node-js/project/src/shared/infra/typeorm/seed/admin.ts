@@ -1,15 +1,15 @@
 import { v4 as uuid } from "uuid";
 import { hash } from "bcrypt";
 
-import { AppDataSource } from "..";
+import { createConnection } from "..";
 
 async function create() {
-  AppDataSource.initialize();
+  const connection = await createConnection("localhost");
 
   const id = uuid();
   const password = await hash("admin", 8);
 
-  AppDataSource.query(
+  await connection.query(
     `INSERT INTO USERS(
         id,
         name,
@@ -30,6 +30,8 @@ async function create() {
       )
     `
   );
+
+  await connection.destroy();
 }
 
 create().then(() => {
