@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, TableColumn } from "typeorm";
 
-export class FixLicensePlateCars1657307433527 implements MigrationInterface {
+class FixLicensePlateCars1657307433527 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropColumn(
       "cars",
@@ -37,3 +37,5 @@ export class FixLicensePlateCars1657307433527 implements MigrationInterface {
     );
   }
 }
+
+export { FixLicensePlateCars1657307433527 };

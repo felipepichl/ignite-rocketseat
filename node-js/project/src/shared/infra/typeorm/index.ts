@@ -11,6 +11,8 @@ import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
  * Migrations
  */
 import { CreateUsers1642989944458 } from "@shared/infra/typeorm/migrations/1642989944458-CreateUsers";
+import { CreateCars1657300482401 } from "@shared/infra/typeorm/migrations/1657300482401-CreateCars";
+import { CreateUsersToken1660526427775 } from "@shared/infra/typeorm/migrations/1660526427775-CreateUsersToken";
 
 const database = {
   dev: "./src/shared/infra/typeorm/database.sqlite",
@@ -21,6 +23,11 @@ const AppDataSource = new DataSource({
   type: "sqlite",
   database: process.env.NODE_ENV === "test" ? database.test : database.dev,
   entities: [User, UserTokens, Car, CarImage, Category, Specification, Rental],
+  migrations: [
+    CreateUsers1642989944458,
+    CreateUsersToken1660526427775,
+    CreateCars1657300482401,
+  ],
   synchronize: false,
   subscribers: [],
 });
