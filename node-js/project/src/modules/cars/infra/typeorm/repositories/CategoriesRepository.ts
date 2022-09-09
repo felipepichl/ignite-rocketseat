@@ -3,13 +3,13 @@ import { Repository } from "typeorm";
 import { ICreateCategoryDTO } from "@modules/cars/dtos/CreateCategoryDTO";
 import { Category } from "@modules/cars/infra/typeorm/entities/Category";
 import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository";
-import { AppDataSource } from "@shared/infra/typeorm";
+import dataSource from "@shared/infra/typeorm";
 
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(Category);
+    this.repository = dataSource.getRepository(Category);
   }
 
   public async create({

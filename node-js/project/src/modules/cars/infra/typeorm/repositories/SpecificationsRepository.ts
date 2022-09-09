@@ -3,13 +3,13 @@ import { In, Repository } from "typeorm";
 import { ICreateSpecificationDTO } from "@modules/cars/dtos/CreateSpecificationDTO";
 import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
-import { AppDataSource } from "@shared/infra/typeorm";
+import dataSource from "@shared/infra/typeorm";
 
 class SpecificationsRepository implements ISpecificationsRepository {
   private repository: Repository<Specification>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(Specification);
+    this.repository = dataSource.getRepository(Specification);
   }
 
   async create({

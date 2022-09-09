@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 
 import { ICreateRentalDTO } from "@modules/rentals/dtos/ICreateRentalDTO";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
-import { AppDataSource } from "@shared/infra/typeorm";
+import dataSource from "@shared/infra/typeorm";
 
 import { Rental } from "../entities/Rental";
 
@@ -10,7 +10,7 @@ class RentalsRepository implements IRentalsRepository {
   private repository: Repository<Rental>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(Rental);
+    this.repository = dataSource.getRepository(Rental);
   }
 
   async create({

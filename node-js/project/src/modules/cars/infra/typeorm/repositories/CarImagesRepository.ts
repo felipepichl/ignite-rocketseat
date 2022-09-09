@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 
 import { ICreateCarImagesDTO } from "@modules/cars/dtos/ICreateCarImagesDTO";
 import { ICarImagesRepository } from "@modules/cars/repositories/ICarImagesRepository";
-import { AppDataSource } from "@shared/infra/typeorm";
+import dataSource from "@shared/infra/typeorm";
 
 import { CarImage } from "../entities/CarImage";
 
@@ -10,7 +10,7 @@ class CarImagesRepository implements ICarImagesRepository {
   private repository: Repository<CarImage>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(CarImage);
+    this.repository = dataSource.getRepository(CarImage);
   }
 
   async create({ car_id, image_name }: ICreateCarImagesDTO): Promise<CarImage> {

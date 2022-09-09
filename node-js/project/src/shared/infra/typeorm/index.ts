@@ -31,7 +31,7 @@ const database = {
   test: "./src/shared/infra/typeorm/database_test.sqlite",
 };
 
-const AppDataSource = new DataSource({
+const dataSource = new DataSource({
   type: "sqlite",
   database: process.env.NODE_ENV === "test" ? database.test : database.dev,
   entities: [User, UserTokens, Car, CarImage, Category, Specification, Rental],
@@ -50,14 +50,15 @@ const AppDataSource = new DataSource({
     CreateUsersToken1660526427775,
   ],
   synchronize: false,
+  logging: true,
   subscribers: [],
 });
 
-function createConnection(host = "database"): Promise<DataSource> {
-  return AppDataSource.setOptions({ host }).initialize();
+export function createConnection(host = "database"): Promise<DataSource> {
+  return dataSource.setOptions({ host }).initialize();
 }
 
-export { createConnection, AppDataSource };
+export default dataSource;
 
 // AppDataSource.initialize();
 // export { AppDataSource };
