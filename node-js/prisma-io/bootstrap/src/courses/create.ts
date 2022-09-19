@@ -7,7 +7,17 @@ async function main() {
     data: {
       duration: 190,
       name: 'ReactNative Course',
-      description: 'Great ReactNative course'
+      description: 'Great ReactNative course',
+      teachers: {
+        connectOrCreate: {
+          where: {
+            name: "Felipe Pichl"
+          }, 
+          create: {
+            name: "Felipe Pichl"
+          }
+        }
+      }
     }
   });
 
