@@ -23,7 +23,7 @@ model Books {
   created_at DateTime @default(now())
 
   authors      Authors @relation(fields: [fk_id_author], references: [id])
-  fk_id_author String  @unique()
+  fk_id_author String
 
   @@map("books")
 }

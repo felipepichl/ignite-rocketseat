@@ -9,10 +9,10 @@ async function main() {
       authors: {
         connectOrCreate: {
           where: {
-            name: "Felipe Pichl"
+            name: "Helena Pichl"
           },
           create: {
-            name: "Felipe Pichl"
+            name: "Helena Pichl"
           }
         }
       }
