@@ -14,7 +14,7 @@ model Courses {
   duration    Int
   created_at  DateTime @default(now())
 
-  CoursesModules CoursesModules[]
+  courses_modules CoursesModules[]
 
   @@map("courses")
 }
@@ -25,7 +25,7 @@ model Modules {
   description String
   created_at  DateTime @default(now())
 
-  CoursesModules CoursesModules[]
+  courses_modules CoursesModules[]
 
   @@map("modules")
 }
@@ -39,4 +39,6 @@ model CoursesModules {
 
   module       Modules @relation(fields: [fk_id_module], references: [id])
   fk_id_module String
+
+  @@map("courses_modules")
 }
