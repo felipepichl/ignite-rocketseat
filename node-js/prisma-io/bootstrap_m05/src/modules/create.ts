@@ -7,7 +7,7 @@ async function main() {
     data: {
       name: 'Firebase learning begin',
       description: "Firebase learning",
-      courses_modules: {
+      courses: {
         create: {
           course: {
             connect: {

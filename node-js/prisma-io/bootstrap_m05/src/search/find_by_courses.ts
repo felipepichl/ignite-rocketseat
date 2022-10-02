@@ -8,11 +8,11 @@ async function main() {
       id: "2073fb11-301c-41c4-a0f5-8eda322574bf"
     },
     include: {
-      // TODO
+      modules: true
     } 
   });
 
-  console.log(result)
+  console.log(JSON.stringify(result))
 }
 
 main();
