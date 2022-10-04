@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(uuid())
+  name           String
+  email          String
+  password       String
+  driver_lisence String
+  is_admin       Boolean  @default(false)
+  avatar         String?
+  created_at     DateTime @default(now())
+
+  user_tokens UserTokens[]
+
+  @@map("users")
+}
+
+model UserTokens {
+  id            String   @id @default(uuid())
+  refresh_token String
+  expires_date  DateTime
+  created_at    DateTime
+
+  user       User   @relation(fields: [fk_user_id], references: [id])
+  fk_user_id String
+
+  @@map("user_tokens")
+}
