@@ -6,7 +6,7 @@ import dataSource from "@shared/infra/typeorm";
 
 import { UserTokens } from "../entities/UserTokens";
 
-class UsersTokensRepository implements IUsersTokensRepository {
+class UsersTokensRepository implements IUsersTokensRepository<UserTokens> {
   private repository: Repository<UserTokens>;
 
   constructor() {

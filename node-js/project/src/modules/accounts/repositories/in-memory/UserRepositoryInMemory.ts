@@ -3,7 +3,7 @@ import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../IUsersRepository";
 
-class UserRepositoryInMemory implements IUsersRepository {
+class UserRepositoryInMemory implements IUsersRepository<User> {
   private users: User[] = [];
 
   async create({

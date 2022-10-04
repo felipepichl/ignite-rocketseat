@@ -5,7 +5,7 @@ import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import dataSource from "@shared/infra/typeorm";
 
-class UsersRepository implements IUsersRepository {
+class UsersRepository implements IUsersRepository<User> {
   private repository: Repository<User>;
 
   constructor() {
