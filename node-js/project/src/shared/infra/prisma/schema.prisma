@@ -26,10 +26,64 @@ model UserTokens {
   id            String   @id @default(uuid())
   refresh_token String
   expires_date  DateTime
-  created_at    DateTime
+  created_at    DateTime @default(now())
 
   user       User   @relation(fields: [fk_user_id], references: [id])
   fk_user_id String
 
   @@map("user_tokens")
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  created_at  DateTime @default(now())
+
+  Car Car[]
+
+  @@map("categories")
+}
+
+model Specification {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  created_at  DateTime @default(now())
+
+  Car Car[]
+
+  @@map("specifications")
+}
+
+model Car {
+  id            String   @id @default(uuid())
+  description   String
+  daily_rate    Float
+  available     Boolean  @default(true)
+  lisence_plate String
+  fine_amount   Float
+  brand         String
+  created_at    DateTime @default(now())
+
+  CarImage CarImage[]
+
+  category       Category @relation(fields: [fk_category_id], references: [id])
+  fk_category_id String
+
+  specification       Specification @relation(fields: [fk_specification_id], references: [id])
+  fk_specification_id String
+
+  @@map("cars")
+}
+
+model CarImage {
+  id         String   @id @default(uuid())
+  image_name String
+  created_at DateTime @default(now())
+
+  car       Car    @relation(fields: [fk_car_id], references: [id])
+  fk_car_id String
+
+  @@map("car_images")
 }
