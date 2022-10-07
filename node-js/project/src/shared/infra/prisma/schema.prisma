@@ -45,17 +45,6 @@ model Category {
   @@map("categories")
 }
 
-model Specification {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  created_at  DateTime @default(now())
-
-  Car Car[]
-
-  @@map("specifications")
-}
-
 model Car {
   id            String   @id @default(uuid())
   description   String
@@ -71,10 +60,32 @@ model Car {
   category       Category @relation(fields: [fk_category_id], references: [id])
   fk_category_id String
 
+  specifications_cars SpecificationsCars[]
+
+  @@map("cars")
+}
+
+model Specification {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  created_at  DateTime @default(now())
+
+  specifications_cars SpecificationsCars[]
+
+  @@map("specifications")
+}
+
+model SpecificationsCars {
+  id String @id @default(uuid())
+
+  car       Car    @relation(fields: [fk_car_id], references: [id])
+  fk_car_id String
+
   specification       Specification @relation(fields: [fk_specification_id], references: [id])
   fk_specification_id String
 
-  @@map("cars")
+  @@map("specifications_cars")
 }
 
 model CarImage {
