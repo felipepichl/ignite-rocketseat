@@ -18,6 +18,7 @@ model User {
   created_at     DateTime @default(now())
 
   user_tokens UserTokens[]
+  rental      Rental[]
 
   @@map("users")
 }
@@ -61,6 +62,7 @@ model Car {
   fk_category_id String
 
   specifications_cars SpecificationsCars[]
+  rental              Rental[]
 
   @@map("cars")
 }
@@ -97,4 +99,22 @@ model CarImage {
   fk_car_id String
 
   @@map("car_images")
+}
+
+model Rental {
+  id                   String   @id @default(uuid())
+  start_date           DateTime @default(now())
+  end_date             DateTime
+  expected_return_date DateTime
+  total                Float
+  created_at           DateTime @default(now())
+  updated_at           DateTime @default(now())
+
+  car       Car    @relation(fields: [fk_car_id], references: [id])
+  fk_car_id String
+
+  user       User   @relation(fields: [fk_user_id], references: [id])
+  fk_user_id String
+
+  @@map("rentals")
 }
