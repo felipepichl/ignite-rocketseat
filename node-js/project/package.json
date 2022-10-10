@@ -11,6 +11,7 @@
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts"
   },
   "dependencies": {
+    "@prisma/client": "^4.4.0",
     "bcrypt": "^5.0.1",
     "csv-parse": "^5.2.2",
     "dayjs": "^1.11.4",

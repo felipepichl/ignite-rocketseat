@@ -1,10 +1,12 @@
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 
-interface IUsersRepository<T> {
+import { User } from "../infra/prisma/models/User";
+
+interface IUsersRepository {
   create(data: ICreateUserDTO): Promise<void>;
-  list(): Promise<T[]>;
-  findByEmail(email: string): Promise<T>;
-  findById(user_id: string): Promise<T>;
+  list(): Promise<User[]>;
+  findByEmail(email: string): Promise<User>;
+  findById(user_id: string): Promise<User>;
 }
 
 export { IUsersRepository };

@@ -12,7 +12,7 @@ model User {
   name           String
   email          String
   password       String
-  driver_lisence String
+  driver_license String
   is_admin       Boolean  @default(false)
   avatar         String?
   created_at     DateTime @default(now())
