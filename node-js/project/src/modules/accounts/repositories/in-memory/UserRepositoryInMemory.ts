@@ -1,9 +1,9 @@
-import { User } from "@modules/accounts/infra/typeorm/entities/User";
+import { User } from "@modules/accounts/infra/prisma/models/User";
 
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../IUsersRepository";
 
-class UserRepositoryInMemory implements IUsersRepository<User> {
+class UserRepositoryInMemory implements IUsersRepository {
   private users: User[] = [];
 
   async create({
