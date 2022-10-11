@@ -51,7 +51,7 @@ model Car {
   description   String
   daily_rate    Float
   available     Boolean  @default(true)
-  lisence_plate String
+  license_plate String
   fine_amount   Float
   brand         String
   created_at    DateTime @default(now())
