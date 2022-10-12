@@ -48,6 +48,7 @@ model Category {
 
 model Car {
   id            String   @id @default(uuid())
+  name          String
   description   String
   daily_rate    Float
   available     Boolean  @default(true)
