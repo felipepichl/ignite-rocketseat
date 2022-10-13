@@ -1,6 +1,6 @@
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 import { Car } from "../models/Car";
 
@@ -50,23 +50,31 @@ class CarsRepository implements ICarsRepository {
     brand?: string,
     name?: string
   ): Promise<Car[]> {
-    const result = await this.prisma.car.findMany({
-      where: {
-        OR: [
-          {
-            fk_category_id: category_id,
-          },
-          {
-            brand,
-          },
-          {
-            name,
-          },
-        ],
-      },
-    });
+    const available = await this.prisma.$queryRaw<Car[]>(Prisma.sql`
+      SELECT * FROM cars where available = true
+    `);
 
-    return result;
+    if (available) {
+      console.log("There is a available car");
+    }
+
+    // const result = await this.prisma.car.findMany({
+    //   where: {
+    //     OR: [
+    //       {
+    //         fk_category_id: category_id,
+    //       },
+    //       {
+    //         brand,
+    //       },
+    //       {
+    //         name,
+    //       },
+    //     ],
+    //   },
+    // });
+
+    return available;
   }
 
   async findById(car_id: string): Promise<Car> {
