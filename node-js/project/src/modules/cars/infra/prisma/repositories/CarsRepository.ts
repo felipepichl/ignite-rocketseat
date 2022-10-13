@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 
 import { Car } from "../models/Car";
 
-class CarRepository implements ICarsRepository {
+class CarsRepository implements ICarsRepository {
   private prisma: PrismaClient;
 
   constructor() {
@@ -68,6 +68,7 @@ class CarRepository implements ICarsRepository {
 
     return result;
   }
+
   async findById(car_id: string): Promise<Car> {
     const result = await this.prisma.car.findUnique({
       where: {
@@ -92,4 +93,4 @@ class CarRepository implements ICarsRepository {
   }
 }
 
-export { CarRepository };
+export { CarsRepository };
