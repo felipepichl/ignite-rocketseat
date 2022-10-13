@@ -50,13 +50,45 @@ class CarRepository implements ICarsRepository {
     brand?: string,
     name?: string
   ): Promise<Car[]> {
-    const result = await this.prisma.car.findMany({});
+    const result = await this.prisma.car.findMany({
+      where: {
+        OR: [
+          {
+            fk_category_id: category_id,
+          },
+          {
+            brand,
+          },
+          {
+            name,
+          },
+        ],
+      },
+    });
+
+    return result;
   }
-  findById(car_id: string): Promise<Car> {
-    throw new Error("Method not implemented.");
+  async findById(car_id: string): Promise<Car> {
+    const result = await this.prisma.car.findUnique({
+      where: {
+        id: car_id,
+      },
+    });
+
+    return result;
   }
-  updateAvailable(id: string, available: boolean): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    if (available) {
+      await this.prisma.car.update({
+        where: {
+          id,
+        },
+        data: {
+          available: false,
+        },
+      });
+    }
   }
 }
 
