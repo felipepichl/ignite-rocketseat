@@ -9,7 +9,7 @@ interface ICreateCarDTO {
   license_plate: string;
   fine_amount: number;
   brand: string;
-  category_id: string;
+  fk_category_id: string;
   specifications?: Specification[];
 }
 

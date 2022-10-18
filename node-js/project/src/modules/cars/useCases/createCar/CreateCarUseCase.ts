@@ -11,7 +11,7 @@ interface IRequest {
   license_plate: string;
   fine_amount: number;
   brand: string;
-  category_id: string;
+  fk_category_id: string;
 }
 
 @injectable()
@@ -28,7 +28,7 @@ class CreateCarUseCase {
     license_plate,
     fine_amount,
     brand,
-    category_id,
+    fk_category_id,
   }: IRequest): Promise<Car> {
     const carAlreadyExists = await this.carsRepository.findByLicensePlate(
       license_plate
@@ -45,7 +45,7 @@ class CreateCarUseCase {
       license_plate,
       fine_amount,
       brand,
-      category_id,
+      fk_category_id,
     });
 
     return car;

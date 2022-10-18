@@ -47,7 +47,7 @@ describe("Create Car Specification", () => {
       license_plate: "Example license plate",
       fine_amount: 33,
       brand: "Example brand",
-      category_id: "category_id",
+      fk_category_id: "category_id",
     };
   });
 
@@ -68,7 +68,7 @@ describe("Create Car Specification", () => {
     });
 
     expect(specificationsCars).toHaveProperty("specifications");
-    expect(specificationsCars.specifications.length).toBe(1);
+    expect(specificationsCars.specifications_cars.length).toBe(1);
   });
 
   it("should not be able to add a new specification with a non-existing car", async () => {

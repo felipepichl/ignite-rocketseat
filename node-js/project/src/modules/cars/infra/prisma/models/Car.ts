@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import { Car as ICar } from "@prisma/client";
+import { Car as ICar, Specification as ISpecification } from "@prisma/client";
 
 class Car implements ICar {
   id: string;
@@ -13,6 +13,8 @@ class Car implements ICar {
   brand: string;
   created_at: Date;
   fk_category_id: string;
+
+  specifications_cars: ISpecification[];
 
   constructor() {
     if (!this.id) {
