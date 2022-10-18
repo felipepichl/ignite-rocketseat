@@ -17,6 +17,7 @@ class Car implements ICar {
   constructor() {
     if (!this.id) {
       this.id = uuid();
+      this.available = true;
     }
   }
 }
