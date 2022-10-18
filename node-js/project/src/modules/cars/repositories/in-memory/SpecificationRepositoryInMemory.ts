@@ -1,5 +1,5 @@
 import { ICreateSpecificationDTO } from "@modules/cars/dtos/CreateSpecificationDTO";
-import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
+import { Specification } from "@modules/cars/infra/prisma/models/Specification";
 
 import { ISpecificationsRepository } from "../ISpecificationsRepository";
 

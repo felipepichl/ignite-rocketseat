@@ -4,6 +4,7 @@ import { Car as ICar } from "@prisma/client";
 
 class Car implements ICar {
   id: string;
+  name: string;
   description: string;
   daily_rate: number;
   available: boolean;

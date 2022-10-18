@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import { Category } from "@modules/cars/infra/typeorm/entities/Category";
+import { Category } from "@modules/cars/infra/prisma/models/Category";
 
 import { ICreateCategoryDTO } from "../../dtos/CreateCategoryDTO";
 import { ICategoriesRepository } from "../ICategoriesRepository";

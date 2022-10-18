@@ -1,5 +1,5 @@
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
-import { Car } from "@modules/cars/infra/typeorm/entities/Car";
+import { Car } from "@modules/cars/infra/prisma/models/Car";
 
 import { ICarsRepository } from "../ICarsRepository";
 
@@ -30,7 +30,7 @@ class CarRepositoryInMemory implements ICarsRepository {
     if (!category_id && !brand && !name) return availableCar;
 
     availableCar = availableCar.filter((car) => {
-      if (car.category_id === category_id) return true;
+      if (car.fk_category_id === category_id) return true;
       if (car.brand === brand) return true;
       if (car.name === name) return true;
 

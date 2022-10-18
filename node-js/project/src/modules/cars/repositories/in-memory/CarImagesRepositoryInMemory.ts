@@ -1,5 +1,5 @@
 import { ICreateCarImagesDTO } from "@modules/cars/dtos/ICreateCarImagesDTO";
-import { CarImage } from "@modules/cars/infra/typeorm/entities/CarImage";
+import { CarImage } from "@modules/cars/infra/prisma/models/CarImage";
 
 import { ICarImagesRepository } from "../ICarImagesRepository";
 
