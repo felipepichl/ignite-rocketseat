@@ -1,7 +1,7 @@
 import { injectable, inject } from "tsyringe";
 
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
-import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
+import { Rental } from "@modules/rentals/infra/prisma/models/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/model/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
@@ -33,6 +33,8 @@ class CreateRentalUseCase {
     const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(
       car_id
     );
+
+    console.log(carUnavailable);
 
     if (carUnavailable) {
       throw new AppError("Car does not available");
