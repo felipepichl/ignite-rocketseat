@@ -23,7 +23,7 @@ describe("List Cars", () => {
       license_plate: "XXXI66K",
       fine_amount: 33,
       brand: "car_brand",
-      category_id: "category_id",
+      fk_category_id: "category_id",
     });
   });
 
@@ -48,7 +48,7 @@ describe("List Cars", () => {
   });
   it("should be able to list all available cars by category_id", async () => {
     const cars = await listAvailableCarUseCase.execute({
-      category_id: car.category_id,
+      category_id: car.fk_category_id,
     });
 
     expect(cars).toEqual([car]);
