@@ -103,13 +103,13 @@ model CarImage {
 }
 
 model Rental {
-  id                   String   @id @default(uuid())
-  start_date           DateTime @default(now())
-  end_date             DateTime
+  id                   String    @id @default(uuid())
+  start_date           DateTime  @default(now())
+  end_date             DateTime?
   expected_return_date DateTime
   total                Float
-  created_at           DateTime @default(now())
-  updated_at           DateTime @default(now())
+  created_at           DateTime  @default(now())
+  updated_at           DateTime  @default(now())
 
   car       Car    @relation(fields: [fk_car_id], references: [id])
   fk_car_id String
