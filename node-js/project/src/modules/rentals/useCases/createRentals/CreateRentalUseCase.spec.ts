@@ -66,20 +66,23 @@ describe("Create Rentals", () => {
       fk_category_id: "category_id",
     });
 
-    await rentalRepositoryInMemory.create({
+    const rental = await createRentalUseCase.execute({
       car_id: car.id,
       user_id: "user.id",
       expected_return_date: dayjs().add(1, "day").toDate(),
-      end_date: null,
     });
 
-    await expect(
+    console.log(rental);
+
+    const r = await expect(
       createRentalUseCase.execute({
-        user_id: "1111",
+        user_id: "user.id",
         car_id: car.id,
         expected_return_date: dayAdd24Hours,
       })
     ).rejects.toEqual(new AppError("Car does not available"));
+
+    console.log(r, "hee");
   });
 
   // it("should not be able to create a new rental in progress for a user", async () => {

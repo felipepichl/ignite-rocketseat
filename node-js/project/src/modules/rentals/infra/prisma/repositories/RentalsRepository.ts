@@ -36,16 +36,15 @@ class RentalsRepository implements IRentalsRepository {
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
     const result = await this.prisma.rental.findFirst({
       where: {
-        // fk_car_id: car_id,
-        end_date: {
-          equals: null,
-        },
-
-        // AND: {
-        //   end_date: {
-        //     equals: null,
-        //   },
+        fk_car_id: car_id,
+        // end_date: {
+        //   equals: null,
         // },
+        AND: {
+          end_date: {
+            equals: null,
+          },
+        },
       },
     });
 
