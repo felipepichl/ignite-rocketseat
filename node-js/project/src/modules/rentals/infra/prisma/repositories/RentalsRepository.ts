@@ -38,12 +38,10 @@ class RentalsRepository implements IRentalsRepository {
       where: {
         fk_car_id: car_id,
         // end_date: {
-        //   equals: null,
+        //   equals: "null",
         // },
         AND: {
-          end_date: {
-            equals: null,
-          },
+          end_date: null,
         },
       },
     });

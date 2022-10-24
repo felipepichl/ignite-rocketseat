@@ -28,7 +28,7 @@ class CreateRentalUseCase {
     user_id,
     expected_return_date,
   }: IRequest): Promise<Rental> {
-    const minimumHour = 24;
+    // const minimumHour = 24;
 
     const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(
       car_id
@@ -38,21 +38,21 @@ class CreateRentalUseCase {
       throw new AppError("Car does not available");
     }
 
-    const rentalOpenRentalToUser =
-      await this.rentalsRepository.findOpenRentalByUser(user_id);
+    // const rentalOpenRentalToUser =
+    //   await this.rentalsRepository.findOpenRentalByUser(user_id);
 
-    if (rentalOpenRentalToUser) {
-      throw new AppError("There is a rental in progress for user");
-    }
+    // if (rentalOpenRentalToUser) {
+    //   throw new AppError("There is a rental in progress for user");
+    // }
 
-    const compare = this.dateProvider.compareInHours(
-      this.dateProvider.dateNow(),
-      expected_return_date
-    );
+    // const compare = this.dateProvider.compareInHours(
+    //   this.dateProvider.dateNow(),
+    //   expected_return_date
+    // );
 
-    if (compare < minimumHour) {
-      throw new AppError("Invalid return time");
-    }
+    // if (compare < minimumHour) {
+    //   throw new AppError("Invalid return time");
+    // }
 
     const rental = await this.rentalsRepository.create({
       car_id,
