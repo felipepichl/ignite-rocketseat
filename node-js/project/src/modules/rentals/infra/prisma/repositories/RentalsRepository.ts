@@ -1,6 +1,6 @@
 import { ICreateRentalDTO } from "@modules/rentals/dtos/ICreateRentalDTO";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 import { Rental } from "../models/Rental";
 
@@ -34,17 +34,21 @@ class RentalsRepository implements IRentalsRepository {
   }
 
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
-    const result = await this.prisma.rental.findFirst({
-      where: {
-        fk_car_id: car_id,
-        // end_date: {
-        //   equals: "null",
-        // },
-        AND: {
-          end_date: null,
-        },
-      },
-    });
+    // const result = await this.prisma.rental.findFirst({
+    //   where: {
+    //     fk_car_id: car_id,
+    //     // end_date: {
+    //     //   equals: "null",
+    //     // },
+    //     AND: {
+    //       end_date: null,
+    //     },
+    //   },
+    // });
+
+    const result = await this.prisma.$queryRaw<Rental>(Prisma.sql`
+      SELECT * FROM rentals
+    `);
 
     return result;
   }

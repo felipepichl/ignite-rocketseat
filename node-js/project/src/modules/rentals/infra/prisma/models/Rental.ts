@@ -16,7 +16,7 @@ class Rental implements IRental {
   constructor() {
     if (!this.id) {
       this.id = uuid();
-      this.end_date = null;
+      // this.end_date = null;
     }
   }
 }

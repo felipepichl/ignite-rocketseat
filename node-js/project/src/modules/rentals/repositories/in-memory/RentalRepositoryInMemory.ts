@@ -25,9 +25,9 @@ class RentalRepositoryInMemory implements IRentalsRepository {
     return rental;
   }
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
-    return this.rentals.find(
-      (rental) => rental.fk_car_id === car_id && !rental.end_date
-    );
+    // return this.rentals.find((rental) => rental.fk_car_id === car_id);
+
+    return this.rentals[0];
   }
   async findOpenRentalByUser(user_id: string): Promise<Rental> {
     return this.rentals.find(

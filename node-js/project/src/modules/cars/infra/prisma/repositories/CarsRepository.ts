@@ -19,7 +19,7 @@ class CarsRepository implements ICarsRepository {
     license_plate,
     fine_amount,
     brand,
-    category_id,
+    fk_category_id,
   }: ICreateCarDTO): Promise<Car> {
     const result = await this.prisma.car.create({
       data: {
@@ -30,7 +30,7 @@ class CarsRepository implements ICarsRepository {
         license_plate,
         fine_amount,
         brand,
-        fk_category_id: category_id,
+        fk_category_id,
       },
     });
 

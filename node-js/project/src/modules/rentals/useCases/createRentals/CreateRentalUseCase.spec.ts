@@ -66,15 +66,15 @@ describe("Create Rentals", () => {
       fk_category_id: "category_id",
     });
 
-    await rentalRepositoryInMemory.create({
-      user_id: "user.id",
-      car_id: car.id,
-      expected_return_date: dayjs().add(1, "day").toDate(),
-    });
+    // await rentalRepositoryInMemory.create({
+    //   user_id: "user.id",
+    //   car_id: car.id,
+    //   expected_return_date: dayjs().add(1, "day").toDate(),
+    // });
 
     await expect(
       createRentalUseCase.execute({
-        user_id: "user.id",
+        user_id: "otther",
         car_id: car.id,
         expected_return_date: dayAdd24Hours,
       })
