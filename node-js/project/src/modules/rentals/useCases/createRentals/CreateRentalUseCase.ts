@@ -17,7 +17,7 @@ class CreateRentalUseCase {
   constructor(
     @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
-    @inject("DataProvider")
+    @inject("DateProvider")
     private dateProvider: IDateProvider,
     @inject("CarsRepository")
     private carsRepository: ICarsRepository
@@ -34,7 +34,9 @@ class CreateRentalUseCase {
       car_id
     );
 
-    if (carUnavailable) {
+    console.log(carUnavailable);
+
+    if (!carUnavailable) {
       throw new AppError("Car does not available");
     }
 

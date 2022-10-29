@@ -45,9 +45,10 @@ class RentalsRepository implements IRentalsRepository {
     //     },
     //   },
     // });
+    console.log("repo");
 
     const result = await this.prisma.$queryRaw<Rental>(Prisma.sql`
-      SELECT * FROM rentals
+      SELECT * FROM rentals where fk_car_id = ${car_id}
     `);
 
     return result;
