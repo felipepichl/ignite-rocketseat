@@ -34,9 +34,14 @@ class UsersTokensRepository implements IUsersTokensRepository {
     const result = await this.prisma.userTokens.findFirst({
       where: {
         fk_user_id: user_id,
-        refresh_token,
+        AND: {
+          refresh_token,
+        },
       },
+      include: { user: true },
     });
+
+    console.log(result);
 
     return result;
   }
