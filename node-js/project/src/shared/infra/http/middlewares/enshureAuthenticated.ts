@@ -25,7 +25,6 @@ export async function enshureAuthenticated(
     const { secret_token } = authConfig;
 
     const { sub: user_id } = verify(token, secret_token) as ITokenPayload;
-    console.log(user_id);
 
     request.user = {
       id: user_id,

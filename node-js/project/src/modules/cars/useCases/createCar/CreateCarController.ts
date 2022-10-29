@@ -24,7 +24,7 @@ class CreateCarController {
       license_plate,
       fine_amount,
       brand,
-      category_id,
+      fk_category_id: category_id,
     });
 
     return response.status(201).json(car);
