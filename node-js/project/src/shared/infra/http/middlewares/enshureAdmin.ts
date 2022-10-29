@@ -13,7 +13,7 @@ async function enshureAdmin(
   const usersRepository = new UsersRepository();
   const user = await usersRepository.findById(id);
 
-  if (!user.isAdmin) {
+  if (!user.is_admin) {
     throw new AppError("User isn't an administrator");
   }
 
