@@ -14,7 +14,7 @@ class Car implements ICar {
   created_at: Date;
   fk_category_id: string;
 
-  specifications_cars: ISpecification[];
+  specifications_cars?: ISpecification[];
 
   constructor() {
     if (!this.id) {

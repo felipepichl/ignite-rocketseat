@@ -68,8 +68,6 @@ class AuthenticateUserUseCase {
       expires_refresh_token_days
     );
 
-    console.log("here");
-
     await this.usersTokensRepository.create({
       user_id: user.id,
       expires_date: refresh_token_expires_date,
