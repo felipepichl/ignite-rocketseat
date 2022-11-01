@@ -36,16 +36,17 @@ class CreateRentalUseCase {
 
     console.log(carUnavailable);
 
-    if (!carUnavailable) {
+    if (carUnavailable) {
       throw new AppError("Car does not available");
     }
 
-    // const rentalOpenRentalToUser =
-    //   await this.rentalsRepository.findOpenRentalByUser(user_id);
+    const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(
+      user_id
+    );
 
-    // if (rentalOpenRentalToUser) {
-    //   throw new AppError("There is a rental in progress for user");
-    // }
+    if (rentalOpenToUser) {
+      throw new AppError("There is a rental in progress for user");
+    }
 
     // const compare = this.dateProvider.compareInHours(
     //   this.dateProvider.dateNow(),
