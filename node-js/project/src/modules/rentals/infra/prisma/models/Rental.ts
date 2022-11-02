@@ -10,6 +10,7 @@ class Rental implements IRental {
   total: number;
   created_at: Date;
   updated_at: Date;
+
   fk_car_id: string;
   fk_user_id: string;
 

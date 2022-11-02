@@ -31,6 +31,10 @@ describe("Create Rentals", () => {
   });
 
   it("should be able to create a new rental", async () => {
-    await createRentalUseCase.execute({});
+    await createRentalUseCase.execute({
+      user_id: "user_id",
+      car_id: "car_id",
+      expected_return_date: new Date(),
+    });
   });
 });
