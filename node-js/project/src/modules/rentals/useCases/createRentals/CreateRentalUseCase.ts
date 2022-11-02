@@ -1,26 +1,22 @@
-import { injectable, inject } from "tsyringe";
+// import { injectable, inject } from "tsyringe";
 
-import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
+// import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { Rental } from "@modules/rentals/infra/prisma/models/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
-import { IDateProvider } from "@shared/container/providers/DateProvider/model/IDateProvider";
+// import { IDateProvider } from "@shared/container/providers/DateProvider/model/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
   car_id: string;
   user_id: string;
-  expected_return_date?: Date;
+  expected_return_date: Date;
 }
 
-@injectable()
+// @injectable()
 class CreateRentalUseCase {
   constructor(
-    @inject("RentalsRepository")
-    private rentalsRepository: IRentalsRepository,
-    @inject("DateProvider")
-    private dateProvider: IDateProvider,
-    @inject("CarsRepository")
-    private carsRepository: ICarsRepository
+    // @inject("RentalsRepository")
+    private rentalsRepository: IRentalsRepository // @inject("DateProvider") // private dateProvider: IDateProvider, // @inject("CarsRepository") // private carsRepository: ICarsRepository
   ) {}
 
   async execute({
