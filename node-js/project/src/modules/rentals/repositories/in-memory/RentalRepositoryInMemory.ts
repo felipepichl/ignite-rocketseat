@@ -4,7 +4,7 @@ import { Rental } from "@modules/rentals/infra/prisma/models/Rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 class RentalRepositoryInMemory implements IRentalsRepository {
-  rentals: Rental[] = [];
+  private rentals: Rental[] = [];
 
   async create({
     car_id,
@@ -25,7 +25,9 @@ class RentalRepositoryInMemory implements IRentalsRepository {
     return rental;
   }
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
-    return this.rentals.find((rental) => rental.fk_car_id === car_id);
+    return this.rentals.find(
+      (rental) => rental.fk_car_id === car_id && !rental.end_date
+    );
   }
   async findOpenRentalByUser(user_id: string): Promise<Rental> {
     return this.rentals.find(
