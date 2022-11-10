@@ -1,3 +1,4 @@
+import { Rental } from "@modules/rentals/infra/prisma/models/Rental";
 import { AppError } from "@shared/errors/AppError";
 
 import { IRentalsRepository } from "../../repositories/IRentalsRepository";
@@ -15,7 +16,7 @@ class CreateRentalUseCase {
     user_id,
     car_id,
     expected_return_date,
-  }: IRequest): Promise<void> {
+  }: IRequest): Promise<Rental> {
     const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(
       car_id
     );
@@ -31,6 +32,13 @@ class CreateRentalUseCase {
     if (rentalOpenToUser) {
       throw new AppError("There is a rental in progress for user");
     }
+
+    const rental = await this.rentalsRepository.create({
+      start_date: new Date(),
+      expected_return_date,
+    });
+
+    return rental;
   }
 }
 
