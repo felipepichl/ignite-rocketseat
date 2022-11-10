@@ -1,5 +1,7 @@
 import { AppError } from "@shared/errors/AppError";
 
+import { IRentalsRepository } from "../../repositories/IRentalsRepository";
+
 interface IRequest {
   user_id: string;
   car_id: string;
