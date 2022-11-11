@@ -1,6 +1,6 @@
 import { ICreateRentalDTO } from "@modules/rentals/dtos/ICreateRentalDTO";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 import { Rental } from "../models/Rental";
 
@@ -12,21 +12,15 @@ class RentalsRepository implements IRentalsRepository {
   }
 
   async create({
-    id,
     car_id,
     user_id,
     expected_return_date,
-    end_date,
-    total,
   }: ICreateRentalDTO): Promise<Rental> {
     const result = await this.prisma.rental.create({
       data: {
-        id,
         fk_car_id: car_id,
         fk_user_id: user_id,
         expected_return_date,
-        end_date,
-        total,
       },
     });
 
@@ -34,21 +28,9 @@ class RentalsRepository implements IRentalsRepository {
   }
 
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
-    // const result = await this.prisma.rental.findFirst({
-    //   where: {
-    //     fk_car_id: car_id,
-    //     // end_date: {
-    //     //   equals: "null",
-    //     // },
-    //     AND: {
-    //       end_date: null,
-    //     },
-    //   },
-    // });
-
-    const result = await this.prisma.$queryRaw<Rental>(Prisma.sql`
-      SELECT * FROM rentals where fk_car_id = ${car_id}
-    `);
+    const result = await this.prisma.rental.findFirst({
+      where: { fk_car_id: car_id, end_date: null },
+    });
 
     return result;
   }
