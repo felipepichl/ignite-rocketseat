@@ -34,7 +34,8 @@ class CreateRentalUseCase {
     }
 
     const rental = await this.rentalsRepository.create({
-      start_date: new Date(),
+      user_id,
+      car_id,
       expected_return_date,
     });
 

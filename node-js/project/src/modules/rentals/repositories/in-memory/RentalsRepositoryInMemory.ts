@@ -6,10 +6,19 @@ import { IRentalsRepository } from "../IRentalsRepository";
 class RentalsRepositoryInMemory implements IRentalsRepository {
   rentals: Rental[] = [];
 
-  async create(data: ICreateRentalDTO): Promise<Rental> {
+  async create({
+    user_id,
+    car_id,
+    expected_return_date,
+  }: ICreateRentalDTO): Promise<Rental> {
     const rental = new Rental();
 
-    Object.assign(rental, data);
+    Object.assign(rental, {
+      fk_user_id: user_id,
+      fk_car_id: car_id,
+      expected_return_date,
+      start_date: new Date(),
+    });
 
     this.rentals.push(rental);
 
