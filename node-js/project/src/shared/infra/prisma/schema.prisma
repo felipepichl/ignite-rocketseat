@@ -107,7 +107,7 @@ model Rental {
   start_date           DateTime  @default(now())
   end_date             DateTime?
   expected_return_date DateTime
-  total                Float
+  total                Float?
   created_at           DateTime  @default(now())
   updated_at           DateTime  @default(now())
 
