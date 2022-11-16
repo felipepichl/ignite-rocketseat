@@ -2,38 +2,47 @@ import { hash } from "bcrypt";
 import request from "supertest";
 import { v4 as uuid } from "uuid";
 
+import { PrismaClient, Prisma } from "@prisma/client";
 import { app } from "@shared/infra/http/start/app";
-import { AppDataSource } from "@shared/infra/typeorm/";
+// import { AppDataSource } from "@shared/infra/typeorm/";
 
 describe("Create Category Controller", () => {
   beforeAll(async () => {
-    await AppDataSource.initialize();
-    await AppDataSource.runMigrations();
+    // await AppDataSource.initialize();
+    // await AppDataSource.runMigrations();
+
+    const prisma = new PrismaClient();
 
     const id = uuid();
     const password = await hash("admin", 8);
 
-    AppDataSource.query(
-      `INSERT INTO USERS(
-        id,
-        name,
-        email,
-        password,
-        driver_license,
-        isAdmin,
-        created_at
-      )
-      values(
-        '${id}',
-        'admin',
-        'admin@rentx.com.br',
-        '${password}',
-        'XX',
-        true,
-        '${new Date().getTime()}'
-      )
-    `
-    );
+    // await prisma.$executeRaw(
+    //   Prisma.sql(
+    //     `INSERT INTO USERS(id, name, email, password, driver_license, isAdmin, created_at) values ('${id}', 'admin', 'admin@rentx.com.br', '${password}','XX', true,'${new Date().getTime()}')`
+    //   )
+    // );
+
+    // AppDataSource.query(
+    //   `INSERT INTO USERS(
+    //     id,
+    //     name,
+    //     email,
+    //     password,
+    //     driver_license,
+    //     isAdmin,
+    //     created_at
+    //   )
+    //   values(
+    //     '${id}',
+    //     'admin',
+    //     'admin@rentx.com.br',
+    //     '${password}',
+    //     'XX',
+    //     true,
+    //     '${new Date().getTime()}'
+    //   )
+    // `
+    // );
   });
 
   afterAll(async () => {
