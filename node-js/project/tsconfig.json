@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "module": "commonjs",
+    "lib": ["ES6"],
+    "allowJs": true,
     "outDir": "./dist",
+    "removeComments": true,
+    "strictPropertyInitialization": false,
     "baseUrl": "./src",
-    "rootDir": "./",
     "paths": {
       "@modules/*": ["modules/*"],
       "@config/*": ["config/*"],
@@ -12,6 +15,10 @@
       "@errors/*": ["errors/*"],
       "@utils/*": ["utils/*"]
     },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

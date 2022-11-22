@@ -1,16 +1,16 @@
-import dotenv from "dotenv";
-import NodeEnvironment from "jest-environment-node";
-import { exec } from "node:child_process";
+import dotenv from 'dotenv';
+import NodeEnvironment from 'jest-environment-node';
+import { exec } from 'node:child_process';
 // import crypto from "node:crypto";
-import util from "node:util";
+import util from 'node:util';
 
-import type { Config } from "@jest/types";
+import type { Config } from '@jest/types';
 
-dotenv.config({ path: ".env.testing" });
+dotenv.config({ path: '.env.testing' });
 
 const execSync = util.promisify(exec);
 
-const prismaBinary = "./node_modules/.bin/prisma";
+const prismaBinary = './node_modules/.bin/prisma';
 
 export default class PrismaTestEnvironment extends NodeEnvironment {
   // private schema: string;
