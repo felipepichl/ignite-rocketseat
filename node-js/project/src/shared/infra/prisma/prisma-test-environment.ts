@@ -4,7 +4,8 @@ import { exec } from 'node:child_process';
 // import crypto from "node:crypto";
 import util from 'node:util';
 
-import type { Config } from '@jest/types';
+//import type { Config } from '@jest/types';
+import type { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
 
 dotenv.config({ path: '.env.testing' });
 
@@ -16,8 +17,12 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
   // private schema: string;
   private connectionString: string;
 
-  constructor(config: Config.ProjectConfig) {
-    super(config);
+  constructor(config: JestEnvironmentConfig, _context?: EnvironmentContext) {
+    super(config, _context);
+
+    console.log('====================================');
+    console.log('here');
+    console.log('====================================');
 
     // this.schema = `test_${crypto.randomUUID()}`;
     this.connectionString = process.env.DATABASE_URL;
