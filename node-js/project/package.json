@@ -7,11 +7,12 @@
     "build": "tsc",
     "dev": " ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/start/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts",
     "prisma:generate": "prisma generate --schema=./src/shared/infra/prisma/schema.prisma",
     "prisma:migrate": "prisma migrate dev --schema=./src/shared/infra/prisma/schema.prisma",
-    "prisma:studio": "prisma studio --schema=./src/shared/infra/prisma/schema.prisma"
+    "prisma:studio": "prisma studio --schema=./src/shared/infra/prisma/schema.prisma",
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
+    "test:e2e": "jest --config jest-e2e.config.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.4.0",
