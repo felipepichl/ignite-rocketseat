@@ -4,6 +4,7 @@ import { inject, injectable } from "tsyringe";
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
+import { User } from "@modules/accounts/infra/prisma/models/User";
 
 @injectable()
 class CreateUserUseCase {
@@ -17,7 +18,7 @@ class CreateUserUseCase {
     email,
     password,
     driver_license,
-  }: ICreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<User> {
     const usersAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (usersAlreadyExists) {
@@ -26,12 +27,14 @@ class CreateUserUseCase {
 
     const passwordHash = await hash(password, 8);
 
-    await this.usersRepository.create({
+    const user = await this.usersRepository.create({
       name,
       email,
       password: passwordHash,
       driver_license,
     });
+
+    return user;
   }
 }
 
