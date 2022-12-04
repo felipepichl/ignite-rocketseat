@@ -1,6 +1,5 @@
-import { v4 as uuid } from "uuid";
-
 import { Specification as ISpecification } from "@prisma/client";
+import { v4 as uuid } from "uuid";
 
 class Specification implements ISpecification {
   id: string;

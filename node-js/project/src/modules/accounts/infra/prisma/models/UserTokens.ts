@@ -1,6 +1,5 @@
-import { v4 as uuid } from "uuid";
-
 import { UserTokens as IUserTokens } from "@prisma/client";
+import { v4 as uuid } from "uuid";
 
 class UserTokens implements IUserTokens {
   id: string;

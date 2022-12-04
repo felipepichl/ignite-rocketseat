@@ -1,6 +1,5 @@
-import { v4 as uuid } from "uuid";
-
 import { Category as ICategory } from "@prisma/client";
+import { v4 as uuid } from "uuid";
 
 class Category implements ICategory {
   id: string;

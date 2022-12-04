@@ -1,5 +1,6 @@
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { CarRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarRepositoryInMemory";
+
 import { AppError } from "@shared/errors/AppError";
 
 import { CreateCarUseCase } from "./CreateCarUseCase";
@@ -23,7 +24,7 @@ describe("Create Car", () => {
       license_plate: "Example license plate",
       fine_amount: 33,
       brand: "Example brand",
-      category_id: "category_id",
+      fk_category_id: "category_id",
     };
   });
 

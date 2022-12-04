@@ -1,7 +1,6 @@
-import { injectable, inject } from "tsyringe";
-
 import { Car } from "@modules/cars/infra/prisma/models/Car";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
+import { injectable, inject } from "tsyringe";
 
 interface IRequest {
   category_id?: string;

@@ -1,6 +1,6 @@
+import { UsersRepository } from "@modules/accounts/infra/prisma/repositories/UsersRepository";
 import { Request, Response, NextFunction } from "express";
 
-import { UsersRepository } from "@modules/accounts/infra/prisma/repositories/UsersRepository";
 import { AppError } from "@shared/errors/AppError";
 
 async function enshureAdmin(

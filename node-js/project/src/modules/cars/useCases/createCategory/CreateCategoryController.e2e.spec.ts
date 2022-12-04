@@ -1,8 +1,8 @@
+import { PrismaClient, Prisma } from "@prisma/client";
 import { hash } from "bcrypt";
 import request from "supertest";
 import { v4 as uuid } from "uuid";
 
-import { PrismaClient, Prisma } from "@prisma/client";
 import { app } from "@shared/infra/http/start/app";
 // import { AppDataSource } from "@shared/infra/typeorm/";
 

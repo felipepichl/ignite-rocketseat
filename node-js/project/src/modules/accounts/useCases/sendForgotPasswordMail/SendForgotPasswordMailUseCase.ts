@@ -1,9 +1,9 @@
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { resolve } from "path";
 import { injectable, inject } from "tsyringe";
 import { v4 as uuid } from "uuid";
 
-import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
-import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/model/IDateProvider";
 import { IMailProvider } from "@shared/container/providers/MailProvider/model/IMailProvider";
 import { AppError } from "@shared/errors/AppError";

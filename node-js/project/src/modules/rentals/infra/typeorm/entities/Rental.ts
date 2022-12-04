@@ -1,3 +1,5 @@
+import { User } from "@modules/accounts/infra/typeorm/entities/User";
+import { Car } from "@modules/cars/infra/typeorm/entities/Car";
 import {
   Column,
   CreateDateColumn,
@@ -8,9 +10,6 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
-
-import { User } from "@modules/accounts/infra/typeorm/entities/User";
-import { Car } from "@modules/cars/infra/typeorm/entities/Car";
 
 @Entity("rentals")
 class Rental {

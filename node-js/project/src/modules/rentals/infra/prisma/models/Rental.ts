@@ -1,9 +1,7 @@
+import { Rental as IRental } from "@prisma/client";
 import { v4 as uuid } from "uuid";
 
-// import { Rental as IRental } from "@prisma/client";
-// class Rental implements IRental {
-
-class Rental {
+class Rental implements IRental {
   id: string;
   start_date: Date;
   end_date: Date;

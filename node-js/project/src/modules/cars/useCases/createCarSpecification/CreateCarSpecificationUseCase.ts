@@ -1,8 +1,8 @@
-import { inject, injectable } from "tsyringe";
-
 import { Car } from "@modules/cars/infra/prisma/models/Car";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
+import { inject, injectable } from "tsyringe";
+
 import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
