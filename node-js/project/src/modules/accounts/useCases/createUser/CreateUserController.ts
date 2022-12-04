@@ -16,7 +16,7 @@ class CreateUserController {
       driver_license,
     });
 
-    return response.status(200).send();
+    return response.status(201).send();
   }
 }
 
