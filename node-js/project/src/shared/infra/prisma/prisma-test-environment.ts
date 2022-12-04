@@ -2,7 +2,10 @@ import dotenv from 'dotenv';
 import NodeEnvironment from 'jest-environment-node';
 import { exec } from 'node:child_process';
 import util from 'node:util';
-import crypto from 'node:crypto'
+import crypto from 'node:crypto';
+
+import fs from 'fs';
+import path from 'path';
 
 import type { Config } from '@jest/types';
 
@@ -36,6 +39,6 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
   }
 
   async teardown() {
-    //ToDo
+    fs.unlinkSync(path.join(__dirname, '..', 'prisma', this.schema));
   }
 }
