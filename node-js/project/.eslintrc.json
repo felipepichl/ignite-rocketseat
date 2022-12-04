@@ -1,38 +1,28 @@
 {
   "env": {
-    "es6": true,
-    "node": true,
-    "jest": true
+      "es2020": true,
+      "node": true,
+      "jest": true
   },
   "extends": [
-    "airbnb-base",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+      "airbnb-base",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "plugin:prettier/recommended"
   ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module"
+      "ecmaVersion": 12,
+      "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers", "prettier"],
+  "plugins": [
+      "@typescript-eslint",
+      "eslint-plugin-import-helpers",
+      "prettier"
+  ],
   "rules": {
-    "class-methods-use-this": "off",
     "camelcase": "off",
-    "no-console": "off",
-    "no-useless-constructor": "off",
-    "no-shadow": "off",
-    "import/no-extraneous-dependencies": "off",
-    "import/prefer-default-export": "off",
     "import/no-unresolved": "error",
-    "no-empty-function": "off",
-    "lines-between-class-members": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {
@@ -44,6 +34,13 @@
         }
       }
     ],
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
+    "no-shadow": "off",
+    "no-console": "off",
+    "no-useless-constructor": "off",
+    "no-empty-function": "off",
+    "lines-between-class-members": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -55,15 +52,13 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
+        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ],
-    "@typescript-eslint/no-unused-vars": [
+    "import/no-extraneous-dependencies": [
       "error",
-      {
-        "argsIgnorePattern": "_"
-      }
+      { "devDependencies": ["**/*.spec.js"] }
     ],
     "prettier/prettier": "error"
   },
