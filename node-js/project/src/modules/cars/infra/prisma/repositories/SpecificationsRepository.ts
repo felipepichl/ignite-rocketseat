@@ -1,18 +1,13 @@
 import { ICreateSpecificationDTO } from "@modules/cars/dtos/CreateSpecificationDTO";
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
-import { PrismaClient } from "@prisma/client";
+
+import { prisma } from "@shared/infra/prisma";
 
 import { Specification } from "../models/Specification";
 
 class SpecificationsRepository implements ISpecificationsRepository {
-  private prisma: PrismaClient;
-
-  constructor() {
-    this.prisma = new PrismaClient();
-  }
-
   async create(data: ICreateSpecificationDTO): Promise<Specification> {
-    const result = await this.prisma.specification.create({
+    const result = await prisma.specification.create({
       data,
     });
 
@@ -20,7 +15,7 @@ class SpecificationsRepository implements ISpecificationsRepository {
   }
 
   async findByName(name: string): Promise<Specification> {
-    const result = await this.prisma.specification.findFirst({
+    const result = await prisma.specification.findFirst({
       where: { name },
     });
 
@@ -28,7 +23,7 @@ class SpecificationsRepository implements ISpecificationsRepository {
   }
 
   async findByIds(ids: string[]): Promise<Specification[]> {
-    const result = await this.prisma.specification.findMany({
+    const result = await prisma.specification.findMany({
       where: { id: { in: ids } },
     });
 

@@ -1,37 +1,32 @@
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
-import { PrismaClient } from "@prisma/client";
+
+import { prisma } from "@shared/infra/prisma";
 
 import { User } from "../models/User";
 
 class UsersRepository implements IUsersRepository {
-  private prisma: PrismaClient;
-
-  constructor() {
-    this.prisma = new PrismaClient();
-  }
-
   async create(data: ICreateUserDTO): Promise<User> {
-    const result = await this.prisma.user.create({
+    const result = await prisma.user.create({
       data,
     });
 
     return result;
   }
   async list(): Promise<User[]> {
-    const result = await this.prisma.user.findMany();
+    const result = await prisma.user.findMany();
 
     return result;
   }
   async findByEmail(email: string): Promise<User> {
-    const result = await this.prisma.user.findFirst({
+    const result = await prisma.user.findFirst({
       where: { email },
     });
 
     return result;
   }
   async findById(user_id: string): Promise<User> {
-    const result = await this.prisma.user.findUnique({
+    const result = await prisma.user.findUnique({
       where: { id: user_id },
     });
 

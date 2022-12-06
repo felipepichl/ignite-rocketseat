@@ -1,16 +1,11 @@
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
-import { PrismaClient, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import { prisma } from "shared/infra/prisma";
 
 import { Car } from "../models/Car";
 
 class CarsRepository implements ICarsRepository {
-  private prisma: PrismaClient;
-
-  constructor() {
-    this.prisma = new PrismaClient();
-  }
-
   async create({
     name,
     description,
@@ -21,7 +16,7 @@ class CarsRepository implements ICarsRepository {
     brand,
     fk_category_id,
   }: ICreateCarDTO): Promise<Car> {
-    const result = await this.prisma.car.create({
+    const result = await prisma.car.create({
       data: {
         name,
         description,
@@ -38,7 +33,7 @@ class CarsRepository implements ICarsRepository {
   }
 
   async findByLicensePlate(license_plate: string): Promise<Car> {
-    const result = await this.prisma.car.findFirst({
+    const result = await prisma.car.findFirst({
       where: { license_plate },
     });
 
@@ -50,7 +45,7 @@ class CarsRepository implements ICarsRepository {
     brand?: string,
     name?: string
   ): Promise<Car[]> {
-    const available = await this.prisma.$queryRaw<Car[]>(Prisma.sql`
+    const available = await prisma.$queryRaw<Car[]>(Prisma.sql`
       SELECT * FROM cars where available = true
     `);
 
@@ -78,7 +73,7 @@ class CarsRepository implements ICarsRepository {
   }
 
   async findById(car_id: string): Promise<Car> {
-    const result = await this.prisma.car.findUnique({
+    const result = await prisma.car.findUnique({
       where: {
         id: car_id,
       },
@@ -89,7 +84,7 @@ class CarsRepository implements ICarsRepository {
 
   async updateAvailable(id: string, available: boolean): Promise<void> {
     if (available) {
-      await this.prisma.car.update({
+      await prisma.car.update({
         where: {
           id,
         },
