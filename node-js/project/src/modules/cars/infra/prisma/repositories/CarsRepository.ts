@@ -1,7 +1,8 @@
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { Prisma } from "@prisma/client";
-import { prisma } from "shared/infra/prisma";
+
+import { prisma } from "@shared/infra/prisma";
 
 import { Car } from "../models/Car";
 
