@@ -1,49 +1,28 @@
 import { hash } from "bcrypt";
 import request from "supertest";
-import { v4 as uuid } from "uuid";
 
 import { app } from "@shared/infra/http/start/app";
-import { AppDataSource } from "@shared/infra/typeorm/";
+import { prisma } from "@shared/infra/prisma";
 
 describe("List Category Controller", () => {
   beforeAll(async () => {
-    await AppDataSource.initialize();
-    await AppDataSource.runMigrations();
+    const passwordHash = await hash("hash123", 8);
 
-    const id = uuid();
-    const password = await hash("admin", 8);
-
-    AppDataSource.query(
-      `INSERT INTO USERS(
-        id,
-        name,
-        email,
-        password,
-        driver_license,
-        isAdmin,
-        created_at
-      )
-      values(
-        '${id}',
-        'admin',
-        'admin@rentx.com.br',
-        '${password}',
-        'XX',
-        true,
-        '${new Date().getTime()}'
-      )
-    `
-    );
-  });
-
-  afterAll(async () => {
-    await AppDataSource.dropDatabase();
+    await prisma.user.create({
+      data: {
+        name: "Test",
+        email: "admin@rentx.com.br",
+        password: passwordHash,
+        driver_license: "AB",
+        is_admin: true,
+      },
+    });
   });
 
   it("should be able to list all categories", async () => {
     const responseToken = await request(app).post("/sessions").send({
       email: "admin@rentx.com.br",
-      password: "admin",
+      password: "hash123",
     });
 
     const { token } = responseToken.body;

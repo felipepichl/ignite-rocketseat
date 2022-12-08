@@ -1,4 +1,4 @@
-import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
+import { Specification } from "@modules/cars/infra/prisma/models/Specification";
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
 import { inject, injectable } from "tsyringe";
 
@@ -17,10 +17,10 @@ class CreateSpecificationUseCase {
   ) {}
 
   async execute({ name, description }: IRequest): Promise<Specification> {
-    const speacificationAlreadyExists =
+    const specificationAlreadyExists =
       await this.specificationsRepository.findByName(name);
 
-    if (speacificationAlreadyExists) {
+    if (specificationAlreadyExists) {
       throw new AppError("Speficication already exists");
     }
 

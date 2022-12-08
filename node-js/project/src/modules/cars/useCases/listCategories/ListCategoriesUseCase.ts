@@ -1,4 +1,4 @@
-import { Category } from "@modules/cars/infra/typeorm/entities/Category";
+import { Category } from "@modules/cars/infra/prisma/models/Category";
 import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository";
 import { inject, injectable } from "tsyringe";
 
