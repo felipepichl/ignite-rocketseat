@@ -3,12 +3,14 @@ import { UserRepositoryInMemory } from "@modules/accounts/repositories/in-memory
 import { UserTokensRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UserTokensRepositoryInMemory";
 import { CreateUserUseCase } from "@modules/accounts/useCases/createUser/CreateUserUseCase";
 
+import { DateProviderInMemory } from "@shared/container/providers/DateProvider/in-memory/DateProviderInMemory";
 import { AppError } from "@shared/errors/AppError";
 
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 let userRepositoryInMemory: UserRepositoryInMemory;
 let userTokensRepositoryInMemory: UserTokensRepositoryInMemory;
+let dateProviderInMemory: DateProviderInMemory;
 
 let createUserUseCase: CreateUserUseCase;
 let authenticateUserUseCase: AuthenticateUserUseCase;
@@ -17,11 +19,13 @@ describe("Authenticate User", () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory();
     userTokensRepositoryInMemory = new UserTokensRepositoryInMemory();
+    dateProviderInMemory = new DateProviderInMemory();
 
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory);
     authenticateUserUseCase = new AuthenticateUserUseCase(
       userRepositoryInMemory,
-      userRepositoryInMemory
+      userTokensRepositoryInMemory,
+      dateProviderInMemory
     );
   });
 
