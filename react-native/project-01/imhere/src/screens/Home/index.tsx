@@ -34,7 +34,7 @@ function Home() {
         </TouchableOpacity>
       </View>
 
-      <Participant/>
+      <Participant name="Felipe Pichl"/>
     </View>
   )
 }
