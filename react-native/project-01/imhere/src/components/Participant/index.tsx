@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import { styles } from './styles'
 
@@ -8,6 +8,15 @@ export function Participant() {
       <Text style={styles.container}>
         Felipe Pichl
       </Text>
+
+      <TouchableOpacity 
+          style={styles.button}
+          
+        >
+          <Text style={styles.buttonText}>
+            -
+          </Text>
+        </TouchableOpacity>
     </View>
   );
 }
