@@ -10,6 +10,10 @@ function Home() {
     
   }
 
+  function handleParticipantRemove(name: string) {
+    
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.eventName}>
@@ -34,7 +38,10 @@ function Home() {
         </TouchableOpacity>
       </View>
 
-      <Participant name="Felipe Pichl"/>
+      <Participant 
+        name="Felipe Pichl"
+        onRemove={() => handleParticipantRemove("Felipe Pichl")}  
+      />
     </View>
   )
 }
