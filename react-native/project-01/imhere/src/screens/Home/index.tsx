@@ -3,7 +3,8 @@ import {
   View, 
   TextInput, 
   TouchableOpacity, 
-  FlatList 
+  FlatList,
+  Alert 
 } from 'react-native'
 
 import {styles} from './styles'
@@ -25,11 +26,23 @@ function Home() {
   ];
 
   function handleParticipantAdd() {
+    if(participants.includes('')) {
+      return Alert.alert('Participant exists', 'Participant already exists!')
+    }
     
   }
 
   function handleParticipantRemove(name: string) {
-    
+    Alert.alert('Remove',`Do you want to remove ${name}?`, [
+      {
+        text: 'Yes',
+        onPress: () => Alert.alert('Deleted!')
+      },
+      {
+        text: 'No',
+        style: 'cancel'
+      }
+    ])
   }
 
   return (
