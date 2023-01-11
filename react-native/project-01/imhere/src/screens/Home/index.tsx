@@ -13,14 +13,16 @@ import {styles} from './styles'
 import { Participant } from '../../components/Participant'
 
 function Home() {
-  const [participants, setParticipants] = useState(['João'])
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [participantName, setParticipantName] = useState('');
 
   function handleParticipantAdd() {
-    if(participants.includes('')) {
+    if(participants.includes(participantName)) {
       return Alert.alert('Participant exists', 'Participant already exists!')
     }
 
-    setParticipants(prevState => [...prevState, 'Felipe'])
+    setParticipants(prevState => [...prevState, participantName]);
+    setParticipantName('');
     
   }
 
@@ -51,6 +53,9 @@ function Home() {
           style={styles.input}
           placeholder="Invited name"
           placeholderTextColor="#6b6b6b"
+          // onChangeText={(text) => setParticipantName(text)}
+          onChangeText={setParticipantName}
+          value={participantName}
         />
 
         <TouchableOpacity 
