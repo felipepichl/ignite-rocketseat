@@ -30,13 +30,13 @@ function Home() {
     Alert.alert('Remove',`Do you want to remove ${name}?`, [
       {
         text: 'Yes',
-        onPress: () => Alert.alert('Deleted!')
+        onPress: () => setParticipants(prevState => prevState.filter(participant => participant !== name))
       },
       {
         text: 'No',
         style: 'cancel'
       }
-    ])
+    ]);
   }
 
   return (
