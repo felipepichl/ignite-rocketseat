@@ -22,4 +22,9 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
 `;
 
-export const Icon = styled(UsersThree).attrs({})``
+export const Icon = styled(UsersThree).attrs(({ theme }) => ({
+  size: 32,
+  color: theme.COLORS.GREEN_700
+}))`
+  margin-right: 20px;
+`;
