@@ -2,6 +2,7 @@ import { Container } from './styles';
 
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
+import { ButtonIcon } from '@components/ButtonIcon'
 
 export function Players() {
   return (
@@ -12,6 +13,8 @@ export function Players() {
         title='Nova Turma'
         subtitle='Adicione a galera e separe os times'
       />
+
+      <ButtonIcon />
 
     </Container>
   );

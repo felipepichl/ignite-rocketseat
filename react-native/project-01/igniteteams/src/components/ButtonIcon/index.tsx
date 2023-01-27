@@ -1,7 +1,14 @@
-import { Container } from './syles';
+import { TouchableOpacityProps } from 'react-native' 
+import { Container, Icon } from './syles';
 
-export function ButtonIcon() {
+type Props = TouchableOpacityProps & {
+
+}
+
+export function ButtonIcon({}: Props) {
   return (
-    <Container />
+    <Container>
+      <Icon />
+    </Container>
   );
 }
