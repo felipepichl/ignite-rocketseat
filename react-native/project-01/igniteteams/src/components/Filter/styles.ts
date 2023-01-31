@@ -30,4 +30,3 @@ export const Title = styled.Text`
       color: ${theme.COLORS.WHITE};
   `}
 `;
-
