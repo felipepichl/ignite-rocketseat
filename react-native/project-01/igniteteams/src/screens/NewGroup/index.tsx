@@ -6,6 +6,11 @@ import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 
 export function NewGroup() {
+  
+  function handleNew() {
+    
+  }
+  
   return (
     <Container >
       <Header showBackButton/>
@@ -24,6 +29,7 @@ export function NewGroup() {
         <Button 
           title='Criar'
           style={{ marginTop: 20 }}
+          onPress={handleNew}
         />
       </Content>
     </Container>
