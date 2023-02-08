@@ -13,12 +13,16 @@ import { Filter } from '@components/Filter';
 import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
 
+type RouteParams = {
+  group: string;
+}
+
 export function Players() {
   const [team, setTeam] = useState('Time A');
   const [players, setPlayers] = useState([]);
 
   const route = useRoute();
-  const { group } = route.params;
+  const { group } = route.params as RouteParams;
 
   return (
     <Container>
