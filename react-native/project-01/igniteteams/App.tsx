@@ -24,7 +24,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent
       />
-      { fontsLoaded ?  <Routes /> : <Loading /> }
+      { fontsLoaded ?  <Routes  /> : <Loading /> }
     </ThemeProvider>
   );
 }
