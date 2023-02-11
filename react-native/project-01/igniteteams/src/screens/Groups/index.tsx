@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { Container } from './styles';
 
@@ -31,9 +31,11 @@ export function Groups() {
     }
   }
 
-  useEffect(() => {
-    fetchGroups();
-  },[]);
+  useFocusEffect(
+    useCallback(() => {
+      fetchGroups()
+    }, []),
+  );
 
   return (
     <Container >
