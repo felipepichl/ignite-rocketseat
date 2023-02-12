@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
 
 import { Container, Content, Icon } from './styles'
 
+import { AppError } from '@utils/AppError';
 import { groupCreate } from '@storage/group/groupCreate';
 
 import { Header } from '@components/Header';
@@ -17,12 +19,21 @@ export function NewGroup() {
 
   async function handleNew() {
     try {
-      
+      if(group.length === 0) {
+        
+      }
+
+
       await groupCreate(group);
       navigation.navigate('players', { group });    
 
     } catch (error) {
-      console.error(error);
+      if (error instanceof AppError) {
+        Alert.alert('New Group', error.message);
+      } else {
+        Alert.alert('New Group', 'Error to create a new Group');
+        console.error(error);
+      }
     }
   }
   
