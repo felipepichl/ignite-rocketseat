@@ -19,8 +19,8 @@ export function NewGroup() {
 
   async function handleNew() {
     try {
-      if(group.length === 0) {
-        
+      if(group.trim().length === 0) {
+        return Alert.alert('New Group', 'Name should have be informed');
       }
 
 
