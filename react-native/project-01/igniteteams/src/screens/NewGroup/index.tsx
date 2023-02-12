@@ -23,7 +23,6 @@ export function NewGroup() {
         return Alert.alert('New Group', 'Name should have be informed');
       }
 
-
       await groupCreate(group);
       navigation.navigate('players', { group });    
 
