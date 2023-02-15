@@ -6,9 +6,20 @@ import { PlayerStorageDTO } from './PlayerStorageDTO';
 
 async function playerAddByGroup(newPlayer: PlayerStorageDTO, group: string) {
   try {
+
+    const storedPlayers = await playersGetAll();
+
+    const playerAlreadyExists = storedPlayers.includes(newPlayer);
+
+    if(playerAlreadyExists) {
+      throw new AppError('Player already exists')
+    }
   
+    await AsyncStorage.setItem(`${PLAYER_COLLECTION}-${group}`, 
+      [...storedPlayers, newPlayer],
+    );
   } catch (error) {
-    throw error;
+    throw (error);
   }
 }
 
