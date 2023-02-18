@@ -15,6 +15,7 @@ import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
 
 import { playerAddByGroup } from '@storage/player/playerAddByGroup';
+import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
 
 type RouteParams = {
   group: string;
@@ -51,6 +52,14 @@ export function Players() {
       console.log(error);
       Alert.alert('Nova Pessoa', 'Não foi possível adicionar');
      }
+    }
+  }
+
+  async function fetchPlayersByTeam() {
+    try {
+      
+    } catch (error) {
+      throw error;
     }
   }
 
