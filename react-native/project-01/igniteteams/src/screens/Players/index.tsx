@@ -3,6 +3,10 @@ import { Alert, FlatList } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { AppError } from '@utils/AppError';
 
+import { playerAddByGroup } from '@storage/player/playerAddByGroup';
+import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
+import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
+
 import { Container, Form, HeaderList, NumberOfPlayers } from './styles';
 
 import { Header } from '@components/Header';
@@ -14,8 +18,6 @@ import { Filter } from '@components/Filter';
 import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
 
-import { playerAddByGroup } from '@storage/player/playerAddByGroup';
-import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
 
 type RouteParams = {
   group: string;
@@ -24,7 +26,7 @@ type RouteParams = {
 export function Players() {
   const [newPlayerName, setNewPlayerName] = useState('');
   const [team, setTeam] = useState('Time A');
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
 
   const route = useRoute();
   const { group } = route.params as RouteParams;
@@ -57,9 +59,13 @@ export function Players() {
 
   async function fetchPlayersByTeam() {
     try {
-      
+      const playersByTeam = await playerGetByGroupAndTeam(group, team);
+      setPlayers(playersByTeam);
     } catch (error) {
-      throw error;
+      console.log(error);
+      Alert.alert(
+        'Pessoas', 'Não foi possível carregas as pessoas do time selecionado'
+      );
     }
   }
 
