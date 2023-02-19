@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Alert } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { Container } from './styles';
@@ -28,6 +28,7 @@ export function Groups() {
       setGroups(data);
     } catch (error) {
       console.error(error);
+      Alert.alert('Turmas', 'Não foi possível carregar as turmas');
     }
   }
 
