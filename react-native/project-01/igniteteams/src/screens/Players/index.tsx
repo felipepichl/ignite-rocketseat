@@ -110,7 +110,7 @@ export function Players() {
   async function handleGroupRemove() {
     Alert.alert(
       'Remover',
-      'Deseja remover o grupo?',
+      'Deseja remover a turma?',
       [
         { text: 'Não', style: 'cancel' },
         { text: 'Sim', onPress: () => groupRemove() }
@@ -169,7 +169,7 @@ export function Players() {
       </HeaderList>
       
       {
-        isLoading ? <Loading /> : (
+        isLoading ? <Loading /> : 
           <FlatList 
             data={players}
             keyExtractor={item => item.name}
@@ -190,12 +190,11 @@ export function Players() {
               players.length === 0 && { flex: 1 }
             ]}
           />
-        )
       }
       
 
       <Button 
-        title='Remover Turma'
+        title='Remover turma'
         type='SECONDARY'
         onPress={handleGroupRemove}
       />
