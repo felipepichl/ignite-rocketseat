@@ -14,7 +14,6 @@ function SignIn() {
     >
       <VStack 
         flex={1} 
-        bg="gray.700"
         px={10}
         pb={16}
       >
