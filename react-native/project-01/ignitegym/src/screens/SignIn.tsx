@@ -28,6 +28,7 @@ function SignIn() {
       >
         <Image 
           source={BackgroundImg}
+          defaultSource={BackgroundImg}
           alt='Pessoas treinando'
           resizeMode='contain'
           position='absolute'
