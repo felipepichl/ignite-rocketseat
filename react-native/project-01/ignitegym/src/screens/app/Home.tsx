@@ -1,6 +1,7 @@
 import { VStack } from 'native-base';
 
 import { HomeHeader } from '@components/HomeHeader';
+import { Group } from '@components/Group';
 
 function Home() {
   return (
@@ -8,6 +9,8 @@ function Home() {
       flex={1}
     >
       <HomeHeader />
+
+      <Group name='Costas'/>
     </VStack>
   );
 }
