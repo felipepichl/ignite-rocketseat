@@ -7,7 +7,7 @@ import { ExerciseCard } from '@components/ExerciseCard';
 
 function Home() {
   const [groups, setGroups] = useState([
-    'Costa', 
+    'Costas', 
     'Ombro', 
     'Bícipes', 
     'Trícipes', 
@@ -33,7 +33,10 @@ function Home() {
         renderItem={({ item }) => (
           <Group 
             name={item} 
-            isActive={groupSelected === item}
+            isActive={
+              groupSelected.toLocaleUpperCase() === 
+              item.toLocaleUpperCase()
+            }
             onPress={() => setGroupSelected(item)}
           />
         )}
