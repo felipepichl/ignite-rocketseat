@@ -3,6 +3,7 @@ import { FlatList, Heading, HStack, VStack, Text } from 'native-base';
 
 import { HomeHeader } from '@components/HomeHeader';
 import { Group } from '@components/Group';
+import { ExerciseCard } from '@components/ExerciseCard';
 
 function Home() {
   const [groups, setGroups] = useState([
@@ -47,6 +48,8 @@ function Home() {
             4
           </Text>
         </HStack>
+
+        <ExerciseCard />
       
       </VStack>
     </VStack>
