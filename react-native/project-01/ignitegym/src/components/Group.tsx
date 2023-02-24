@@ -15,6 +15,10 @@ function Group({ name, ...rest }: Props) {
     justifyContent='center'
     alignItems='center'
     overflow='hidden'
+    _pressed={{
+      backgroundColor: 'green.500',
+      borderWidth: 1
+    }}
     {...rest}
   >
     <Text
