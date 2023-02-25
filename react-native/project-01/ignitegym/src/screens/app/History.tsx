@@ -51,6 +51,7 @@ function History() {
             Vamos treinar.
           </Text>
         )}
+        showsVerticalScrollIndicator={false}
       />
 
     </VStack>
