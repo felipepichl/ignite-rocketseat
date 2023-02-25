@@ -1,6 +1,7 @@
-import { VStack } from 'native-base';
+import { Center, ScrollView, VStack } from 'native-base';
 
 import { ScreenHeader } from '@components/ScreenHeader';
+import { UserPhoto } from '@components/UserPhoto';
 
 function Profile() {
   return (
@@ -8,6 +9,17 @@ function Profile() {
       flex={1}
     >
       <ScreenHeader title='Perfil'/>
+
+      <ScrollView>
+        <Center mt={6} px={10}>
+          <UserPhoto 
+            source={{ uri: 'https://github.com/felipepichl.png' }}
+            alt="Foto do usuário"
+            size={33}
+          />
+        </Center>
+
+      </ScrollView>
     </VStack>
   );
 }
