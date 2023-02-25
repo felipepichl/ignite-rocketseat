@@ -18,7 +18,7 @@ function Profile() {
     >
       <ScreenHeader title='Perfil'/>
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ paddingBottom: 36 }} >
         <Center mt={6} px={10}>
 
           {
@@ -59,37 +59,40 @@ function Profile() {
               placeholder='Email'
               isDisabled
             />
+        
+            <Heading 
+              color="gray.200" 
+              fontSize="md" 
+              mb={2}
+              alignSelf='flex-start'
+              mt={12}  
+            >
+              Alterar senha
+            </Heading>
+
+            <Input 
+              bg="gray.600"
+              placeholder='Senha antiga'
+              secureTextEntry
+            />
+
+            <Input 
+              bg="gray.600"
+              placeholder='Nova senha'
+              secureTextEntry
+            />
+            
+            <Input 
+              bg="gray.600"
+              placeholder='Confirme a nova senha'
+              secureTextEntry
+            />
+
+            <Button 
+              title="Atualizar"
+              mt={4}
+            />      
         </Center>
-
-        <VStack px={10} mt={12} mb={9}>
-          <Heading color="gray.200" fontSize="md" mb={2}>
-            Alterar senha
-          </Heading>
-
-          <Input 
-            bg="gray.600"
-            placeholder='Senha antiga'
-            secureTextEntry
-          />
-
-          <Input 
-            bg="gray.600"
-            placeholder='Nova senha'
-            secureTextEntry
-          />
-          
-          <Input 
-            bg="gray.600"
-            placeholder='Confirme a nova senha'
-            secureTextEntry
-          />
-
-          <Button 
-            title="Atualizar"
-            mt={4}
-          />
-        </VStack>
-
       </ScrollView>
     </VStack>
   );
