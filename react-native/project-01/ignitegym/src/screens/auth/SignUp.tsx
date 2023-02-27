@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { VStack, Image, Text, Center, Heading, ScrollView } from 'native-base';
 
@@ -8,10 +9,16 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 
 function SignUp() {
+  const [name, setName] = useState('');
+
   const { goBack } = useNavigation();
 
   function handleGoBack() {
     goBack();
+  }
+
+  function handleSignUp() {
+    
   }
 
   return (
@@ -53,9 +60,9 @@ function SignUp() {
           </Heading>
 
           <Input 
-            placeholder='Nome'  
+            placeholder='Nome'
+            onChangeText={setName}  
           />
-
           <Input 
             placeholder='E-mail'
             keyboardType='email-address'
@@ -65,9 +72,14 @@ function SignUp() {
             placeholder='Senha'
             secureTextEntry
           />
+          <Input 
+            placeholder='Confirme a senha'
+            secureTextEntry
+          />
 
           <Button 
             title='Criar e acessar'
+            onPress={handleSignUp}
           />
         </Center>
 
