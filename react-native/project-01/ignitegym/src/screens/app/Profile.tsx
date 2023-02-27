@@ -19,6 +19,7 @@ const PHOTO_SIZE = 33;
 
 function Profile() {
   const [photoIsLoading, setPhotoISLoading] = useState(true);
+  const [userPhoto, setUserPhoto] = useState('https://github.com/felipepichl.png')
 
   async function handleUserPhotoSelect() {
     const photoSelected = await ImagePicker.launchImageLibraryAsync({
@@ -31,6 +32,8 @@ function Profile() {
     if (photoSelected.canceled) {
       return;
     }
+
+    setUserPhoto(photoSelected.assets[0].uri);
   }
 
   return (
@@ -53,7 +56,7 @@ function Profile() {
             />
           :
             <UserPhoto 
-              source={{ uri: 'https://github.com/felipepichl.png' }}
+              source={{ uri: userPhoto }}
               alt="Foto do usuário"
               size={PHOTO_SIZE}
             />}
