@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Center, ScrollView, VStack, Skeleton, Text, Heading } from 'native-base';
+import { 
+  Center, 
+  ScrollView, 
+  VStack, 
+  Skeleton, 
+  Text, 
+  Heading 
+} from 'native-base';
+import * as ImagePicker from 'expo-image-picker';
 
 import { ScreenHeader } from '@components/ScreenHeader';
 import { UserPhoto } from '@components/UserPhoto';
@@ -11,6 +19,10 @@ const PHOTO_SIZE = 33;
 
 function Profile() {
   const [photoIsLoading, setPhotoISLoading] = useState(true);
+
+  async function handleUserPhotoSelect() {
+    await ImagePicker.launchImageLibraryAsync();
+  }
 
   return (
     <VStack
