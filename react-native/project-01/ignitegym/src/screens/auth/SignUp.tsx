@@ -31,7 +31,7 @@ function SignUp() {
     password, 
     password_confirm 
   }: FormDataProps) {
-      
+
   }
 
   return (
@@ -75,6 +75,9 @@ function SignUp() {
           <Controller 
             control={control}
             name="name"
+            rules={{
+              required: 'Informe o nome.'
+            }}
             render={({ field: { onChange, value } }) => (
               <Input 
                 placeholder='Nome'
