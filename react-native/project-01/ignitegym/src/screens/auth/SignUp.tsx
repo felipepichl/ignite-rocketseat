@@ -4,11 +4,14 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 
+import { api } from '@services/api';
+
 import LogoSvg from '@assets/logo.svg'; 
 import BackgroundImg from '@assets/background.png';
 
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
+
 
 type FormDataProps = {
   name: string;
@@ -52,6 +55,7 @@ function SignUp() {
     email, 
     password,
   }: FormDataProps) {
+    /*
     const response = await fetch('http://10.0.0.149:3333/users', {
       method: 'POST',
       headers: {
@@ -67,7 +71,10 @@ function SignUp() {
 
     const data = await response.json();
     console.log(data);
+    */
     
+    const response = await api.post('/users', { name, email, password });
+    console.log(response.data);
     
   }
 
