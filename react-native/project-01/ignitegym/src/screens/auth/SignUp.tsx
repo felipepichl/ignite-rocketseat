@@ -47,12 +47,12 @@ function SignUp() {
     goBack();
   }
 
-  function handleSignUp({ 
+  async function handleSignUp({ 
     name, 
     email, 
     password,
   }: FormDataProps) {
-    fetch('http://10.0.0.149:3333/users', {
+    const response = await fetch('http://10.0.0.149:3333/users', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -63,9 +63,11 @@ function SignUp() {
         email,
         password
       })
-    })
-      .then(response => response.json())
-      .then(data => console.log(data)) 
+    });
+
+    const data = await response,json();
+    console.log(data);
+    
     
   }
 
