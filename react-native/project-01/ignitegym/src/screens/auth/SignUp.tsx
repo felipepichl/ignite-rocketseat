@@ -50,10 +50,20 @@ function SignUp() {
   function handleSignUp({ 
     name, 
     email, 
-    password, 
-    password_confirm 
+    password,
   }: FormDataProps) {
-
+    fetch('http://10.0.0.149:3333/users', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name, 
+        email,
+        password
+      }) 
+    });
   }
 
   return (
