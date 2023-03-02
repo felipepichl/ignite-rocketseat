@@ -1,15 +1,23 @@
-import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { VStack, Image, Text, Center, Heading, ScrollView } from 'native-base';
+import { 
+  VStack, 
+  Image, 
+  Text, 
+  Center, 
+  Heading, 
+  ScrollView, 
+  useToast 
+} from 'native-base';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 
-import axios from 'axios';
 import { api } from '@services/api';
 
 import LogoSvg from '@assets/logo.svg'; 
 import BackgroundImg from '@assets/background.png';
+
+import { AppError } from '@utils/AppError';
 
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
@@ -37,6 +45,8 @@ const signUpSchema = yup.object({
 })
 
 function SignUp() {
+
+  const toast = useToast();
 
   const { 
     control, 
@@ -78,9 +88,17 @@ function SignUp() {
       const response = await api.post('/users', { name, email, password });
       console.log(response.data);
     } catch (error) {
-      if(axios.isAxiosError(error)){
-        Alert.alert(error.response?.data.message);
-      }
+      const isAppError = error instanceof AppError;
+      const title = isAppError 
+        ? error.message: 
+          'Não foi possível criar a conta, tente novamente mais tarde';
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500'
+      })
+
     }
     
   }
