@@ -8,6 +8,8 @@ import {
 
 import { Routes } from './src/routes';
 
+import { AuthContext } from '@contexts/AuthContext';
+
 import { THEME } from './src/theme';
 import { Loading } from '@components/Loading';
 
@@ -25,7 +27,14 @@ export default function App() {
         backgroundColor='transparent'
         translucent
       />
-      {fontsLoaded ? <Routes/> : <Loading/>}
+      <AuthContext.Provider value={{
+        id: '1',
+        name: 'Felipe',
+        email: 'felipe@email.com',
+        avatar: 'felipe.png'
+      }}>
+        {fontsLoaded ? <Routes/> : <Loading/>}
+      </AuthContext.Provider>
     </NativeBaseProvider>
   );
 }
