@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { useForm, Controller } from 'react-hook-form';
 import { VStack, Image, Text, Center, Heading, ScrollView } from 'native-base';
 
 import LogoSvg from '@assets/logo.svg'; 
@@ -9,11 +10,26 @@ import { Button } from '@components/Button';
 
 import { AuthNavigationRoutesProps } from '@routes/auth.routes';
 
+type FormDataProps = {
+  email: string;
+  password: string;
+}
+
 function SignIn() {
   const { navigate } = useNavigation<AuthNavigationRoutesProps>();
 
+  const { 
+    control, 
+    handleSubmit, 
+    formState: { errors } 
+  } = useForm<FormDataProps>();
+
   function handleNewAccount() {
     navigate('signUp')
+  }
+
+  function handleSignIn({ email, password }: FormDataProps) {
+    
   }
 
   return (
@@ -54,18 +70,40 @@ function SignIn() {
             Acesse sua conta
           </Heading>
 
-          <Input 
-            placeholder='E-mail'
-            keyboardType='email-address'
-            autoCapitalize='none'  
+          <Controller 
+            control={control}
+            name='email'
+            rules={{ required: 'Informe o email' }}
+            render={({ field: { onChange, value } }) => (
+              <Input 
+                placeholder='E-mail'
+                keyboardType='email-address'
+                autoCapitalize='none'
+                onChangeText={onChange}
+                value={value}
+                errorMessage={errors.email?.message}  
+              />
+            )}
           />
-          <Input 
-            placeholder='Senha'
-            secureTextEntry
+
+          <Controller 
+            control={control}
+            name='password'
+            rules={{ required: 'Informe o password' }}
+            render={({ field: { onChange, value } }) => (
+              <Input 
+                placeholder='Senha'
+                secureTextEntry
+                onChangeText={onChange}
+                value={value}
+                errorMessage={errors.password?.message}  
+              />
+            )}
           />
 
           <Button 
             title='Acessar'
+            onPress={handleSubmit(handleSignIn)}
           />
         </Center>
 
