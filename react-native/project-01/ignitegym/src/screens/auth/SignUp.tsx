@@ -90,8 +90,10 @@ function SignUp() {
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError 
-        ? error.message: 
-          'Não foi possível criar a conta, tente novamente mais tarde';
+        ? 
+        error.message 
+        : 
+        'Não foi possível criar a conta, tente novamente mais tarde';
 
       toast.show({
         title,
