@@ -2,6 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
 import { VStack, Image, Text, Center, Heading, ScrollView } from 'native-base';
 
+import { useAuth } from '@hooks/useAuth';
+
 import LogoSvg from '@assets/logo.svg'; 
 import BackgroundImg from '@assets/background.png';
 
@@ -16,6 +18,8 @@ type FormDataProps = {
 }
 
 function SignIn() {
+  const { signIn } = useAuth();
+
   const { navigate } = useNavigation<AuthNavigationRoutesProps>();
 
   const { 
@@ -29,7 +33,7 @@ function SignIn() {
   }
 
   function handleSignIn({ email, password }: FormDataProps) {
-    
+    signIn(email, password);
   }
 
   return (
