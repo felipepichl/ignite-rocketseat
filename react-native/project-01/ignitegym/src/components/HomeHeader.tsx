@@ -2,7 +2,9 @@ import { TouchableOpacity } from 'react-native';
 import { Heading, HStack, Text, VStack, Icon } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { UserPhoto } from './UserPhoto'
+import { UserPhoto } from './UserPhoto';
+
+import userPhotoDefaultImg from '@assets/userPhotoDefault.png';
 
 import { useAuth } from '@hooks/useAuth';
 
@@ -18,7 +20,7 @@ function HomeHeader() {
       alignItems="center"
     >
       <UserPhoto 
-        source={{ uri: user.avatar }}
+        source={user.avatar ?  { uri: user.avatar } : userPhotoDefault }
         alt="Imagem do Usuário"
         size={16}
         mr={4}
