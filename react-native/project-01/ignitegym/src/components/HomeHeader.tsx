@@ -4,7 +4,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { UserPhoto } from './UserPhoto'
 
+import { useAuth } from '@hooks/useAuth';
+
 function HomeHeader() {
+  const { user } = useAuth();
+
   return (
     <HStack
       bg="gray.600"
@@ -14,7 +18,7 @@ function HomeHeader() {
       alignItems="center"
     >
       <UserPhoto 
-        source={{ uri: 'https://github.com/felipepichl.png' }}
+        source={{ uri: user.avatar }}
         alt="Imagem do Usuário"
         size={16}
         mr={4}
@@ -26,7 +30,7 @@ function HomeHeader() {
         </Text>
 
         <Heading color="gray.100" fontSize="md" fontFamily="heading">
-          Felipe
+          {user.name}
         </Heading>
       </VStack>
 
