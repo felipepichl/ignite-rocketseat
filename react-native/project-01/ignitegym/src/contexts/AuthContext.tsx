@@ -69,6 +69,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
       setUser({} as UserDTO);
 
       await storageUserRemove();
+      await storageAuthTokenRemove();
 
     } catch (error) {
       throw error
