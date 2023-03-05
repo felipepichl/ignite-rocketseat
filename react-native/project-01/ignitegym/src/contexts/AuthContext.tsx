@@ -7,7 +7,8 @@ import {
 } from '@storage/storageUser';
 import { 
   storageAuthTokenSave, 
-  storageTokenGet 
+  storageAuthTokenGet,
+  storageAuthTokenRemove
 } from '@storage/storageAuthToken';
 
 import { api } from '@services/api';
@@ -81,7 +82,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
       setIsLoadingUserStorageData(true);
       
       const userLogged = await storageUserGet();
-      const token = await storageTokenGet();
+      const token = await storageAuthTokenGet();
   
       if (token && userLogged) {
         userAndTokenUpdate(userLogged, token);
