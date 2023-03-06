@@ -9,7 +9,7 @@ import {
   Box, 
   ScrollView 
 } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 
 import { AppNavigationRoutesProps } from '@routes/app.routes';
@@ -20,9 +20,17 @@ import RepetitionsSvg from '@assets/repetitions.svg';
 
 import { Button } from '@components/Button';
 
+type RouteParamsProps = {
+  exerciseId: string;
+}
+
 function Exercise() {
 
   const navigation = useNavigation<AppNavigationRoutesProps>();
+
+  const route = useRoute();
+
+  const { exerciseId } = route.params as RouteParamsProps;
 
   function handleGoBack() {
     navigation.navigate;
