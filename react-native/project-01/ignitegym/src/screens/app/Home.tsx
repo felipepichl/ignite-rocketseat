@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { FlatList, Heading, HStack, VStack, Text, useToast } from 'native-base';
 
 import { api } from '@services/api';
@@ -48,9 +48,31 @@ function Home() {
     }
   }
 
+  async function fetchExercisesByGroups() {
+    try {
+      const response = await api.get(`/exercises/bygroup/${groupSelected}`);
+
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError 
+        ? error.message 
+        : 'Não foi possível carregar os exercícios.';
+
+      toast.show({
+        title,
+        placement: 'top',
+        bgColor: 'red.500'
+      });
+    }
+  }
+
   useEffect(() => {
     fetchGroups();
   }, [])
+
+  useFocusEffect(useCallback(() => {
+    fetchExercisesByGroups();
+  }, [groupSelected]));
 
   return (
     <VStack
