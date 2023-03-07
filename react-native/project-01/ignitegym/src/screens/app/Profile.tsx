@@ -9,8 +9,11 @@ import {
   Heading,
   useToast 
 } from 'native-base';
+import { Controller, useForm } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
+
+import { useAuth } from '@hooks/useAuth';
 
 import { ScreenHeader } from '@components/ScreenHeader';
 import { UserPhoto } from '@components/UserPhoto';
@@ -19,11 +22,26 @@ import { Button } from '@components/Button';
 
 const PHOTO_SIZE = 33;
 
+type FormDataProps = {
+  name: string;
+  email: string;
+  old_password: string;
+  password: string;
+  confirm_password: string;
+}
+
 function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(true);
   const [userPhoto, setUserPhoto] = useState('https://github.com/felipepichl.png');
 
   const toast = useToast();
+  const { user } = useAuth()
+  const { control } = useForm<FormDataProps>({
+    defaultValues: {
+      name: user.name,
+      email: user.email
+    }
+  });
 
   async function handleUserPhotoSelect() {
     setPhotoIsLoading(true);
@@ -98,15 +116,31 @@ function Profile() {
               </Text>
             </TouchableOpacity>
 
-            <Input 
-              bg="gray.600"
-              placeholder='Nome'
+            <Controller 
+              control={control}
+              name="name"
+              render={({ field: { value, onChange } }) => (
+                <Input 
+                  bg="gray.600"
+                  placeholder='Nome'
+                  value={value}
+                  onChangeText={onChange}
+                />
+              )}
             />
 
-            <Input 
-              bg="gray.600"
-              placeholder='Email'
-              isDisabled
+            <Controller 
+              control={control}
+              name="email"
+              render={({ field: { value, onChange } }) => (
+                <Input 
+                  bg="gray.600"
+                  placeholder='Email'
+                  isDisabled
+                  value={value}
+                  onChangeText={onChange}
+                />
+              )}
             />
         
             <Heading 
