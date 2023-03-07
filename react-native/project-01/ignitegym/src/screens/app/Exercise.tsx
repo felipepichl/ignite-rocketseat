@@ -73,7 +73,16 @@ function Exercise() {
   async function handleExerciseHistoryRegister() {
     try {
       setSendingRegister(true);
+
+      await api.post('/history', { exercise_id: exerciseId });
       
+      toast.show({
+        title: 'Parabéns, Exercício registrado no seu histórico.',
+        placement: 'top',
+        bgColor: 'green.700'
+      });
+
+      navigation.navigate('history');
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError 
@@ -168,6 +177,7 @@ function Exercise() {
                 <Button 
                   title='Marcar como realizado'
                   isLoading={sendingRegister}  
+                  onPress={handleExerciseHistoryRegister}
                 />
               </Box>
             </VStack>
