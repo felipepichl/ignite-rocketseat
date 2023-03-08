@@ -9,9 +9,11 @@ import {
   Heading,
   useToast 
 } from 'native-base';
+import { yupResolver} from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
+import * as yup from 'yup';
 
 import { useAuth } from '@hooks/useAuth';
 
@@ -30,17 +32,31 @@ type FormDataProps = {
   confirm_password: string;
 }
 
+const profileSchema = yup.object({
+  name: yup.string().required('Informe o nome.'),
+  password: yup
+    .string()
+    .required('Informe a senha.')
+    .min(6, 'A senha de ter pelo menos 6 digitos.'),
+  password_confirm: yup
+    .string()
+    .required('Confirme a senha.')
+    .min(6, 'A senha de ter pelo menos 6 digitos.')
+    .oneOf([yup.ref('password')], 'A senha não confere'),
+});
+
 function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(true);
   const [userPhoto, setUserPhoto] = useState('https://github.com/felipepichl.png');
 
   const toast = useToast();
   const { user } = useAuth()
-  const { control, handleSubmit } = useForm<FormDataProps>({
+  const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
     defaultValues: {
       name: user.name,
       email: user.email
-    }
+    },
+    resolver: yupResolver(profileSchema)
   });
 
   async function handleUserPhotoSelect() {
@@ -129,6 +145,7 @@ function Profile() {
                   placeholder='Nome'
                   value={value}
                   onChangeText={onChange}
+                  errorMessage={errors.name?.message}
                 />
               )}
             />
@@ -180,6 +197,7 @@ function Profile() {
                   placeholder='Nova senha'
                   secureTextEntry
                   onChangeText={onChange}
+                  errorMessage={errors.password?.message}
                 />
               )}
             />
@@ -193,6 +211,7 @@ function Profile() {
                   placeholder='Confirme a nova senha'
                   secureTextEntry
                   onChangeText={onChange}
+                  errorMessage={errors.confirm_password?.message}
                 />
               )}
             />
