@@ -36,7 +36,7 @@ function Profile() {
 
   const toast = useToast();
   const { user } = useAuth()
-  const { control } = useForm<FormDataProps>({
+  const { control, handleSubmit } = useForm<FormDataProps>({
     defaultValues: {
       name: user.name,
       email: user.email
@@ -79,6 +79,10 @@ function Profile() {
     }
   }
 
+  async function handleProfileUpdate(data: FormDataProps) {
+    
+  }
+
   return (
     <VStack
       flex={1}
@@ -104,7 +108,7 @@ function Profile() {
               size={PHOTO_SIZE}
             />}
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleUserPhotoSelect}>
               <Text
                 color="gray.500"
                 fontWeight="bold"
@@ -154,27 +158,49 @@ function Profile() {
               Alterar senha
             </Heading>
 
-            <Input 
-              bg="gray.600"
-              placeholder='Senha antiga'
-              secureTextEntry
+            <Controller 
+              control={control}
+              name="old_password"
+              render={({ field: { onChange } }) => (
+                <Input 
+                  bg="gray.600"
+                  placeholder='Senha antiga'
+                  secureTextEntry
+                  onChangeText={onChange}
+                />    
+              )}
             />
 
-            <Input 
-              bg="gray.600"
-              placeholder='Nova senha'
-              secureTextEntry
+            <Controller 
+              control={control}
+              name="password"
+              render={({ field: { onChange } }) => (   
+                <Input 
+                  bg="gray.600"
+                  placeholder='Nova senha'
+                  secureTextEntry
+                  onChangeText={onChange}
+                />
+              )}
             />
-            
-            <Input 
-              bg="gray.600"
-              placeholder='Confirme a nova senha'
-              secureTextEntry
+
+            <Controller 
+              control={control}
+              name="confirm_password"
+              render={({ field: { onChange } }) => (    
+                <Input 
+                  bg="gray.600"
+                  placeholder='Confirme a nova senha'
+                  secureTextEntry
+                  onChangeText={onChange}
+                />
+              )}
             />
 
             <Button 
               title="Atualizar"
               mt={4}
+              onPress={handleSubmit(handleProfileUpdate)}
             />      
         </Center>
       </ScrollView>
