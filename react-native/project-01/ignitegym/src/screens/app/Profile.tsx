@@ -36,12 +36,13 @@ const profileSchema = yup.object({
   name: yup.string().required('Informe o nome.'),
   password: yup
     .string()
-    .required('Informe a senha.')
-    .min(6, 'A senha de ter pelo menos 6 digitos.'),
+    .min(6, 'A senha de ter pelo menos 6 digitos.')
+    .nullable()
+    .transform((value) => !!value ? value: null),
   password_confirm: yup
     .string()
-    .required('Confirme a senha.')
-    .min(6, 'A senha de ter pelo menos 6 digitos.')
+    .nullable()
+    .transform((value) => !!value ? value: null)
     .oneOf([yup.ref('password')], 'A senha não confere'),
 });
 

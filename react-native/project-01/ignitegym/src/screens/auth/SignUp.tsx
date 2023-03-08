@@ -44,7 +44,7 @@ const signUpSchema = yup.object({
     .required('Confirme a senha.')
     .min(6, 'A senha de ter pelo menos 6 digitos.')
     .oneOf([yup.ref('password')], 'A senha não confere'),
-})
+});
 
 function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
