@@ -4,6 +4,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { UserPhoto } from './UserPhoto';
 
+import { api } from '@services/api';
+
 import userPhotoDefaultImg from '@assets/userPhotoDefault.png';
 
 import { useAuth } from '@hooks/useAuth';
@@ -20,7 +22,11 @@ function HomeHeader() {
       alignItems="center"
     >
       <UserPhoto 
-        source={user.avatar ?  { uri: user.avatar } : userPhotoDefaultImg}
+        source={
+          user.avatar 
+          ?  { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` } 
+          : userPhotoDefaultImg
+        }
         alt="Imagem do Usuário"
         size={16}
         mr={4}
