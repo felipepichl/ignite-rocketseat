@@ -1,9 +1,14 @@
 import { AppError } from '@utils/AppError';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 
 import { storageAuthTokenGet } from '@storage/storageAuthToken';
 
 type SignOut = () => void;
+
+type PromiseType = {
+  onSuccess: (token: string) => void;
+  onError: (error: AxiosError) => void;
+}
 
 type APIInstanceProps = AxiosInstance & {
   registerInterceptTokenManager: (signOut: SignOut) => () => void;
@@ -29,6 +34,9 @@ api.interceptors.response.use((response) => {
 });
 */
 
+let failedQueue: Array<PromiseType> = [];
+let isRefreshing = false; 
+
 api.registerInterceptTokenManager = signOut => {
   const interceptTokenManager = api.interceptors.response.use(
     response => response, async (requestError) => {
@@ -40,6 +48,16 @@ api.registerInterceptTokenManager = signOut => {
             signOut();
             return Promise.reject(requestError);
           }
+
+          const originalRequestConfig = requestError.config;
+
+          if (isRefreshing) {
+            return new Promise((resolve, reject) => {
+
+            });
+          };
+
+          isRefreshing = true;
         }
 
         signOut(); 
