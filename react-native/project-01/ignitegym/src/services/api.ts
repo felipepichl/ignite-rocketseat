@@ -53,7 +53,17 @@ api.registerInterceptTokenManager = signOut => {
 
           if (isRefreshing) {
             return new Promise((resolve, reject) => {
-
+              failedQueue.push({
+                onSuccess: (token: string) => {
+                  originalRequestConfig.headers = { 
+                    'Authorization': `Bearer ${token}` 
+                  }
+                  resolve(api(originalRequestConfig));
+                },
+                onError: (error: AxiosError) => {
+                  reject(error);
+                }
+              })
             });
           };
 
