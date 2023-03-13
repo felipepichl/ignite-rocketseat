@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { Heading, VStack, SectionList, Text, useToast } from 'native-base';
 
 import { api } from '@services/api';
@@ -8,7 +9,7 @@ import { HistoryByDayDTO } from '@dtos/HistoryByDayDTO';
 
 import { ScreenHeader } from '@components/ScreenHeader';
 import { HistoryCard } from '@components/HistoryCard';
-import { useFocusEffect } from '@react-navigation/native';
+import { Loading } from '@components/Loading';
 
 function History() {
   const [isLoading, setIsLoading] = useState(true);
