@@ -14,7 +14,6 @@ import { CartContextProvider } from './src/contexts/CartContext';
 
 OneSignal.setAppId('7011924b-6f60-4fb9-bb15-1397b62400a1');
 
-
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
