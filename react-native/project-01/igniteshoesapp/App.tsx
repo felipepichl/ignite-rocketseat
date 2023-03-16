@@ -17,6 +17,9 @@ const onSignalAppId = Platform.OS === 'ios'
   : '7011924b-6f60-4fb9-bb15-1397b62400a1'; 
 
 OneSignal.setAppId(onSignalAppId);
+
+OneSignal.setEmail('felipe@email.com');
+
 OneSignal.promptForPushNotificationsWithUserResponse(response => {
   console.log(response);
 });
