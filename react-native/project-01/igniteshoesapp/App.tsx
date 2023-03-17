@@ -1,4 +1,5 @@
-import OneSignal from 'react-native-onesignal';
+import { useEffect } from 'react';
+import OneSignal, { NotificationReceivedEvent } from 'react-native-onesignal';
 
 import { StatusBar, Platform } from 'react-native';
 import { NativeBaseProvider } from 'native-base';
@@ -12,7 +13,8 @@ import { Loading } from './src/components/Loading';
 
 import { 
   tagUserEmailCreate, 
-  tagUserEmailDelete 
+  tagUserEmailDelete,
+  tagUserInfoCreate 
 } from './src/notifications/notificationsTags';
 
 import { CartContextProvider } from './src/contexts/CartContext';
@@ -33,6 +35,18 @@ export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
   tagUserEmailCreate('felipe@email.com');
+  tagUserEmailDelete();
+  tagUserInfoCreate();
+
+  useEffect(() => {
+    const unsubscribe = OneSignal.setNotificationWillShowInForegroundHandler((
+      notificationReceivedEvent: NotificationReceivedEvent
+    ) => {
+      console.log(notificationReceivedEvent);
+    })
+
+    return () => unsubscribe;
+  }, []);
 
   return (
     <NativeBaseProvider theme={THEME}>
