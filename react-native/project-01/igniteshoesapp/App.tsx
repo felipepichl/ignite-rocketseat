@@ -10,7 +10,10 @@ import { Routes } from './src/routes';
 import { THEME } from './src/theme';
 import { Loading } from './src/components/Loading';
 
-import { tagUserEmailCreate } from './src/notifications/notificationsTags';
+import { 
+  tagUserEmailCreate, 
+  tagUserEmailDelete 
+} from './src/notifications/notificationsTags';
 
 import { CartContextProvider } from './src/contexts/CartContext';
 
