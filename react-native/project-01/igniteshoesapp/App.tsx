@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react';
-import OneSignal, { 
-  NotificationReceivedEvent, 
-  OSNotification 
-} from 'react-native-onesignal';
+import OneSignal from 'react-native-onesignal';
 
 import { StatusBar, Platform } from 'react-native';
 import { NativeBaseProvider } from 'native-base';
@@ -16,7 +12,6 @@ import { Routes } from './src/routes';
 
 import { THEME } from './src/theme';
 import { Loading } from './src/components/Loading';
-import { Notification } from './src/components/Notification';
 
 import { 
   tagUserEmailCreate, 
@@ -40,23 +35,10 @@ OneSignal.promptForPushNotificationsWithUserResponse(response => {
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
-  const [notification, setNotification] = useState<OSNotification>();
 
   tagUserEmailCreate('felipe@email.com');
   tagUserEmailDelete();
   tagUserInfoCreate();
-
-  useEffect(() => {
-    const unsubscribe = OneSignal.setNotificationWillShowInForegroundHandler((
-      notificationReceivedEvent: NotificationReceivedEvent
-    ) => {
-      const response = notificationReceivedEvent.getNotification();
-
-      setNotification(response);
-    })
-
-    return () => unsubscribe;
-  }, []);
 
   return (
     <NativeBaseProvider theme={THEME}>
@@ -68,14 +50,6 @@ export default function App() {
       <CartContextProvider>
         {fontsLoaded ? <Routes /> : <Loading />}
       </CartContextProvider>
-
-      {
-        notification?.title &&
-        <Notification 
-          title={notification.title} 
-          onClose={() => setNotification(undefined)}
-        />
-      }
     </NativeBaseProvider>
   );
 }
