@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import OneSignal from 'react-native-onesignal';
 
 import { StatusBar, Platform } from 'react-native';
@@ -33,6 +34,7 @@ OneSignal.promptForPushNotificationsWithUserResponse(response => {
   console.log(response);
 });
 
+
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
@@ -40,6 +42,14 @@ export default function App() {
   tagUserEmailDelete();
   tagUserInfoCreate();
 
+  useEffect(() => {
+    const unsubscrible = OneSignal.setNotificationOpenedHandler(() => {
+      console.log('Open Notification');
+    });
+
+    return () => unsubscrible;
+  }, []);
+  
   return (
     <NativeBaseProvider theme={THEME}>
       <StatusBar
