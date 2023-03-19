@@ -5,10 +5,10 @@ import OneSignal, {
   NotificationReceivedEvent, 
   OSNotification 
 } from 'react-native-onesignal';
-
-import { Notification } from '../components/Notification';
+// import * as Linking from 'expo-linking';
 
 import { AppRoutes } from './app.routes';
+import { Notification } from '../components/Notification';
 
 const linking = {
   prefixes: [
@@ -34,6 +34,12 @@ export function Routes() {
 
   const theme = DefaultTheme;
   theme.colors.background = colors.gray[700];
+
+  // const deepLinking = Linking.createURL('details', {
+  //   queryParams: {
+  //     productId: '7'
+  //   }
+  // });
 
   useEffect(() => {
     const unsubscribe = OneSignal.setNotificationWillShowInForegroundHandler((
