@@ -19,7 +19,10 @@ const linking = {
   config: {
     screens: {
       details: {
-        path: 'details:productId'
+        path: 'details/:productId',
+        parse: {
+          productId: (productId: string) => productId
+        }
       }
     }
   }
@@ -45,7 +48,7 @@ export function Routes() {
   }, []);
 
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={theme} linking={linking}>
       <AppRoutes />
 
       {
