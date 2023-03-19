@@ -51,39 +51,41 @@ function History() {
     >
       <ScreenHeader title="Histórico de Exercícios"/>
 
-      <SectionList 
-        sections={exercises}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <HistoryCard  data={item} />
-        )}
-        renderSectionHeader={({ section }) => (
-          <Heading
-            color="gray.200"
-            fontSize="md"
-            fontFamily="heading"
-            mt={10}
-            mb={3}
-          >
-            {section.title}
-          </Heading>
-        )}
-        px={8}
-        contentContainerStyle={
-          [].length === 0 && {flex: 1, justifyContent: 'center'}
-        }
-        ListEmptyComponent={() => (
-          <Text
-            color="gray.100"
-            textAlign='center'
-          >
-            Não há exercícios registrado ainda. {'\n'}
-            Vamos treinar.
-          </Text>
-        )}
-        showsVerticalScrollIndicator={false}
-      />
-
+      { 
+        isLoading ? <Loading /> : 
+          <SectionList 
+            sections={exercises}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <HistoryCard  data={item} />
+            )}
+            renderSectionHeader={({ section }) => (
+              <Heading
+                color="gray.200"
+                fontSize="md"
+                fontFamily="heading"
+                mt={10}
+                mb={3}
+              >
+                {section.title}
+              </Heading>
+            )}
+            px={8}
+            contentContainerStyle={
+              [].length === 0 && {flex: 1, justifyContent: 'center'}
+            }
+            ListEmptyComponent={() => (
+              <Text
+                color="gray.100"
+                textAlign='center'
+              >
+                Não há exercícios registrado ainda. {'\n'}
+                Vamos treinar.
+              </Text>
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+      }
     </VStack>
   );
 }
