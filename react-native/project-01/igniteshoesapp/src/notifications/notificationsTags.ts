@@ -14,3 +14,7 @@ export function tagUserInfoCreate() {
 export function tagUserEmailDelete() {
   OneSignal.deleteTag('user_email');
 }
+  
+export function tagCartUpdate(itemsCount: string) {
+  OneSignal.sendTag('cart_items_count', itemsCount);
+}
