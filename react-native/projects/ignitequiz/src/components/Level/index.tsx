@@ -7,6 +7,8 @@ import Animated, {
   interpolateColor
 } from 'react-native-reanimated';
 
+const PressebleAnimayed = Animated.createAnimatedComponent(Pressable);
+
 import { THEME } from '../../styles/theme';
 import { styles } from './styles';
 
