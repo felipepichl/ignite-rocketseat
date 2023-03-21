@@ -1,4 +1,5 @@
 import { View, Text } from 'react-native';
+import Animated, { Keyframe } from 'react-native-reanimated';
 
 import { Option } from '../Option';
 import { styles } from './styles';
@@ -16,7 +17,7 @@ type Props = {
 
 export function Question({ question, alternativeSelected, setAlternativeSelected }: Props) {
   return (
-    <View style={styles.container}>
+    <Animated.View style={styles.container}>
       <Text style={styles.title}>
         {question.title}
       </Text>
@@ -31,6 +32,6 @@ export function Question({ question, alternativeSelected, setAlternativeSelected
           />
         ))
       }
-    </View>
+    </Animated.View>
   );
 }
