@@ -16,8 +16,18 @@ type Props = {
 }
 
 export function Question({ question, alternativeSelected, setAlternativeSelected }: Props) {
+
+  const enteringKeyframe = new Keyframe({
+    0: {},
+    70: {},
+    100: {}
+  })
+
   return (
-    <Animated.View style={styles.container}>
+    <Animated.View 
+      style={styles.container}
+      entering={enteringKeyframe}  
+    >
       <Text style={styles.title}>
         {question.title}
       </Text>
