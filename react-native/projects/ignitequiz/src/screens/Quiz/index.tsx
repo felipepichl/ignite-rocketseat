@@ -165,6 +165,7 @@ export function Quiz() {
 
   const onPen = Gesture
     .Pan()
+    .activateAfterLongPress(200)
     .onUpdate((event) => {
       const moveToLeft = event.translationX < 0;
 
@@ -186,7 +187,6 @@ export function Quiz() {
       transform: [
         { translateX: cardPosition.value },
         { rotateZ: `${rotateZ}deg` }
-      
       ]
     }
   });
