@@ -5,6 +5,7 @@ import {
   useLoop,
   Easing
 } from "@shopify/react-native-skia";
+import Animated, { BounceIn } from 'react-native-reanimated';
 import { View } from "react-native";
 
 import TrophySvg from '../../assets/trophy.svg'
@@ -134,7 +135,9 @@ function Stars() {
         />
       </Canvas>
 
-      <TrophySvg />
+      <Animated.View entering={BounceIn}>
+        <TrophySvg />
+      </Animated.View>
     </View>
   );
 }
