@@ -5,7 +5,8 @@ import {
   Path, 
   Skia, 
   useValue,
-  runTiming 
+  runTiming,
+  BlurMask 
 } from '@shopify/react-native-skia';
 
 import { styles } from './styles';
@@ -64,7 +65,9 @@ export function Option({ checked, title, ...rest }: Props) {
           strokeWidth={CHECK_STROKE}
           start={0}
           end={percentage}
-        />
+        >
+          <BlurMask blur={1} style="solid"/>
+        </Path>
       </Canvas>
     </TouchableOpacity>
   );
