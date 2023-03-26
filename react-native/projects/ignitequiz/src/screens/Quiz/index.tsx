@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, View, Text } from 'react-native';
+import { Alert, View, Text, BackHandler } from 'react-native';
 import Animated, { 
   useAnimatedStyle,
   useSharedValue, 
@@ -221,6 +221,12 @@ export function Quiz() {
     const quizSelected = QUIZ.filter(item => item.id === id)[0];
     setQuiz(quizSelected);
     setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleStop);
+
+    return () => backHandler.remove();
   }, []);
 
   if (isLoading) {
