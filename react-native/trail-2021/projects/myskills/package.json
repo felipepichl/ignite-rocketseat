@@ -1,25 +1,21 @@
 {
   "name": "myskills",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "react-native start",
-    "test": "jest"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
   },
   "dependencies": {
-    "react": "16.8.6",
-    "react-native": "0.60.6"
+    "expo": "~48.0.9",
+    "expo-status-bar": "~1.4.4",
+    "react": "18.2.0",
+    "react-native": "0.71.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.0",
-    "@babel/runtime": "^7.5.0",
-    "@react-native-community/eslint-config": "^0.0.3",
-    "babel-jest": "^24.1.0",
-    "jest": "^24.1.0",
-    "metro-react-native-babel-preset": "0.54.1",
-    "react-test-renderer": "16.8.6"
+    "@babel/core": "^7.20.0"
   },
-  "jest": {
-    "preset": "react-native"
-  }
+  "private": true
 }
