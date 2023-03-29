@@ -5,12 +5,12 @@ import {
   StyleSheet 
 } from 'react-native';
 
-function Button() {
+function Button({ onPress }) {
   return (
     <TouchableOpacity 
         style={styles.button}
         activeOpacity={.7}  
-        // onPress={handleAddNewSkill }
+        onPress={onPress}
       >
         <Text style={styles.buttonText}>Add</Text>
     </TouchableOpacity>
