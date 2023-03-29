@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#1f1e25',
     padding: 15,
     borderRadius: 50,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 10,
   },
   textSkill: {
     color: '#fff',
