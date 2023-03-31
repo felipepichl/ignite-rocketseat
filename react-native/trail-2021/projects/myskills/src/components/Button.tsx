@@ -5,7 +5,11 @@ import {
   StyleSheet 
 } from 'react-native';
 
-function Button({ onPress }) {
+interface Props  {
+  onPress: () => void;
+}
+
+function Button({ onPress }: Props) {
   return (
     <TouchableOpacity 
         style={styles.button}

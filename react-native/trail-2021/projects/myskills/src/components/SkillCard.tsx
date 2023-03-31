@@ -5,7 +5,11 @@ import {
   StyleSheet 
 } from 'react-native';
 
-function SkillCard({ skill }) {
+interface Props {
+  skill: string;
+}
+
+function SkillCard({ skill }: Props) {
   return (
     <TouchableOpacity 
       style={styles.buttonSkill}

@@ -13,7 +13,7 @@ import { SkillCard } from '../components/SkillCard';
 
 function Home() {
   const [newSkills, setNewSkills] = useState('');
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<string[]>([]);
   const [greeting, setGreetings] = useState('');
 
 
@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#121015',
     paddingHorizontal: 20,
     paddingVertical: 70,
-    paddingHorizontal: 30,
   },
   title: {
     color: '#fff',
