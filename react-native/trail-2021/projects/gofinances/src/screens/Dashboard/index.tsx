@@ -12,13 +12,24 @@ import {
   Icon, 
   HighlightCards,
   Transactions, 
-  Title 
+  Title,
+  TransactionList 
 } from './styles';
 
 import { HighlightCard } from '../../components/HighlightCard';
 import { TransactionCard } from '../../components/TransactionCard';
 
 export function Dashboard() {
+  const data = {
+    title: 'Desenvolvimento de site',
+    amount: 'R$ 12.000,00',
+    category: {
+      name: 'Vendas',
+      icon: 'dollar-sign'
+    },
+    date: '04/04/2023'
+  };
+
   return (
     <Container>
       <Header>
@@ -58,7 +69,9 @@ export function Dashboard() {
       <Transactions>
         <Title>Listagem</Title>
 
-        <TransactionCard />
+        <TransactionList />
+
+        <TransactionCard data={data} />
       </Transactions>
     </Container>
   )
