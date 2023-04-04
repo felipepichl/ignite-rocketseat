@@ -83,6 +83,8 @@ export const Title = styled.Text`
   /* color: ${({ theme }) => theme.colors.shape}; */
   font-size: ${RFValue(18)}px;
   font-family: ${({ theme }) => theme.fonts.regular};
+
+  margin-bottom: 16px;
 `;
 
 
