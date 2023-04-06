@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import {Feather} from '@expo/vector-icons'
 
-interface TypeProps {
+interface IconsProps {
   type: 'up' | 'down';
 }
 
@@ -20,17 +20,15 @@ export const Container = styled(TouchableOpacity)`
   padding: 16px;
 `;
 
-export const Icon = styled(Feather)<TypeProps>`
+export const Icon = styled(Feather)<IconsProps>`
   font-size: ${RFValue(24)}px;
   margin-right: 12px;
 
-  ${({ type }) => type === 'up' && css`
-    color: ${({ theme }) => theme.colors.success};
-  `};
-
-  ${({ type }) => type === 'down' && css`
-    color: ${({ theme }) => theme.colors.attention};
-  `};
+  color: ${({ theme, type }) => 
+    type === 'up' 
+      ? theme.colors.success 
+      : theme.colors.attention
+    };
 `;
 
 export const Title = styled.Text`
