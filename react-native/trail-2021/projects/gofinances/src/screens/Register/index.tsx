@@ -5,7 +5,8 @@ import { Input } from '../../components/Form/Input';
 import { 
   Container,
   Header,
-  Title
+  Title, 
+  Form
 } from './styles';
 
 export function Register() {
@@ -15,9 +16,14 @@ export function Register() {
         <Title>Cadastro</Title>
       </Header>
 
-      <Input 
-        placeholder='Nome'
-      />
+      <Form>
+        <Input 
+          placeholder='Nome'
+        />
+        <Input 
+          placeholder='Preço'
+        />
+      </Form>
     </Container>
   )
 }
