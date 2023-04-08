@@ -23,7 +23,7 @@ export function Register() {
   
   const [category, setCategory] = useState({
     key: 'category',
-    name: 'Category'
+    name: 'Categoria'
   });
   
   function handleTransactionTypeSelect(type: 'up' | 'down') {
@@ -70,7 +70,7 @@ export function Register() {
           </TransactionsTypes>
 
           <CategorySelectButton 
-            title='Categoria' 
+            title={category.name}
             onPress={handleOpenSelectCategoryModal}
           />
         </Fields>
@@ -78,12 +78,14 @@ export function Register() {
         <Button title='Enviar'/>
       </Form>
 
-      <Modal visible={categoryModalOpen}>
+      <Modal 
+        visible={categoryModalOpen}
+        statusBarTranslucent  
+      >
         <CategorySelect 
           category={category}
           setCategory={setCategory}
           closeSelectCategory={handleCloseSelectCategoryModal}
-
         />
       </Modal>
     </Container>
