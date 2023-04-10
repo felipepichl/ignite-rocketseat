@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { 
   Modal, 
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { useForm } from 'react-hook-form';
 
 import { InputForm } from '../../components/Form/InputForm';
@@ -24,8 +28,16 @@ import {
 
 interface FormData {
   [name: string]: string;
-  
 }
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('Informe um nome'),
+  amount: Yup
+    .number()
+    .typeError('Informe um número')
+    .positive('O valor não pode ser negativo')
+    .required('Informe um valor')
+});
 
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
@@ -39,7 +51,10 @@ export function Register() {
   const {
     control,
     handleSubmit,
-  } = useForm();
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
   
   function handleTransactionTypeSelect(type: 'up' | 'down') {
     setTransactionType(type);
@@ -54,12 +69,23 @@ export function Register() {
   }
   
   function handleRegister(form: FormData) {
+    if (!transactionType) {
+      return Alert.alert('Selecione o tipo de transação');
+    }
+    
+    if (category.key === 'category') {
+      return Alert.alert('Selecione uma caterogia');
+    }
+
     const data = {
       name: form.name,
       amount: form.amount,
       transactionType,
       category: category.key
     }
+
+    console.log(data);
+    
   }
 
   return (
@@ -77,12 +103,14 @@ export function Register() {
               placeholder='Nome'
               autoCapitalize='sentences'
               autoCorrect={false}
+              error={errors.name && errors?.name.message}
             />
             <InputForm
               name="amount"
               control={control} 
               placeholder='Preço'
               keyboardType='numeric'
+              error={errors.amount && errors?.amount.message}
             />
 
             <TransactionsTypes>
