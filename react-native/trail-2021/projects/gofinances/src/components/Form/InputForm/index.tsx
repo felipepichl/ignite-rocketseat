@@ -24,7 +24,7 @@ export function InputForm({
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input 
-            onChange={onChange}
+            onChangeText={onChange}
             value={value}
             {...rest}
           />
