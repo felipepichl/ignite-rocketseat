@@ -26,12 +26,8 @@ import {
   TransactionsTypes
 } from './styles';
 
-// interface FormData {
-//   [name: string]: string;
-// }
-type FormData = {
+interface FormData {
   [name: string]: string;
-  
 }
 
 const schema = Yup.object({
@@ -55,8 +51,10 @@ export function Register() {
   const {
     control,
     handleSubmit,
-    // formState: { errors }
-  } = useForm<FormData>();
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(schema)
+  });
   
   function handleTransactionTypeSelect(type: 'up' | 'down') {
     setTransactionType(type);
@@ -105,14 +103,14 @@ export function Register() {
               placeholder='Nome'
               autoCapitalize='sentences'
               autoCorrect={false}
-              // error={errors?.name && errors?.name.message}
+              error={errors?.name && errors?.name.message}
             />
             <InputForm
               name="amount"
               control={control} 
               placeholder='Preço'
               keyboardType='numeric'
-              // error={errors?.amount && errors?.amount.message}
+              error={errors?.amount && errors?.amount.message}
             />
 
             <TransactionsTypes>
