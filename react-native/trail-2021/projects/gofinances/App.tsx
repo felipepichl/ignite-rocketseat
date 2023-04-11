@@ -3,6 +3,8 @@ import { ActivityIndicator } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
 
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import {
   useFonts,
   Poppins_400Regular,
@@ -25,9 +27,13 @@ export default function App() {
     <ThemeProvider theme={theme}>
       { fontsLoaded 
         ? 
-          <NavigationContainer>
-            <AppRoutes />
-          </NavigationContainer>  
+          <GestureHandlerRootView
+            style={{ flex: 1 }}
+          >
+            <NavigationContainer>
+              <AppRoutes />
+            </NavigationContainer>  
+          </GestureHandlerRootView>
         : 
           <ActivityIndicator /> 
       }
