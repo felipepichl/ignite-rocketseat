@@ -81,7 +81,7 @@ export function Register() {
       return Alert.alert('Selecione uma caterogia');
     }
 
-    const data = {
+    const newTransaction = {
       name: form.name,
       amount: form.amount,
       transactionType,
@@ -89,14 +89,20 @@ export function Register() {
     }
 
     try {
-      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+      const data = await AsyncStorage.getItem(dataKey);
+      const currentData = data ? JSON.parse(data) : [];
 
+      const formattedDate = [
+        ...currentData,
+        newTransaction
+      ]
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(formattedDate));
 
     } catch (error) {
       console.error(error);
       Alert.alert('Não foi possível salvar')
     }
-    
   }
 
   return (
