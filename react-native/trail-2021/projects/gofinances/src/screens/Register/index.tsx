@@ -8,6 +8,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useForm } from 'react-hook-form';
 
@@ -43,6 +44,8 @@ const schema = Yup.object({
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+
+  const dataKey = '@gofinance:transactions';
   
   const [category, setCategory] = useState({
     key: 'category',
@@ -69,7 +72,7 @@ export function Register() {
     setCategoryModalOpen(false);
   }
   
-  function handleRegister(form: FormData) {
+  async function handleRegister(form: FormData) {
     if (!transactionType) {
       return Alert.alert('Selecione o tipo de transação');
     }
@@ -85,7 +88,14 @@ export function Register() {
       category: category.key
     }
 
-    console.log(data);
+    try {
+      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+
+
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Não foi possível salvar')
+    }
     
   }
 
