@@ -20,6 +20,7 @@ import { TransactionTypeButton } from '../../components/Form/TransactionTypeButt
 import { CategorySelectButton } from '../../components/Form/CategorySelectButton';
 
 import { CategorySelect } from '../../screens/CategorySelect';
+import { DataListProps } from '../Dashboard'
 
 import { 
   Container,
@@ -30,31 +31,29 @@ import {
   TransactionsTypes
 } from './styles';
 
+
 interface FormData {
   [name: string]: string;
+}
+
+type NavigationProps = {
+  navigate:(screen:string) => void;
 }
 
 const schema = Yup.object({
   name: Yup.string().required('Informe um nome'),
   amount: Yup
-    .number()
-    .typeError('Informe um número')
-    .positive('O valor não pode ser negativo')
-    .required('Informe um valor')
+  .number()
+  .typeError('Informe um número')
+  .positive('O valor não pode ser negativo')
+  .required('Informe um valor')
 }).required();
-
-type NavigationProps = {
-  navigate:(screen:string) => void;
-}
 
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
   const { navigate } = useNavigation<NavigationProps>();
-
-
-  const dataKey = '@gofinance:transactions';
   
   const [category, setCategory] = useState({
     key: 'category',
@@ -101,8 +100,10 @@ export function Register() {
     }
 
     try {
+      const dataKey = '@gofinance:transactions';
+      
       const data = await AsyncStorage.getItem(dataKey);
-      const currentData = data ? JSON.parse(data) : [];
+      const currentData: string[] = data ? JSON.parse(data) : [];
 
       const formattedDate = [
         ...currentData,
