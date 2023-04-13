@@ -5,13 +5,14 @@ import {
   Alert
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import uuid from 'react-native-uuid';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useForm } from 'react-hook-form';
-import uuid from 'react-native-uuid';
+import { useNavigation } from '@react-navigation/native';
 
 import { InputForm } from '../../components/Form/InputForm';
 import { Button } from '../../components/Form/Button';
@@ -42,9 +43,16 @@ const schema = Yup.object({
     .required('Informe um valor')
 }).required();
 
+type NavigationProps = {
+  navigate:(screen:string) => void;
+}
+
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+
+  const { navigate } = useNavigation<NavigationProps>();
+
 
   const dataKey = '@gofinance:transactions';
   
@@ -56,6 +64,7 @@ export function Register() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<FormData>({
     resolver: yupResolver(schema)
@@ -101,6 +110,15 @@ export function Register() {
       ]
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(formattedDate));
+
+      reset();
+      setTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria'
+      });
+
+      navigate('Listagem');
 
     } catch (error) {
       console.error(error);
