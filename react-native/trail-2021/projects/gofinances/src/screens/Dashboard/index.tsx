@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { useFocusEffect } from '@react-navigation/native';
 
 import { 
   Container, 
@@ -29,9 +31,8 @@ export function Dashboard() {
   const [data, setData] = useState<DataListProps[]>([]);
 
   async function loadTransaction() {
-    const dataKey = '@gofinance:transactions';
-
     try {
+      const dataKey = '@gofinance:transactions';
       const response = await AsyncStorage.getItem(dataKey);
       const transactions = response ? JSON.parse(response) : [];
 
@@ -70,7 +71,14 @@ export function Dashboard() {
 
   useEffect(() => {
     loadTransaction();
-  }, [])
+
+    // const dataKey = '@gofinance:transactions';
+    // AsyncStorage.removeItem(dataKey);
+  }, []);
+
+  useFocusEffect(useCallback(() => {
+    loadTransaction()
+  },[]));
 
   return (
     <Container>
