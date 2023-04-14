@@ -52,7 +52,7 @@ export function Dashboard() {
 
           return {
             id: item.id,
-            title: item.title,
+            name: item.name,
             amount,
             type: item.type,
             category: item.category,
