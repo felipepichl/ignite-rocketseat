@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useFocusEffect } from '@react-navigation/native';
@@ -108,10 +109,9 @@ export function Dashboard() {
         }
       });
 
-      console.log(highlightCard.total.amount)
-
     } catch (error) {
-      
+     console.log(error);
+      Alert.alert('Não foi possível listar');
     }
   }
 
@@ -147,20 +147,19 @@ export function Dashboard() {
         <HighlightCard 
           type='up'
           title='Entradas'
-          amount={highlightCard.entries.amount}
+          amount={highlightCard?.entries?.amount}
           lastTransaction='Última entrada dia 13 de Abril'
         />
         <HighlightCard 
           type='down'
           title='Saídas'
-          amount={highlightCard.expensive.amount}
+          amount={highlightCard?.expensive?.amount}
           lastTransaction='Última entrada dia 15 de Abril'
         />
         <HighlightCard
           type='total' 
           title='Total'
-          amount=''
-          // amount={highlightCard.total.amount}
+          amount={highlightCard?.total?.amount}
           lastTransaction='Última entrada dia 15 de Abril'
         />
       </HighlightCards>
