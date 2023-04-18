@@ -15,6 +15,7 @@ import { HistoryCard } from '../../components/HistoryCard';
 import { TransactionCardProps as TransactionData } from '../../components/TransactionCard/'
 
 interface CategoryData {
+  key: string;
   name: string;
   total: string;
   color: string;
@@ -52,6 +53,7 @@ export function Resume() {
           })
 
           totalByCategory.push({
+            key: category.key,
             name: category.name,
             total,
             color: category.color
@@ -62,8 +64,6 @@ export function Resume() {
 
       setTotalByCategories(totalByCategory);
       
-     
-
     } catch (error) {
       console.error(error);
       Alert.alert('Não foi possível listar ')
@@ -85,7 +85,7 @@ export function Resume() {
         {
           totalByCategories.map(category => (
             <HistoryCard 
-              key={category.name}
+              key={category.key}
               title={category.name}
               amount={category.total}
               color={category.color}
