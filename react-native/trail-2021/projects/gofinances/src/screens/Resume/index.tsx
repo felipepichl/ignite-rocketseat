@@ -6,6 +6,7 @@ import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 import { addMonths, subMonths, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale'
 
 import { 
   Container,
@@ -55,7 +56,10 @@ export function Resume() {
       const responseFormatted = response ? JSON.parse(response) : [];
 
       const expensives: TransactionData[]  = responseFormatted.filter(
-        (expensive: TransactionData) => expensive.type === 'negative'
+        (expensive: TransactionData) => 
+          expensive.type === 'negative' &&
+          new Date(expensive.date).getMonth() === selectDate.getMonth() &&
+          new Date(expensive.date).getFullYear() === selectDate.getFullYear()
       );
 
       const expensiveTotal = expensives
@@ -105,7 +109,7 @@ export function Resume() {
 
   useEffect(() => {
     loadData();
-  }, [])
+  }, [setSelectDate])
 
   return (
     <Container>
@@ -127,7 +131,7 @@ export function Resume() {
           
           <Month>
             {
-              format(selectDate, 'yyyy')
+              format(selectDate, 'MMMM, yyyy', { locale: ptBR })
             }
           </Month>
           
