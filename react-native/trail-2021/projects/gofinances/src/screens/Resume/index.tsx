@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { useTheme } from 'styled-components';
+import { addMonths, subMonths, format } from 'date-fns';
 
 import { 
   Container,
@@ -33,9 +34,18 @@ interface CategoryData {
 }
 
 export function Resume() {
+  const [selectDate, setSelectDate] = useState(new Date());
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
 
   const theme = useTheme();
+
+  function handleDateChange(action: 'next' | 'prev') {
+    if (action === 'next') {
+      setSelectDate(addMonths(selectDate, 1));
+    } else {
+      setSelectDate(subMonths(selectDate, 1));
+    }
+  }
 
   async function loadData() {
     try {
@@ -111,13 +121,17 @@ export function Resume() {
         }}
       >
         <MonthSelect>
-          <MonthSelectButton>
+          <MonthSelectButton onPress={() => handleDateChange('prev')} >
             <MonthSelectIcon name="chevron-left"/>
           </MonthSelectButton>
           
-          <Month>Abril</Month>
+          <Month>
+            {
+              format(selectDate, 'yyyy')
+            }
+          </Month>
           
-          <MonthSelectButton>
+          <MonthSelectButton onPress={() => handleDateChange('next')}>
             <MonthSelectIcon name="chevron-right"/>
           </MonthSelectButton>
         </MonthSelect>
