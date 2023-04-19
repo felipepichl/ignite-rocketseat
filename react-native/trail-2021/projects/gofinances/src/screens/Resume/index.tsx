@@ -109,7 +109,7 @@ export function Resume() {
 
   useEffect(() => {
     loadData();
-  }, [setSelectDate])
+  }, [selectDate])
 
   return (
     <Container>
