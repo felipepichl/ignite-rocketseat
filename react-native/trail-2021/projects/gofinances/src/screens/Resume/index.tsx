@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Alert, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
+import { useFocusEffect } from '@react-navigation/native';
 import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
@@ -10,6 +11,7 @@ import { ptBR } from 'date-fns/locale'
 
 import { 
   Container,
+  LoadContainer,
   Header,
   Title, 
   Content,
@@ -35,12 +37,14 @@ interface CategoryData {
 }
 
 export function Resume() {
-  const [selectDate, setSelectDate] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(true); 
+  const [selectDate, setSelectDate] = useState(new Date()); 
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
 
   const theme = useTheme();
 
   function handleDateChange(action: 'next' | 'prev') {
+    setIsLoading(true)
     if (action === 'next') {
       setSelectDate(addMonths(selectDate, 1));
     } else {
@@ -99,6 +103,7 @@ export function Resume() {
       }) 
 
       setTotalByCategories(totalByCategory);
+      setIsLoading(false);
       
     } catch (error) {
       console.error(error);
@@ -111,63 +116,76 @@ export function Resume() {
     loadData();
   }, [selectDate])
 
+  useFocusEffect(useCallback(() => {
+    loadData();
+  },[]));
+
   return (
     <Container>
       <Header>
         <Title>Resumo por categoria</Title>
       </Header>
 
-      <Content
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 24,
-          paddingBottom: useBottomTabBarHeight(),
-        }}
-      >
-        <MonthSelect>
-          <MonthSelectButton onPress={() => handleDateChange('prev')} >
-            <MonthSelectIcon name="chevron-left"/>
-          </MonthSelectButton>
-          
-          <Month>
-            {
-              format(selectDate, 'MMMM, yyyy', { locale: ptBR })
-            }
-          </Month>
-          
-          <MonthSelectButton onPress={() => handleDateChange('next')}>
-            <MonthSelectIcon name="chevron-right"/>
-          </MonthSelectButton>
-        </MonthSelect>
-
-        <ChartContainer>
-          <VictoryPie 
-            data={totalByCategories}
-            colorScale={totalByCategories.map(category => category.color)}
-            style={{
-              labels: { 
-                fontSize: RFValue(18), 
-                fontWeight: 'bold',
-                fill: theme.colors.shape
+      {
+        isLoading ? 
+        <LoadContainer>
+          <ActivityIndicator 
+            color={theme.colors.primary} 
+            size="large"  
+          /> 
+        </LoadContainer> :
+      
+        <Content
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingHorizontal: 24,
+            paddingBottom: useBottomTabBarHeight(),
+          }}
+        > 
+          <MonthSelect>
+            <MonthSelectButton onPress={() => handleDateChange('prev')} >
+              <MonthSelectIcon name="chevron-left"/>
+            </MonthSelectButton>
+            
+            <Month>
+              {
+                format(selectDate, 'MMMM, yyyy', { locale: ptBR })
               }
-            }}
-            labelRadius={50}
-            x="percent"
-            y="total"
-          />
-        </ChartContainer>
-        {
-          totalByCategories.map(category => (
-            <HistoryCard 
-              key={category.key}
-              title={category.name}
-              amount={category.totalFormatted}
-              color={category.color}
-            />
-          ))
-        }
-      </Content>
+            </Month>
+            
+            <MonthSelectButton onPress={() => handleDateChange('next')}>
+              <MonthSelectIcon name="chevron-right"/>
+            </MonthSelectButton>
+          </MonthSelect>
 
+          <ChartContainer>
+            <VictoryPie 
+              data={totalByCategories}
+              colorScale={totalByCategories.map(category => category.color)}
+              style={{
+                labels: { 
+                  fontSize: RFValue(18), 
+                  fontWeight: 'bold',
+                  fill: theme.colors.shape
+                }
+              }}
+              labelRadius={50}
+              x="percent"
+              y="total"
+            />
+          </ChartContainer>
+          {
+            totalByCategories.map(category => (
+              <HistoryCard 
+                key={category.key}
+                title={category.name}
+                amount={category.totalFormatted}
+                color={category.color}
+              />
+            ))
+          }
+        </Content>        
+      }
     </Container>
   )
 }

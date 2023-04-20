@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -33,6 +33,11 @@ export default function App() {
             style={{ flex: 1 }}
           >
             <NavigationContainer>
+              <StatusBar 
+                barStyle="light-content" 
+                translucent 
+                backgroundColor="transparent"
+              />
               <AppRoutes />
             </NavigationContainer>  
           </GestureHandlerRootView>
