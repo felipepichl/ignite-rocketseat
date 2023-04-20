@@ -37,14 +37,13 @@ interface CategoryData {
 }
 
 export function Resume() {
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(false); 
   const [selectDate, setSelectDate] = useState(new Date()); 
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
 
   const theme = useTheme();
 
-  function handleDateChange(action: 'next' | 'prev') {
-    setIsLoading(true)
+  function handleDateChange(action: 'next' | 'prev') { 
     if (action === 'next') {
       setSelectDate(addMonths(selectDate, 1));
     } else {
@@ -54,6 +53,7 @@ export function Resume() {
 
   async function loadData() {
     try {
+      setIsLoading(true);
       const dataKey = '@gofinance:transactions';
       
       const response = await AsyncStorage.getItem(dataKey);
@@ -112,13 +112,9 @@ export function Resume() {
     
   }
 
-  useEffect(() => {
-    loadData();
-  }, [selectDate])
-
   useFocusEffect(useCallback(() => {
     loadData();
-  },[]));
+  },[selectDate]));
 
   return (
     <Container>
