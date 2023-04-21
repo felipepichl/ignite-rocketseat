@@ -13,7 +13,8 @@ import {
   TitleWrapper,
   Title,
   SignInTitle,
-  Footer 
+  Footer, 
+  FooterWrapper
 } from './styles';
 
 export function SignIn() {
@@ -37,12 +38,17 @@ export function SignIn() {
       </Header>
 
       <Footer>
+        <FooterWrapper>
+          <SignInSocialButton 
+            icon={GoogleSvg}
+            title='Entrar com Google'
+          />
 
-        <SignInSocialButton 
-          icon={GoogleSvg}
-          title='Login com Google'
-        />
-
+          <SignInSocialButton 
+            icon={AppleSvg}
+            title='Entrar com Apple'
+          />
+        </FooterWrapper>
       </Footer>
     </Container>
   );
