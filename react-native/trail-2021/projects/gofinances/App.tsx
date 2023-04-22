@@ -19,7 +19,7 @@ import theme from './src/global/styles/theme';
 import { AppRoutes } from './src/routes/app.routes';
 import { SignIn } from './src/screens/auth/SignIn';
 
-import { AuthContext } from './src/AuthContext';
+import { AuthProvider } from './src/hooks/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -42,9 +42,9 @@ export default function App() {
                 backgroundColor="transparent"
               />
               
-              <AuthContext.Provider value={[]}>
+              <AuthProvider>
                 <SignIn />
-              </AuthContext.Provider>
+              </AuthProvider>
 
             </NavigationContainer>  
           </GestureHandlerRootView>
