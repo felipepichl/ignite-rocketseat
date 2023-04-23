@@ -1,6 +1,8 @@
 import React from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+import { useAuth } from '../../../hooks/auth';
+
 import AppleSvg from '../../../assets/apple.svg';
 import GoogleSvg from '../../../assets/google.svg';
 import LogoSvg from '../../../assets/logo.svg';
@@ -18,6 +20,8 @@ import {
 } from './styles';
 
 export function SignIn() {
+  const { user, signInWithGoogle } = useAuth();
+
   return (
     <Container>
       <Header>
