@@ -35,13 +35,11 @@ function AuthProvider({ children }:AuthProviderProps) {
   async function signInWithGoogle() {
     try {
       const CLIENT_ID = '335105956012-3ih8dtve7km367ih4go3tge7nf41c25l.apps.googleusercontent.com';
-      const REDIRECT_URI = 'https://localhost:19006';
+      const REDIRECT_URI = 'https://localhost:19000';
       const RESPONSE_TYPE = 'token';
       const SCOPE = encodeURI('profile email');
 
-      const authUrl = `
-        https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE} 
-      `;
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
 
       const response = await AuthSession.startAsync({ authUrl });
       console.log(response);
