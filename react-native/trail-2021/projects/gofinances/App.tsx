@@ -1,7 +1,8 @@
 import React from 'react';
 import { ActivityIndicator, StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
-import { NavigationContainer } from '@react-navigation/native';
+
+import { Routes } from './src/routes';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'intl';
@@ -15,9 +16,6 @@ import {
 } from '@expo-google-fonts/poppins';
 
 import theme from './src/global/styles/theme';
-
-import { AppRoutes } from './src/routes/app.routes';
-import { SignIn } from './src/screens/auth/SignIn';
 
 import { AuthProvider } from './src/hooks/auth';
 
@@ -35,18 +33,14 @@ export default function App() {
           <GestureHandlerRootView
             style={{ flex: 1 }}
           >
-            <NavigationContainer>
-              <StatusBar 
-                barStyle="light-content" 
-                translucent 
-                backgroundColor="transparent"
-              />
-              
-              <AuthProvider>
-                <SignIn />
-              </AuthProvider>
-
-            </NavigationContainer>  
+            <StatusBar 
+              barStyle="light-content" 
+              translucent 
+              backgroundColor="transparent"
+            />
+            <AuthProvider>
+              <Routes />
+            </AuthProvider>
           </GestureHandlerRootView>
         : 
           <ActivityIndicator /> 
