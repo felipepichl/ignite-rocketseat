@@ -4,9 +4,8 @@ import React, {
   useContext, 
   useState
 } from 'react';
+import { CLIENT_ID, REDIRECT_URI } from 'react-native-dotenv';
 
-const { CLIENT_ID } = process.env;
-const { REDIRECT_URI } = process.env;
 
 import * as AuthSession from 'expo-auth-session';
 
