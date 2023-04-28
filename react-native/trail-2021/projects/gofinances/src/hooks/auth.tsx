@@ -2,6 +2,7 @@ import React, {
   createContext, 
   ReactNode, 
   useContext, 
+  useEffect, 
   useState
 } from 'react';
 import { CLIENT_ID, REDIRECT_URI } from 'react-native-dotenv';
@@ -37,6 +38,9 @@ const AuthContext = createContext({} as IAuthContextData);
 
 function AuthProvider({ children }:AuthProviderProps) {
   const [user, setUser] = useState<IUser>({} as IUser);
+  const [userStorageLoading, setUserStorageLoading] = useState(true);
+
+  const userStorageKey = '@gofinances:user';
 
   async function signInWithGoogle() {
     try {
@@ -53,7 +57,7 @@ function AuthProvider({ children }:AuthProviderProps) {
         const userInfo = await response.json();
 
         const userLogged = {
-          id: userInfo.id,
+          id: String(userInfo.id),
           email: userInfo.email,
           name: userInfo.give_name,
           photo: userInfo.picture,
@@ -61,7 +65,7 @@ function AuthProvider({ children }:AuthProviderProps) {
 
         setUser(userLogged);
         await AsyncStorage.setItem(
-          '@gofinances:user', JSON.stringify(userLogged)
+          userStorageKey, JSON.stringify(userLogged)
         );
       }
 
@@ -69,6 +73,20 @@ function AuthProvider({ children }:AuthProviderProps) {
       throw new Error(error);
     }
   }
+
+  useEffect(() => {
+    async function loadUserStorageDate() {
+      const userStorage = await AsyncStorage.getItem(userStorageKey);
+
+      if(userStorage) {
+        const userLogged = JSON.parse(userStorage) as IUser;
+        setUser(userLogged);
+      }
+      setUserStorageLoading(false);
+    }
+
+    loadUserStorageDate();
+  }, []);
 
   return (
     <AuthContext.Provider value={{user, signInWithGoogle}}>
