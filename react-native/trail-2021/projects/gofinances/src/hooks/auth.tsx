@@ -24,7 +24,9 @@ interface IUser {
 
 interface IAuthContextData {
   user: IUser;
-  signInWithGoogle(): Promise<void>
+  signInWithGoogle(): Promise<void>;
+  signOut(): Promise<void>;
+  userStorageLoading: boolean;
 }
 
 interface AuthorizationResponse {
@@ -59,7 +61,7 @@ function AuthProvider({ children }:AuthProviderProps) {
         const userLogged = {
           id: String(userInfo.id),
           email: userInfo.email,
-          name: userInfo.give_name,
+          name: userInfo.given_name,
           photo: userInfo.picture,
         }
 
@@ -72,6 +74,11 @@ function AuthProvider({ children }:AuthProviderProps) {
     } catch (error: any) {
       throw new Error(error);
     }
+  }
+
+  async function signOut() {
+    setUser({} as IUser);
+    await AsyncStorage.removeItem(userStorageKey);
   }
 
   useEffect(() => {
@@ -89,7 +96,12 @@ function AuthProvider({ children }:AuthProviderProps) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{user, signInWithGoogle}}>
+    <AuthContext.Provider value={{
+      user, 
+      signInWithGoogle,
+      signOut,
+      userStorageLoading
+    }}>
       {children}
     </AuthContext.Provider>
   )

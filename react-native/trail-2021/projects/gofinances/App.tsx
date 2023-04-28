@@ -3,6 +3,7 @@ import { ActivityIndicator, StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 
 import { Routes } from './src/routes';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'intl';
@@ -17,7 +18,6 @@ import {
 
 import theme from './src/global/styles/theme';
 
-import { AuthProvider } from './src/hooks/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,9 +26,11 @@ export default function App() {
     Poppins_700Bold
   });
 
+  const { userStorageLoading } = useAuth();
+
   return (
     <ThemeProvider theme={theme}>
-      { fontsLoaded 
+      { fontsLoaded || userStorageLoading
         ? 
           <GestureHandlerRootView
             style={{ flex: 1 }}

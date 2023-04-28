@@ -1,5 +1,6 @@
-import React from 'react';
-import { Alert } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, Alert } from 'react-native';
+import { useTheme } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import { useAuth } from '../../../hooks/auth';
@@ -21,14 +22,20 @@ import {
 } from './styles';
 
 export function SignIn() {
-  const { user, signInWithGoogle } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { signInWithGoogle } = useAuth();
+
+  const theme = useTheme();
 
   async function handleSignInWithGoogle() {
     try {
-      await signInWithGoogle();
+      setIsLoading(true);
+      return await signInWithGoogle();
     } catch (error) {
       console.log(error)
       Alert.alert('Não foi possível conectar a conta Google')
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -64,6 +71,14 @@ export function SignIn() {
             title='Entrar com Apple'
           />
         </FooterWrapper>
+
+        { isLoading && 
+          <ActivityIndicator 
+            color={theme.colors.shape} 
+            size="small"
+            style={{ marginTop: 18 }}
+          />
+        }
       </Footer>
     </Container>
   );
