@@ -1,13 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {  useState, useCallback } from 'react';
 import { Alert, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
-import { useFocusEffect } from '@react-navigation/native';
 import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { useTheme } from 'styled-components';
 import { addMonths, subMonths, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale'
+
+import { useAuth } from '../../hooks/auth';
+import { useTheme } from 'styled-components';
+import { useFocusEffect } from '@react-navigation/native';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 
 import { 
   Container,
@@ -41,6 +43,7 @@ export function Resume() {
   const [selectDate, setSelectDate] = useState(new Date()); 
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
 
+  const { user } = useAuth();
   const theme = useTheme();
 
   function handleDateChange(action: 'next' | 'prev') { 
@@ -54,7 +57,7 @@ export function Resume() {
   async function loadData() {
     try {
       setIsLoading(true);
-      const dataKey = '@gofinance:transactions';
+      const dataKey = `@gofinance:transactions_user:${user.id}`;
       
       const response = await AsyncStorage.getItem(dataKey);
       const responseFormatted = response ? JSON.parse(response) : [];

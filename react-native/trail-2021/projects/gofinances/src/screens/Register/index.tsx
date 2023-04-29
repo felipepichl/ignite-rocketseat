@@ -12,6 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../hooks/auth';
 import { useNavigation } from '@react-navigation/native';
 
 import { InputForm } from '../../components/Form/InputForm';
@@ -20,7 +21,6 @@ import { TransactionTypeButton } from '../../components/Form/TransactionTypeButt
 import { CategorySelectButton } from '../../components/Form/CategorySelectButton';
 
 import { CategorySelect } from '../../screens/CategorySelect';
-import { DataListProps } from '../Dashboard'
 
 import { 
   Container,
@@ -52,6 +52,8 @@ const schema = Yup.object({
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+
+  const { user } = useAuth();
 
   const { navigate } = useNavigation<NavigationProps>();
   
@@ -100,7 +102,7 @@ export function Register() {
     }
 
     try {
-      const dataKey = '@gofinance:transactions';
+      const dataKey = `@gofinance:transactions_user:${user.id}`;
       
       const data = await AsyncStorage.getItem(dataKey);
       const currentData: string[] = data ? JSON.parse(data) : [];
