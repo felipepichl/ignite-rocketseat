@@ -15,6 +15,19 @@ import {
   CarImage
 } from './styles';
 
+interface CarData {
+  brand: string;
+  name: string;
+  rent: {
+    period: string;
+    price: number;
+  },
+}
+
+interface Props {
+  data: CarData;
+}
+
 export function Car() {
   return (
     <Container>
@@ -34,7 +47,7 @@ export function Car() {
         </About>
       </Details>
 
-      <CarImage source={{ uri: '' }}/>
+      <CarImage source={{ uri: 'https://www.pngmart.com/files/1/Audi-RS5-Red-PNG.png' }}/>
 
     </Container>
   )
