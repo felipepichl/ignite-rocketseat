@@ -10,7 +10,8 @@ import {
   Container,
   Header,
   TotalCars, 
-  HeaderContent 
+  HeaderContent,
+  CarList 
 } from './styles';
 
 export function Home() {
@@ -43,7 +44,13 @@ export function Home() {
         </HeaderContent>
       </Header>
 
-      <Car data={carData}/>
+      <CarList 
+        data={[1,2,3,4,5,6,7]}
+        keyExtractor={item => String(item)}
+        renderItem={({ item }) => (
+          <Car data={carData}/>
+        )}
+      />
     </Container>
   );
 }

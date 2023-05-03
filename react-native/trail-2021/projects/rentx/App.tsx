@@ -15,7 +15,7 @@ import {
 
 import theme from './src/styles/theme';
 
-import { Home } from './src/screens/app/Home';
+import { CarDetails } from './src/screens/app/CarDetails';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -30,7 +30,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       {
         fontsLoaded 
-        ? <Home/>
+        ? <CarDetails />
         : <ActivityIndicator />
       }
     </ThemeProvider>
