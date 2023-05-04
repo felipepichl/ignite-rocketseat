@@ -8,7 +8,11 @@ import {
   CarImage
 } from './styles';
 
-export function ImageSlider() {
+interface Props {
+  imagesUrl: string[];
+}
+
+export function ImageSlider({ imagesUrl }: Props) {
   return (
     <Container>
       <ImageIndexes>
@@ -20,7 +24,7 @@ export function ImageSlider() {
 
       <CarWrapper>
         <CarImage 
-          source={{ uri: '' }}
+          source={{ uri: imagesUrl[0] }}
           resizeMode='contain'
         />
       </CarWrapper>
