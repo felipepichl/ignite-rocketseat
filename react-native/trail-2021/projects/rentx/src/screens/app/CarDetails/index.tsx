@@ -17,6 +17,7 @@ import {
 
 import { BackButton } from '../../../components/BackButton';
 import { ImageSlider } from '../../../components/ImageSlider';
+import { Accessory } from '../../../components/Accessory';
 
 export function CarDetails() {
   return (
@@ -43,6 +44,8 @@ export function CarDetails() {
             <Price>R$ 580</Price>
           </Rent>
         </Details>
+
+        {/* <Accessory /> */}
 
         <About>
           A nice car, everything you need to get more girls
