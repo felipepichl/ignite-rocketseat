@@ -2,6 +2,22 @@ import styles from './Sidebar.module.css';
 
 export function Sidebar() {
   return (
-    <h1>sidebar</h1>
+    <aside className={styles.sidebar}>
+      <img 
+        className={styles.cover} 
+        src="https://images.unsplash.com/photo-1603572161235-cdc0524b5c3c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=50" 
+      />
+
+      <div className={styles.profile}>
+        <strong>Felipe Pichl</strong>
+        <span>Manager</span>
+      </div>
+
+      <footer>
+        <a href="#">
+          Editar seu perfil
+        </a>
+      </footer>
+    </aside>
   )
 }
