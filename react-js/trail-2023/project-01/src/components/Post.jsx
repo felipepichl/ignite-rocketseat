@@ -21,7 +21,15 @@ export function Post() {
         </time>
 
         <div className={styles.content}>
-          Post content
+          <p>Post content</p>
+
+          <p> <a href="#">https://github.com/felipepichl</a> </p>
+
+          <p> 
+            <a href="#">#newproject</a>{' '} 
+            <a href="#">#nlw</a>{' '} 
+            <a href="#">#dreamsacpe</a> 
+          </p>
 
         </div>
       </header>
