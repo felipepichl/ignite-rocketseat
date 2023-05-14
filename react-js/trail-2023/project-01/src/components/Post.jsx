@@ -19,20 +19,20 @@ export function Post() {
          title="11 de Maio de às 11h"
          dateTime=''>Publicado há 1h
         </time>
-
-        <div className={styles.content}>
-          <p>Post content</p>
-
-          <p> <a href="#">https://github.com/felipepichl</a> </p>
-
-          <p> 
-            <a href="#">#newproject</a>{' '} 
-            <a href="#">#nlw</a>{' '} 
-            <a href="#">#dreamsacpe</a> 
-          </p>
-
-        </div>
       </header>
+      <div className={styles.content}>
+        <p>Post content</p>
+
+        <p> <a href="#">https://github.com/felipepichl</a> </p>
+
+        <p> 
+          <a href="#">#newproject</a>{' '} 
+          <a href="#">#nlw</a>{' '} 
+          <a href="#">#dreamsacpe</a> 
+        </p>
+
+      </div>
+    
     </article>
   )
 }
