@@ -42,8 +42,16 @@ export function App() {
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-          <Post />
-          <Post />
+          {
+            posts.map(post => (
+              <Post
+                key={post.id} 
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}  
+              />
+            ))
+          }
         </main>
       </div>
     </div>
