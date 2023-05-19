@@ -11,6 +11,7 @@ const posts = [
     id: 1,
     author: {
       authorUrl: 'https://github.com/felipepichl.png',
+      name: 'Felipe Pichl',
       role: 'Manager'
     },
     content: [
@@ -24,6 +25,7 @@ const posts = [
     id: 2,
     author: {
       authorUrl: 'https://github.com/diego3g.png',
+      name: 'Diego Fernandes',
       role: 'CTO @ Rocketseat'
     },
     content: [
