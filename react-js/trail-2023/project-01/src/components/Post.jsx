@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR';
 
 import { Avatar } from './Avatar';
@@ -6,10 +6,15 @@ import { Comment } from './Comment';
 
 import styles from './Post.module.css';
 
-export function Post({ author, publishedAt }) {
+export function Post({ author, publishedAt, content }) {
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR
   })
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true
+  }) 
 
   return (
     <article className={styles.post}>
@@ -24,22 +29,21 @@ export function Post({ author, publishedAt }) {
 
         <time 
          title={publishedDateFormatted}
-         dateTime=''
+         dateTime={publishedAt.toISOString()}
         >
-          {publishedDateFormatted}
+          {publishedDateRelativeToNow}
         </time>
       </header>
       <div className={styles.content}>
-        <p>Post content</p>
-
-        <p> <a href="#">https://github.com/felipepichl</a> </p>
-
-        <p> 
-          <a href="#">#newproject</a>{' '} 
-          <a href="#">#nlw</a>{' '} 
-          <a href="#">#dreamsacpe</a> 
-        </p>
-
+        {
+          content.map(line => {
+            if (line.type === 'paragraph') {
+              return <p>{line.content}</p>
+            } else if (line.type === 'link') {
+              return <p><a href='#'>{line.content}</a></p>
+            }
+          })
+        }
       </div>
 
       <form className={styles.commentForm}>
