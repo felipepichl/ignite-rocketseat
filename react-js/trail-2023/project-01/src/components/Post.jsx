@@ -1,14 +1,15 @@
+import { format } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR';
+
 import { Avatar } from './Avatar';
 import { Comment } from './Comment';
+
 import styles from './Post.module.css';
 
 export function Post({ author, publishedAt }) {
-  const publishedDateFormatted = new Intl.DateTimeFormat('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    hour: '2-digit',
-    minute: '2-digit'
-  }).format(publishedAt)
+  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    locale: ptBR
+  })
 
   return (
     <article className={styles.post}>
@@ -22,7 +23,7 @@ export function Post({ author, publishedAt }) {
         </div>
 
         <time 
-         title="11 de Maio de às 11h"
+         title={publishedDateFormatted}
          dateTime=''
         >
           {publishedDateFormatted}
