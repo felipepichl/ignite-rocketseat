@@ -6,6 +6,12 @@ import { Comment } from './Comment';
 
 import styles from './Post.module.css';
 
+const comments = [
+  1,
+  2,
+  3,
+]
+
 export function Post({ author, publishedAt, content }) {
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR
@@ -15,6 +21,10 @@ export function Post({ author, publishedAt, content }) {
     locale: ptBR,
     addSuffix: true
   }) 
+
+  function handleComment() {
+    
+  }
 
   return (
     <article className={styles.post}>
@@ -46,7 +56,10 @@ export function Post({ author, publishedAt, content }) {
         }
       </div>
 
-      <form className={styles.commentForm}>
+      <form 
+        onClick={handleComment}
+        className={styles.commentForm}
+      >
         <strong>Deixe seu feedback</strong>
 
         <textarea 
@@ -59,7 +72,11 @@ export function Post({ author, publishedAt, content }) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
+        {
+          comments.map(comment => (
+            <Comment />
+          ))
+        }
       </div>
     
     </article>
