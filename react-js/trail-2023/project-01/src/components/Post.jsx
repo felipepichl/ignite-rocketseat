@@ -31,6 +31,10 @@ export function Post({ author, publishedAt, content }) {
     setNewCommentText(event.target.value);
   }
 
+  function deleteComment() {
+    
+  }
+
   return (
     <article className={styles.post}>
       <header>
