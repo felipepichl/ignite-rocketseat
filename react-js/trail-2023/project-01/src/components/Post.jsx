@@ -31,8 +31,8 @@ export function Post({ author, publishedAt, content }) {
     setNewCommentText(event.target.value);
   }
 
-  function deleteComment() {
-    
+  function deleteComment(comment) {
+    console.log(`Comment => ${comment}`);
   }
 
   return (
@@ -87,8 +87,9 @@ export function Post({ author, publishedAt, content }) {
         {
           comments.map(comment => (
             <Comment
-              key={comment} 
+              key={comment}
               content={comment} 
+              onDeleteComment={deleteComment}
             />
           ))
         }
