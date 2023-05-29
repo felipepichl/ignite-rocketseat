@@ -3,5 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+
+  "scripts": {
+    "dev": "node --watch src/server.js"
+  }
 }
