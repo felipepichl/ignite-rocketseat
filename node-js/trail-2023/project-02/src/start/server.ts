@@ -6,8 +6,10 @@ server.get('/hello', () => {
   return 'Hello World'
 })
 
-server.listen({
-  port: 3333
-}).then(() => {
-  console.log('HTTP Server Running')
-})
+server
+  .listen({
+    port: 3333,
+  })
+  .then(() => {
+    console.log('HTTP Server Running')
+  })
