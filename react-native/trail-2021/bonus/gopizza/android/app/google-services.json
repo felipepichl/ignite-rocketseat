@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "615419747550",
+    "project_id": "pichl-gopizza",
+    "storage_bucket": "pichl-gopizza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615419747550:android:af2daa8b7fdcdd3e63364f",
+        "android_client_info": {
+          "package_name": "com.gopizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615419747550-fg0ecrnua97o59kr7s9kjf7uuph9h206.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiWRb5gDF-QdUts_0Rz742ZeJqzUbOkQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615419747550-fg0ecrnua97o59kr7s9kjf7uuph9h206.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
