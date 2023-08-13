@@ -2,7 +2,8 @@ import React, {
   createContext,
   useContext,
   useState,
-  ReactNode
+  ReactNode,
+  useEffect
 } from 'react';
 import { Alert } from 'react-native';
 
@@ -72,10 +73,7 @@ function AuthProvider({ children }: AuthProviderProps) {
               'Login', 
               'Não foi possível buscar os dados de perfil do usuário'
             )
-          })
-
-
-
+          });
       })
       .catch(err => {
         const { code } = err;
@@ -87,7 +85,25 @@ function AuthProvider({ children }: AuthProviderProps) {
         }
       }).finally(() => setIsLogging(false));
 
-  }
+  };
+
+  async function loadUserStorageData() {
+    setIsLogging(true);
+
+    const storedUser = await AsyncStorage.getItem(USER_COLLECTION);
+
+    if (storedUser) {
+      const userData = JSON.parse(storedUser) as User;
+
+      setUser(userData);
+    }
+
+    setIsLogging(false);
+  };
+
+  useEffect(() => {
+    loadUserStorageData()
+  }, []);
 
   return (
     <AuthContext.Provider value={{
@@ -98,12 +114,12 @@ function AuthProvider({ children }: AuthProviderProps) {
       {children}
     </AuthContext.Provider>
   )
-}
+};
 
 function useAuth() {
   const context = useContext(AuthContext);
 
   return context;
-}
+};
 
 export { AuthProvider, useAuth }
