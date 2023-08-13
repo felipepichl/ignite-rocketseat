@@ -40,7 +40,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn(email:string, password: string) {
     if (!email || !password) {
-      Alert.alert('Login', 'Informe o email ou a senha');
+      return Alert.alert('Login', 'Informe o email ou a senha');
     }
 
     setIsLogging(true);
@@ -52,7 +52,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           .collection('users')
           .doc(account.user.uid)
           .get()
-          .then(async profile => {
+          .then(async ( profile ) => {
             const { name, isAdmin } = profile.data() as User;
 
             if (profile.exists) {
@@ -67,11 +67,12 @@ function AuthProvider({ children }: AuthProviderProps) {
                 JSON.stringify(userDate)
               );
               
+              console.log(userDate)
               setUser(userDate);
             }
           })
           .catch(() => {
-            Alert.alert(
+            return Alert.alert(
               'Login', 
               'Não foi possível buscar os dados de perfil do usuário'
             )
@@ -81,9 +82,9 @@ function AuthProvider({ children }: AuthProviderProps) {
         const { code } = err;
 
         if (code === 'auth/user-not-found' || code === 'auth/wrong-password') {
-          Alert.alert('Login', 'Email e/ou senha inválido');
+          return Alert.alert('Login', 'Email e/ou senha inválido');
         } else {
-          Alert.alert('Login', 'Não foi possível realizar o login');
+          return Alert.alert('Login', 'Não foi possível realizar o login');
         }
       }).finally(() => setIsLogging(false));
 
@@ -118,13 +119,13 @@ function AuthProvider({ children }: AuthProviderProps) {
     auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        Alert.alert(
+        return Alert.alert(
           'Redefinir senha', 
           'Um link de redefinição foi enviado para o seu email'
         )
       })
       .catch(() => {
-        Alert.alert(
+        return Alert.alert(
           'Redefinir senha', 
           'Não foi possível enviar o e-mail para redefinir sua senha'
         )

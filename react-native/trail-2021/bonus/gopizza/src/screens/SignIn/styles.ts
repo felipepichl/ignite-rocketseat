@@ -9,10 +9,10 @@ export const Container = styled(LinearGradient).attrs(({ theme }) => ({
 }))`
   flex: 1;
   justify-content: center;
-`;
+  `;
 
 export const Content = styled.ScrollView.attrs({
-  showsVerticalIndicator: false,
+  showsVerticalScrollIndicator: false,
   contentContainerStyle: {
     paddingBottom: getBottomSpace() + 48,
   } 
@@ -28,15 +28,20 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.FONTS.TITLE};
-    color: : ${theme.COLORS.TITLE};
+    color: ${theme.COLORS.TITLE};
   `}
+`;
+
+export const BrandContainer = styled.View`
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Brand = styled.Image.attrs({
   resizeMode: 'contain'
 })`
   height: 340px;
-  margin: 64px;
+  margin-top: 64px;
   margin-bottom: 32px;
 `;
 
@@ -50,6 +55,6 @@ export const ForgotPasswordLabel = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.FONTS.TEXT};
-    color: : ${theme.COLORS.TITLE};
+    color: ${theme.COLORS.TITLE};
   `}
 `;

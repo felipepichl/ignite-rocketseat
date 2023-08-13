@@ -14,7 +14,8 @@ import {
   Title,
   Brand,
   ForgotPasswordButton,
-  ForgotPasswordLabel
+  ForgotPasswordLabel,
+  BrandContainer
 } from './styles';
 
 export function SignIn(){
@@ -39,9 +40,11 @@ export function SignIn(){
       >
         <Content>
 
-          <Brand 
-            source={brandImg}
-          />
+          <BrandContainer>
+            <Brand 
+              source={brandImg}
+            />
+          </BrandContainer>
 
           <Title>Login</Title>
           

@@ -308,13 +308,13 @@
 				INFOPLIST_FILE = gopizza/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                                MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.gopizza;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gopizza";
 				PRODUCT_NAME = gopizza;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -332,13 +332,13 @@
 				INFOPLIST_FILE = gopizza/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                                MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.gopizza;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gopizza";
 				PRODUCT_NAME = gopizza;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
