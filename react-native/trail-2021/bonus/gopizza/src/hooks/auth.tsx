@@ -45,9 +45,11 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     setIsLogging(true);
 
+    
     auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(account => {
+    .signInWithEmailAndPassword(email, password)
+    .then(account => {
+        console.log(email, password)
         firestore()
           .collection('users')
           .doc(account.user.uid)
