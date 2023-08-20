@@ -1,9 +1,10 @@
 import React from 'react';
 import { Platform, TouchableOpacity } from 'react-native'
 
-import { ButtonBack } from '@src/components/ButtonBack';
+import { ButtonBack } from '@src/components/ButtonBack'
+import { Photo } from '@components/Photo'
 
-import { Container, Header, Title, DeleteLable } from './styles';
+import { Container, Header, Title, DeleteLable } from './styles'
 
 export function Product() {
   return (
@@ -17,6 +18,8 @@ export function Product() {
           <DeleteLable>Deletar</DeleteLable>
         </TouchableOpacity>
       </Header>
+
+      <Photo uri=""/>
     </Container>
   )
 }
