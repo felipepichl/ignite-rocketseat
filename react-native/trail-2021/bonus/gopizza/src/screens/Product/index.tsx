@@ -27,7 +27,7 @@ export function Product() {
       })
 
       if (!result.canceled) {
-        setImage(result.assets.toString())
+        setImage(result.assets[0].uri)
       }
     }
     
