@@ -9,4 +9,7 @@ export const Container = styled.View`
   background-color: ${theme.COLORS.GRAY_800};
 `;
 
-export const LoadIndicator = styled.ActivityIndicator``;
+export const LoadIndicator = styled.ActivityIndicator
+.attrs(() => ({
+  color: theme.COLORS.BRAND_LIGHT
+}))``;
