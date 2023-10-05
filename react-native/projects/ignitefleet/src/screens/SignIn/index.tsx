@@ -1,6 +1,6 @@
 import { Container, Title, Slogan } from './styles'
 
-import backgroundImg from '../../assets/backgroung.png'
+import backgroundImg from '../../assets/background.png'
 
 export function SignIn() {
   return (
