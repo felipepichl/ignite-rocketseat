@@ -16,6 +16,8 @@ WebBrowser.maybeCompleteAuthSession()
 export function SignIn() {
   const [isAuthenticating, setIsAuthenticating] = useState(false)
 
+  console.log(ANDROID_CLIENT_ID)
+
   const [_, response, googleSignIn] = Google.useAuthRequest({
     androidClientId: ANDROID_CLIENT_ID,
     iosClientId: IOS_CLIENT_ID,
