@@ -28,6 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>com.triadge.ignitefleet</string>
+          <string>com.triadge.ignitefleet</string>
         </array>
       </dict>
     </array>
