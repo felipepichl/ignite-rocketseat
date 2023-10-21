@@ -1,10 +1,12 @@
-import {ThemeProvider} from 'styled-components'
-import { defaultTheme } from '../src/styles/themes/detault'
+import { ThemeProvider } from 'styled-components'
+import { defaultTheme } from '../src/styles/theme/default'
 
-export function App() {  
+function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <h1>Hello World</h1>
+      <h1>Dark side of the moon</h1>
     </ThemeProvider>
   )
 }
+
+export default App
