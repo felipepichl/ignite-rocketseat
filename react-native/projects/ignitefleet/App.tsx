@@ -13,7 +13,8 @@ import theme from './src/theme'
 
 import { Loading } from './src/components/Loading'
 import { SignIn } from './src/screens/SignIn'
-import { Home } from './src/screens/Home'
+
+import { Routes } from './src/routes'
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -36,7 +37,7 @@ export default function App() {
           translucent
         />
         <UserProvider fallback={SignIn}>
-          <Home/>
+          <Routes/>
         </UserProvider>
       </ThemeProvider>
     </AppProvider>
