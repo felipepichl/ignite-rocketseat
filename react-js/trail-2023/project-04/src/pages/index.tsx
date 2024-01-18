@@ -17,7 +17,7 @@ interface HomeProducts {
     name:string,
     description:string,
     imageUrl:string,
-    price:number,
+    price:string,
   }[]
 }
 
