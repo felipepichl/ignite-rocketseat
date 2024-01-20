@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { 
   ImageContainer, 
   ProductContainer, 
@@ -19,6 +20,12 @@ interface ProductsProducts {
 }
 
 export default function Product({ product }: ProductsProducts) {
+  const { isFallback } = useRouter()
+
+  if (isFallback) {
+    return <p>Loading...</p>
+  }
+
   return (
     <ProductContainer>
       <ImageContainer>
