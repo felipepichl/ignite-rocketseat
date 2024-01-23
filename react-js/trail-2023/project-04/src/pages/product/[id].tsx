@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { 
   ImageContainer, 
@@ -8,6 +9,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { stripe } from '@/lib/stripe'
 import Stripe from 'stripe'
 import Image from 'next/image'
+import axios from 'axios'
 
 interface ProductsProducts {
   product: {
@@ -21,14 +23,30 @@ interface ProductsProducts {
 }
 
 export default function Product({ product }: ProductsProducts) {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
   const { isFallback } = useRouter()
 
   if (isFallback) {
     return <p>Loading...</p>
   }
 
-  function handleBuyProduct() {
-    console.log(product.defaultPriceId)
+  async function handleBuyProduct() {
+    setIsCreatingCheckoutSession(true)
+    try {
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId
+      })
+
+      const { checkoutUrl } = response.data;
+
+      console.log(checkoutUrl)
+
+      window.location.href = checkoutUrl
+    } catch (err) {
+      setIsCreatingCheckoutSession(false)
+
+      alert('Falha ao redirecionar ao checkout')
+    }
   }
 
   return (
@@ -44,7 +62,10 @@ export default function Product({ product }: ProductsProducts) {
         <p>{product.description}</p>
 
 
-        <button onClick={handleBuyProduct}>
+        <button 
+          disabled={isCreatingCheckoutSession}
+          onClick={handleBuyProduct}
+        >
           Comprar agora
         </button>
       </ProductDetails>
