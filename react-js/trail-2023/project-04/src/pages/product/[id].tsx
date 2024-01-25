@@ -39,8 +39,6 @@ export default function Product({ product }: ProductsProducts) {
 
       const { checkoutUrl } = response.data;
 
-      console.log(checkoutUrl)
-
       window.location.href = checkoutUrl
     } catch (err) {
       setIsCreatingCheckoutSession(false)
@@ -78,15 +76,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [
       { params: { id: 'prod_PJ7VFj3JRMV89p' } }
     ],
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {
-  if (!params?.id) {
-    return null
-  }
-  
   const productId = params.id;
 
   const product = await stripe.products.retrieve(productId, {
@@ -94,10 +88,6 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
   })
 
   const price = product.default_price as Stripe.Price
-
-  if (!price.unit_amount) {
-    return null
-  }
   
   return {
     props: {
