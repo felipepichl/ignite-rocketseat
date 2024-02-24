@@ -15,6 +15,7 @@ export function AuthLayout() {
           bg-muted
           p-10
           text-muted-foreground
+          antialiased
         "
       >
         <div
