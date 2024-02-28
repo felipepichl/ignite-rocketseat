@@ -14,7 +14,7 @@ const signInForm = z.object({
 
 type SignInForm = z.infer<typeof signInForm>
 
-export default function SignIn() {
+export function SignIn() {
   const {
     register,
     handleSubmit,
