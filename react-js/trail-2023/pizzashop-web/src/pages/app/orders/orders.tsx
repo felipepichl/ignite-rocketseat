@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+import { ArrowRight, Search, X } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 
 import { Button } from '@/components/ui/button'
@@ -31,14 +31,14 @@ export function Orders() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead></TableHead>
-                <TableHead>Identificador</TableHead>
-                <TableHead>Realizado há</TableHead>
-                <TableHead>Status</TableHead>
+                <TableHead className="w-[64px]"></TableHead>
+                <TableHead className="w-[140px]">Identificador</TableHead>
+                <TableHead className="w-[180px]">Realizado há</TableHead>
+                <TableHead className="w-[140px]">Status</TableHead>
                 <TableHead>Cliente</TableHead>
-                <TableHead>Total do Pedido</TableHead>
-                <TableHead></TableHead>
-                <TableHead></TableHead>
+                <TableHead className="w-[140px]">Total do Pedido</TableHead>
+                <TableHead className="w-[164px]"></TableHead>
+                <TableHead className="w-[132px]"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,13 +57,26 @@ export function Orders() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-slate-400"></span>
-                    <span className="font-medium text-muted-foreground"></span>
+                    <span className="h-2 w-2 rounded-full bg-slate-400" />
+                    <span className="font-medium text-muted-foreground">
+                      Pendente
+                    </span>
                   </div>
                 </TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
+                <TableCell className="font-medium">Felipe Pichl</TableCell>
+                <TableCell className="font-medium">R$ 149,90</TableCell>
+                <TableCell>
+                  <Button variant="outline" size="xs">
+                    <ArrowRight className="mr-2 h-3 w-3" />
+                    Aprovar
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button variant="ghost" size="xs">
+                    <X className="mr-2 h-3 w-3" />
+                    Cancelar
+                  </Button>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
